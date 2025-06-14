@@ -39,7 +39,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-background via-muted to-background pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-background via-muted to-background pt-40 pb-24 md:pt-60 md:pb-32 overflow-hidden">
       {/* Particle Container */}
       <div className="particle-container">
         {particles.map(p => (
