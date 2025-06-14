@@ -25,8 +25,8 @@ h1, h2, h3, h4, h5, h6 {
     --popover: 240 10% 6%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 140 70% 40%; /* Green */
-    --primary-foreground: 0 0% 98%; /* Light text on green */
+    --primary: 260 70% 55%; /* Violet */
+    --primary-foreground: 0 0% 98%; /* Light text on violet */
 
     --secondary: 240 10% 10%; /* Darker secondary */
     --secondary-foreground: 0 0% 98%;
@@ -34,15 +34,15 @@ h1, h2, h3, h4, h5, h6 {
     --muted: 240 10% 8%; /* Very dark muted */
     --muted-foreground: 0 0% 60%; /* Lighter muted text */
 
-    --accent: 140 60% 55%; /* Lighter/brighter green for accent */
-    --accent-foreground: 0 0% 9%; /* Dark text for on light green accent */
+    --accent: 270 60% 65%; /* Lighter/brighter violet for accent */
+    --accent-foreground: 0 0% 9%; /* Dark text for on light violet accent */
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 240 10% 12%; /* Dark border */
     --input: 240 10% 12%; /* Dark input background */
-    --ring: 140 70% 50%; /* Ring color related to new primary green */
+    --ring: 260 70% 60%; /* Ring color related to new primary violet */
 
     --radius: 0.5rem;
 
@@ -56,12 +56,12 @@ h1, h2, h3, h4, h5, h6 {
     /* Sidebar colors for the new "black" light theme */
     --sidebar-background: 240 10% 5%;
     --sidebar-foreground: 0 0% 80%;
-    --sidebar-primary: 140 70% 40%; /* Green */
+    --sidebar-primary: 260 70% 55%; /* Violet */
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 10% 9%;
     --sidebar-accent-foreground: 0 0% 90%;
     --sidebar-border: 240 10% 11%;
-    --sidebar-ring: 140 70% 50%;
+    --sidebar-ring: 260 70% 60%;
   }
 
   .dark {
@@ -74,7 +74,7 @@ h1, h2, h3, h4, h5, h6 {
     --popover: 240 10% 5%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 140 70% 45%; /* Slightly brighter green for dark mode */
+    --primary: 260 70% 60%; /* Slightly brighter violet for dark mode */
     --primary-foreground: 0 0% 98%;
 
     --secondary: 240 10% 9%;
@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
     --muted: 240 10% 7%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 140 60% 60%; /* Brighter green accent for dark mode */
+    --accent: 270 60% 70%; /* Brighter violet accent for dark mode */
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 62.8% 45.6%;
@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 
     --border: 240 10% 10%;
     --input: 240 10% 10%;
-    --ring: 140 70% 55%;
+    --ring: 260 70% 65%;
     
     /* Default dark theme chart colors, should work well */
     --chart-1: 220 70% 50%;
@@ -103,12 +103,12 @@ h1, h2, h3, h4, h5, h6 {
     /* Sidebar colors for dark mode */
     --sidebar-background: 240 10% 4%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 140 70% 45%; /* Green */
+    --sidebar-primary: 260 70% 60%; /* Violet */
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 10% 7%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 240 10% 9%;
-    --sidebar-ring: 140 70% 55%;
+    --sidebar-ring: 260 70% 65%;
   }
 }
 
