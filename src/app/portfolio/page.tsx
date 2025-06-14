@@ -6,8 +6,8 @@ import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 const projects: Project[] = [
   {
     id: '1',
-    title: 'E-commerce Platform X',
-    description: 'A full-featured e-commerce platform with advanced product management, user accounts, and secure payments.',
+    title: 'Plataforma E-commerce X',
+    description: 'Una plataforma de e-commerce completa con gestión avanzada de productos, cuentas de usuario y pagos seguros.',
     imageUrl: 'https://placehold.co/600x400.png',
     techStack: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
     liveUrl: '#',
@@ -16,8 +16,8 @@ const projects: Project[] = [
   },
   {
     id: '2',
-    title: 'SaaS Dashboard Pro',
-    description: 'An intuitive dashboard for a SaaS product, providing analytics, user management, and settings configuration.',
+    title: 'Dashboard SaaS Pro',
+    description: 'Un panel intuitivo para un producto SaaS, que proporciona análisis, gestión de usuarios y configuración de ajustes.',
     imageUrl: 'https://placehold.co/600x400.png',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Chart.js'],
     liveUrl: '#',
@@ -25,8 +25,8 @@ const projects: Project[] = [
   },
   {
     id: '3',
-    title: 'Community ForumHub',
-    description: 'A dynamic community forum with real-time discussions, user profiles, and moderation tools.',
+    title: 'Foro ComunitarioHub',
+    description: 'Un foro comunitario dinámico con debates en tiempo real, perfiles de usuario y herramientas de moderación.',
     imageUrl: 'https://placehold.co/600x400.png',
     techStack: ['Vue.js', 'Firebase', 'Nuxt.js', 'Vuetify'],
     caseStudyUrl: '#',
@@ -34,8 +34,8 @@ const projects: Project[] = [
   },
   {
     id: '4',
-    title: 'AI-Powered Content Generator',
-    description: 'A web application that uses AI to generate creative content based on user prompts, featuring a sleek and modern UI.',
+    title: 'Generador de Contenido IA',
+    description: 'Una aplicación web que utiliza IA para generar contenido creativo basado en las indicaciones del usuario, con una interfaz de usuario elegante y moderna.',
     imageUrl: 'https://placehold.co/600x400.png',
     techStack: ['Python', 'Flask', 'React', 'OpenAI API', 'Material UI'],
     liveUrl: '#',
@@ -43,8 +43,8 @@ const projects: Project[] = [
   },
    {
     id: '5',
-    title: 'Interactive Learning Platform',
-    description: 'An engaging online learning platform with video courses, quizzes, and progress tracking for students.',
+    title: 'Plataforma de Aprendizaje Interactivo',
+    description: 'Una atractiva plataforma de aprendizaje en línea con cursos en video, cuestionarios y seguimiento del progreso para estudiantes.',
     imageUrl: 'https://placehold.co/600x400.png',
     techStack: ['Angular', 'NestJS', 'GraphQL', 'TypeORM', 'SCSS'],
     liveUrl: '#',
@@ -53,8 +53,8 @@ const projects: Project[] = [
   },
   {
     id: '6',
-    title: 'Mobile App Companion Site',
-    description: 'A responsive landing page and support site for a popular mobile application, driving downloads and user engagement.',
+    title: 'Sitio Web Complementario de App Móvil',
+    description: 'Una página de destino adaptable y sitio de soporte para una popular aplicación móvil, impulsando descargas y participación de usuarios.',
     imageUrl: 'https://placehold.co/600x400.png',
     techStack: ['Gatsby', 'Contentful', 'Styled Components', 'Netlify'],
     dataAiHint: 'mobile app'
@@ -64,9 +64,9 @@ const projects: Project[] = [
 export default function PortfolioPage() {
   return (
     <div className="bg-gradient-to-b from-background via-muted to-background min-h-screen">
-      <Section id="portfolio" title="Our Creative Footprint" className="pt-28 md:pt-36">
+      <Section id="portfolio" title="Nuestra Huella Creativa" className="pt-28 md:pt-36">
         <p className="text-center text-lg md:text-xl text-muted-foreground mb-12 md:mb-16 max-w-2xl mx-auto">
-          Explore a selection of projects that showcase our passion for innovation, quality, and impactful web solutions. Each project reflects our commitment to excellence and client success.
+          Explora una selección de proyectos que muestran nuestra pasión por la innovación, la calidad y las soluciones web impactantes. Cada proyecto refleja nuestro compromiso con la excelencia y el éxito del cliente.
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (

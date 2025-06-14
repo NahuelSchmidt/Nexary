@@ -4,10 +4,10 @@
 import { z } from "zod";
 
 export const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
+  name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
+  email: z.string().email({ message: "Por favor, ingresa una dirección de correo electrónico válida." }),
   company: z.string().optional(),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  message: z.string().min(10, { message: "El mensaje debe tener al menos 10 caracteres." }),
   projectType: z.string().optional(),
 });
 
@@ -27,20 +27,20 @@ export async function submitContactForm(
 
   if (!parsed.success) {
     return {
-      message: "Invalid form data",
+      message: "Datos del formulario no válidos",
       issues: parsed.error.issues.map((issue) => issue.message),
       success: false,
     };
   }
 
-  // In a real application, you would send an email, save to a database, etc.
-  console.log("Contact form submitted:", parsed.data);
+  // En una aplicación real, enviarías un correo electrónico, guardarías en una base de datos, etc.
+  console.log("Formulario de contacto enviado:", parsed.data);
 
-  // Simulate network delay
+  // Simular retraso de red
   await new Promise(resolve => setTimeout(resolve, 1000));
 
   return {
-    message: "Thank you for your message! We'll get back to you soon.",
+    message: "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.",
     success: true,
   };
 }

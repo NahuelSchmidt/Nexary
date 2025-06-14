@@ -6,27 +6,27 @@ import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 const testimonials: Testimonial[] = [
   {
     id: '1',
-    name: 'Sarah L.',
+    name: 'Sara L.',
     company: 'CEO, Tech Innovators Inc.',
-    text: "OpenCode transformed our outdated system into a modern, efficient platform. Their team's expertise and dedication were outstanding. We've seen a significant boost in productivity!",
+    text: "OpenCode transformó nuestro sistema obsoleto en una plataforma moderna y eficiente. La experiencia y dedicación de su equipo fueron sobresalientes. ¡Hemos visto un aumento significativo en la productividad!",
     avatarUrl: 'https://placehold.co/100x100.png',
     dataAiHint: 'woman portrait',
     rating: 5,
   },
   {
     id: '2',
-    name: 'John B.',
-    company: 'Founder, Creative Solutions Co.',
-    text: "Working with OpenCode was a fantastic experience. They truly understood our vision and delivered a product that exceeded our expectations. Highly recommended for any web development needs.",
+    name: 'Juan B.',
+    company: 'Fundador, Creative Solutions Co.',
+    text: "Trabajar con OpenCode fue una experiencia fantástica. Realmente entendieron nuestra visión y entregaron un producto que superó nuestras expectativas. Altamente recomendados para cualquier necesidad de desarrollo web.",
     avatarUrl: 'https://placehold.co/100x100.png',
     dataAiHint: 'man portrait',
     rating: 5,
   },
   {
     id: '3',
-    name: 'Emily K.',
-    company: 'Marketing Director, Global Brands',
-    text: "The professionalism and skill OpenCode brought to our project were exceptional. They delivered on time and within budget, with a keen eye for detail and user experience. We're thrilled with the results.",
+    name: 'Emilia K.',
+    company: 'Directora de Marketing, Global Brands',
+    text: "El profesionalismo y la habilidad que OpenCode aportó a nuestro proyecto fueron excepcionales. Entregaron a tiempo y dentro del presupuesto, con un gran ojo para el detalle y la experiencia del usuario. Estamos encantados con los resultados.",
     avatarUrl: 'https://placehold.co/100x100.png',
     dataAiHint: 'person smiling',
     rating: 4,
@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
 
 export default function TestimonialsSection() {
   return (
-    <Section id="testimonials" title="Words From Our Clients" className="bg-background">
+    <Section id="testimonials" title="Palabras de Nuestros Clientes" className="bg-background">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (
           <ScrollAnimationWrapper

@@ -7,8 +7,8 @@ const blogPosts: BlogPost[] = [
   {
     id: '1',
     slug: 'demystifying-web-frameworks',
-    title: 'Demystifying Modern Web Frameworks: React vs. Vue vs. Angular',
-    summary: 'A deep dive into the pros and cons of the most popular frontend frameworks to help you choose the right one for your next project.',
+    title: 'Desmitificando los Frameworks Web Modernos: React vs. Vue vs. Angular',
+    summary: 'Un análisis profundo de los pros y contras de los frameworks de frontend más populares para ayudarte a elegir el adecuado para tu próximo proyecto.',
     date: '2024-07-15',
     author: 'Alex Chen',
     imageUrl: 'https://placehold.co/600x400.png',
@@ -18,19 +18,19 @@ const blogPosts: BlogPost[] = [
   {
     id: '2',
     slug: 'importance-of-ui-ux',
-    title: 'The Crucial Role of UI/UX in Web Development Success',
-    summary: 'Explore why intuitive design and user experience are paramount for creating successful web applications that users love.',
+    title: 'El Papel Crucial de UI/UX en el Éxito del Desarrollo Web',
+    summary: 'Explora por qué el diseño intuitivo y la experiencia del usuario son primordiales para crear aplicaciones web exitosas que los usuarios amen.',
     date: '2024-06-28',
     author: 'Maria Rodriguez',
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'design sketch',
-    category: 'Design'
+    category: 'Diseño'
   },
   {
     id: '3',
     slug: 'mastering-serverless-architecture',
-    title: 'Mastering Serverless: A Guide to Building Scalable Applications',
-    summary: 'Learn the fundamentals of serverless architecture and how it can help you build cost-effective and highly scalable web services.',
+    title: 'Dominando Serverless: Guía para Construir Aplicaciones Escalables',
+    summary: 'Aprende los fundamentos de la arquitectura serverless y cómo puede ayudarte a construir servicios web rentables y altamente escalables.',
     date: '2024-05-10',
     author: 'David Lee',
     imageUrl: 'https://placehold.co/600x400.png',
@@ -40,22 +40,22 @@ const blogPosts: BlogPost[] = [
   {
     id: '4',
     slug: 'ai-in-web-development',
-    title: 'The Future is Now: How AI is Revolutionizing Web Development',
-    summary: 'Discover the latest AI tools and techniques that are transforming the web development landscape, from code generation to personalized user experiences.',
+    title: 'El Futuro es Ahora: Cómo la IA está Revolucionando el Desarrollo Web',
+    summary: 'Descubre las últimas herramientas y técnicas de IA que están transformando el panorama del desarrollo web, desde la generación de código hasta experiencias de usuario personalizadas.',
     date: '2024-04-22',
     author: 'Sophia Miller',
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHint: 'artificial intelligence brain',
-    category: 'AI & ML'
+    category: 'IA & ML'
   },
 ];
 
 export default function BlogPage() {
   return (
     <div className="bg-gradient-to-b from-background via-muted to-background min-h-screen">
-    <Section id="blog" title="Insights & Ideas from OpenCode" className="pt-28 md:pt-36">
+    <Section id="blog" title="Ideas y Perspectivas de OpenCode" className="pt-28 md:pt-36">
       <p className="text-center text-lg md:text-xl text-muted-foreground mb-12 md:mb-16 max-w-2xl mx-auto">
-        Stay updated with the latest trends, tips, and best practices in web development. Our experts share their knowledge to help you navigate the ever-evolving digital world.
+        Mantente actualizado con las últimas tendencias, consejos y mejores prácticas en desarrollo web. Nuestros expertos comparten sus conocimientos para ayudarte a navegar el mundo digital en constante evolución.
       </p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map((post, index) => (
@@ -69,7 +69,7 @@ export default function BlogPage() {
           </ScrollAnimationWrapper>
         ))}
       </div>
-      {/* TODO: Add pagination or load more button if many posts */}
+      {/* TODO: Agregar paginación o botón de cargar más si hay muchas publicaciones */}
     </Section>
     </div>
   );

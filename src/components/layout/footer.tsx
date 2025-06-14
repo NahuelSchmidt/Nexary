@@ -19,14 +19,14 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-center md:text-left">
-              Crafting digital excellence, one line of code at a time.
+              Creando excelencia digital, una línea de código a la vez.
             </p>
           </div>
 
           <div className="text-center md:col-span-1">
-            <p className="text-sm">&copy; {currentYear} OpenCode. All rights reserved.</p>
+            <p className="text-sm">&copy; {currentYear} OpenCode. Todos los derechos reservados.</p>
             <p className="text-xs mt-1">
-              Built with Next.js and Tailwind CSS.
+              Construido con Next.js y Tailwind CSS.
             </p>
           </div>
 

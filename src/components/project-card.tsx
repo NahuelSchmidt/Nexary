@@ -51,14 +51,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.liveUrl && (
             <Button asChild variant="ghost" size="sm" className="text-accent hover:text-accent-foreground hover:bg-accent/20 group/action">
               <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                Live Demo <ExternalLink className="ml-2 h-4 w-4 group-hover/action:translate-x-1 transition-transform" />
+                Demo en Vivo <ExternalLink className="ml-2 h-4 w-4 group-hover/action:translate-x-1 transition-transform" />
               </Link>
             </Button>
           )}
           {project.caseStudyUrl && (
              <Button asChild variant="link" size="sm" className="text-primary hover:text-accent">
                <Link href={project.caseStudyUrl}>
-                 Case Study <Layers className="ml-2 h-4 w-4" />
+                 Caso de Estudio <Layers className="ml-2 h-4 w-4" />
                </Link>
              </Button>
           )}

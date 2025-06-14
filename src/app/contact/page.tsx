@@ -37,11 +37,11 @@ function SubmitButton() {
     <Button type="submit" disabled={pending} className="w-full md:w-auto group">
       {pending ? (
         <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Enviando...
         </>
       ) : (
         <>
-          Send Message <Mail className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          Enviar Mensaje <Mail className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </>
       )}
     </Button>
@@ -67,7 +67,7 @@ export default function ContactPage() {
     if (state.message) {
       if (state.success) {
         toast({
-          title: "Success!",
+          title: "¡Éxito!",
           description: state.message,
           variant: "default",
           action: <CheckCircle className="text-green-500" />,
@@ -76,7 +76,7 @@ export default function ContactPage() {
       } else {
         toast({
           title: "Error",
-          description: state.message || "Something went wrong.",
+          description: state.message || "Algo salió mal.",
           variant: "destructive",
           action: <AlertCircle className="text-red-500" />,
         });
@@ -87,53 +87,53 @@ export default function ContactPage() {
 
   return (
     <div className="bg-gradient-to-b from-background via-muted to-background min-h-screen">
-    <Section id="contact" title="Get In Touch" className="pt-28 md:pt-36">
+    <Section id="contact" title="Ponte en Contacto" className="pt-28 md:pt-36">
       <p className="text-center text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-        Have a project in mind or just want to say hello? We'd love to hear from you. Fill out the form below, and we'll get back to you as soon as possible.
+        ¿Tienes un proyecto en mente o simplemente quieres saludar? Nos encantaría saber de ti. Completa el formulario a continuación y nos pondremos en contacto lo antes posible.
       </p>
       <Card className="max-w-2xl mx-auto shadow-2xl">
         <CardHeader>
-          <CardTitle className="font-headline text-3xl text-primary">Let's Talk</CardTitle>
-          <CardDescription>Tell us about your project or inquiry.</CardDescription>
+          <CardTitle className="font-headline text-3xl text-primary">Hablemos</CardTitle>
+          <CardDescription>Cuéntanos sobre tu proyecto o consulta.</CardDescription>
         </CardHeader>
         <CardContent>
           <form action={formAction} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" {...form.register("name")} placeholder="John Doe" className={form.formState.errors.name ? "border-destructive" : ""} />
+                <Label htmlFor="name">Nombre Completo</Label>
+                <Input id="name" {...form.register("name")} placeholder="Juan Pérez" className={form.formState.errors.name ? "border-destructive" : ""} />
                 {form.formState.errors.name && <p className="text-sm text-destructive">{form.formState.errors.name.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" {...form.register("email")} placeholder="john.doe@example.com" className={form.formState.errors.email ? "border-destructive" : ""} />
+                <Label htmlFor="email">Correo Electrónico</Label>
+                <Input id="email" type="email" {...form.register("email")} placeholder="juan.perez@ejemplo.com" className={form.formState.errors.email ? "border-destructive" : ""} />
                 {form.formState.errors.email && <p className="text-sm text-destructive">{form.formState.errors.email.message}</p>}
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="company">Company (Optional)</Label>
-                <Input id="company" {...form.register("company")} placeholder="Your Company Inc." />
+                <Label htmlFor="company">Empresa (Opcional)</Label>
+                <Input id="company" {...form.register("company")} placeholder="Tu Empresa S.A." />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="projectType">Project Type (Optional)</Label>
+                <Label htmlFor="projectType">Tipo de Proyecto (Opcional)</Label>
                 <Select name="projectType" onValueChange={(value) => form.setValue('projectType', value)}>
                   <SelectTrigger id="projectType" className="w-full">
-                    <SelectValue placeholder="Select project type" />
+                    <SelectValue placeholder="Selecciona el tipo de proyecto" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="web-development">Web Development</SelectItem>
-                    <SelectItem value="app-development">Mobile App Development</SelectItem>
-                    <SelectItem value="ui-ux-design">UI/UX Design</SelectItem>
-                    <SelectItem value="consulting">Consulting</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="web-development">Desarrollo Web</SelectItem>
+                    <SelectItem value="app-development">Desarrollo de Apps Móviles</SelectItem>
+                    <SelectItem value="ui-ux-design">Diseño UI/UX</SelectItem>
+                    <SelectItem value="consulting">Consultoría</SelectItem>
+                    <SelectItem value="other">Otro</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Textarea id="message" {...form.register("message")} placeholder="Tell us more about your project or how we can help..." rows={5} className={form.formState.errors.message ? "border-destructive" : ""} />
+              <Label htmlFor="message">Mensaje</Label>
+              <Textarea id="message" {...form.register("message")} placeholder="Cuéntanos más sobre tu proyecto o cómo podemos ayudarte..." rows={5} className={form.formState.errors.message ? "border-destructive" : ""} />
               {form.formState.errors.message && <p className="text-sm text-destructive">{form.formState.errors.message.message}</p>}
             </div>
             

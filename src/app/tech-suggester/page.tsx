@@ -29,11 +29,11 @@ function SubmitButton() {
     <Button type="submit" disabled={pending} className="w-full md:w-auto group">
       {pending ? (
         <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Analyzing...
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Analizando...
         </>
       ) : (
         <>
-          Get Suggestions <Cpu className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+          Obtener Sugerencias <Cpu className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
         </>
       )}
     </Button>
@@ -54,8 +54,8 @@ export default function TechSuggesterPage() {
   useEffect(() => {
     if (state.message && !state.success && state.issues) {
        toast({
-        title: "Validation Error",
-        description: state.issues.join("\n") || "Please check your input.",
+        title: "Error de Validación",
+        description: state.issues.join("\n") || "Por favor, revisa los datos ingresados.",
         variant: "destructive",
         action: <AlertCircle className="text-red-500" />,
       });
@@ -67,33 +67,32 @@ export default function TechSuggesterPage() {
         action: <AlertCircle className="text-red-500" />,
       });
     }
-    // Success toast is handled by the presence of suggestions below.
   }, [state, toast]);
 
 
   return (
     <div className="bg-gradient-to-b from-background via-muted to-background min-h-screen">
-    <Section id="tech-suggester" title="AI-Powered Tech Suggester" className="pt-28 md:pt-36">
+    <Section id="tech-suggester" title="Asesor Tecnológico con IA" className="pt-28 md:pt-36">
       <div className="text-center mb-12 max-w-2xl mx-auto">
         <Sparkles className="h-12 w-12 text-primary mx-auto mb-4 animate-subtle-pulse" />
         <p className="text-lg md:text-xl text-muted-foreground">
-          Unsure which technologies are best for your next project? Describe your project idea, and our AI will provide tailored recommendations to get you started on the right path.
+          ¿No estás seguro de qué tecnologías son las mejores para tu próximo proyecto? Describe tu idea de proyecto y nuestra IA te proporcionará recomendaciones personalizadas para comenzar por el camino correcto.
         </p>
       </div>
 
       <Card className="max-w-2xl mx-auto shadow-2xl">
         <CardHeader>
-          <CardTitle className="font-headline text-3xl text-primary">Describe Your Project</CardTitle>
-          <CardDescription>Provide as much detail as possible for the best suggestions.</CardDescription>
+          <CardTitle className="font-headline text-3xl text-primary">Describe tu Proyecto</CardTitle>
+          <CardDescription>Proporciona tantos detalles como sea posible para obtener las mejores sugerencias.</CardDescription>
         </CardHeader>
         <CardContent>
           <form action={formAction} className="space-y-6" onSubmit={form.handleSubmit(() => formAction(new FormData(form.control._formRef.current)))}>
             <div className="space-y-2">
-              <Label htmlFor="projectDescription">Project Description</Label>
+              <Label htmlFor="projectDescription">Descripción del Proyecto</Label>
               <Textarea
                 id="projectDescription"
                 {...form.register("projectDescription")}
-                placeholder="e.g., A social media platform for pet owners, a real-time collaborative whiteboard, an e-commerce site for handmade crafts..."
+                placeholder="Ej: Una plataforma de redes sociales para dueños de mascotas, una pizarra colaborativa en tiempo real, un sitio de e-commerce para artesanías..."
                 rows={8}
                 className={form.formState.errors.projectDescription ? "border-destructive" : ""}
               />
@@ -125,13 +124,13 @@ export default function TechSuggesterPage() {
             <CardHeader>
               <CardTitle className="font-headline text-2xl text-primary flex items-center">
                 <Lightbulb className="mr-3 h-7 w-7 text-accent" />
-                Our Recommendations
+                Nuestras Recomendaciones
               </CardTitle>
-              <CardDescription>Based on your project description, here are some technologies we suggest:</CardDescription>
+              <CardDescription>Según la descripción de tu proyecto, estas son algunas tecnologías que sugerimos:</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h4 className="font-semibold text-lg mb-2 text-foreground">Suggested Technologies:</h4>
+                <h4 className="font-semibold text-lg mb-2 text-foreground">Tecnologías Sugeridas:</h4>
                 <ul className="list-disc list-inside space-y-1 pl-2 text-muted-foreground">
                   {state.suggestions.suggestedTechnologies.map((tech, index) => (
                     <li key={index} className="text-base">{tech}</li>
@@ -139,13 +138,13 @@ export default function TechSuggesterPage() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-lg mb-2 text-foreground">Reasoning:</h4>
+                <h4 className="font-semibold text-lg mb-2 text-foreground">Justificación:</h4>
                 <p className="text-muted-foreground whitespace-pre-line text-base">{state.suggestions.reasoning}</p>
               </div>
             </CardContent>
              <CardFooter>
                 <p className="text-xs text-muted-foreground">
-                  Note: These suggestions are AI-generated and should be used as a starting point. Consult with our experts for a detailed technical plan.
+                  Nota: Estas sugerencias son generadas por IA y deben usarse como punto de partida. Consulta con nuestros expertos para un plan técnico detallado.
                 </p>
               </CardFooter>
           </Card>

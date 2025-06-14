@@ -17,10 +17,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'OpenCode - Web Development Experts',
-  description: 'OpenCode delivers innovative web solutions tailored to your needs.',
+  title: 'OpenCode - Expertos en Desarrollo Web',
+  description: 'OpenCode ofrece soluciones web innovadoras adaptadas a tus necesidades.',
   icons: {
-    icon: '/favicon.ico', // Assuming you might add a favicon later
+    icon: '/favicon.ico',
   },
 };
 
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, spaceGrotesk.variable)}>
+    <html lang="es" className={cn(inter.variable, spaceGrotesk.variable)}>
       <head>
         {/* Additional head elements can go here */}
       </head>

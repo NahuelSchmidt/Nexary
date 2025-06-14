@@ -7,32 +7,32 @@ import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 const values = [
   {
     icon: <Rocket className="h-10 w-10 text-primary mb-4" />,
-    title: 'Innovation',
-    description: 'We continuously explore new technologies and approaches to deliver cutting-edge solutions that drive success.',
+    title: 'Innovación',
+    description: 'Exploramos continuamente nuevas tecnologías y enfoques para ofrecer soluciones de vanguardia que impulsan el éxito.',
   },
   {
     icon: <Lightbulb className="h-10 w-10 text-primary mb-4" />,
-    title: 'Quality',
-    description: 'Our commitment to excellence ensures robust, reliable, and high-performing web applications every time.',
+    title: 'Calidad',
+    description: 'Nuestro compromiso con la excelencia garantiza aplicaciones web robustas, confiables y de alto rendimiento en todo momento.',
   },
   {
     icon: <Users className="h-10 w-10 text-primary mb-4" />,
-    title: 'Collaboration',
-    description: 'We work closely with our clients, fostering open communication to achieve shared goals and visions.',
+    title: 'Colaboración',
+    description: 'Trabajamos en estrecha colaboración con nuestros clientes, fomentando la comunicación abierta para alcanzar metas y visiones compartidas.',
   },
   {
     icon: <Zap className="h-10 w-10 text-primary mb-4" />,
-    title: 'Agility',
-    description: 'Adapting to change swiftly and efficiently, we ensure your project stays on track and meets evolving market demands.',
+    title: 'Agilidad',
+    description: 'Adaptándonos al cambio de manera rápida y eficiente, aseguramos que tu proyecto se mantenga en curso y satisfaga las demandas cambiantes del mercado.',
   },
 ];
 
 export default function MissionSection() {
   return (
-    <Section id="mission" title="Our Mission & Values" className="bg-muted">
+    <Section id="mission" title="Nuestra Misión y Valores" className="bg-muted">
       <ScrollAnimationWrapper className="text-center max-w-3xl mx-auto mb-12 md:mb-16 opacity-0" animationClass="animate-fade-in-up">
         <p className="text-lg md:text-xl text-foreground">
-          To empower businesses with transformative web solutions that drive growth, enhance user experiences, and create lasting value. We believe in the power of technology to shape a better future.
+          Empoderar a las empresas con soluciones web transformadoras que impulsen el crecimiento, mejoren las experiencias de usuario y creen valor duradero. Creemos en el poder de la tecnología para dar forma a un futuro mejor.
         </p>
       </ScrollAnimationWrapper>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

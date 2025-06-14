@@ -5,7 +5,7 @@ import { suggestTechnologies, SuggestTechnologiesInput, SuggestTechnologiesOutpu
 import { z } from "zod";
 
 export const techSuggesterSchema = z.object({
-  projectDescription: z.string().min(20, { message: "Project description must be at least 20 characters." }),
+  projectDescription: z.string().min(20, { message: "La descripción del proyecto debe tener al menos 20 caracteres." }),
 });
 
 export type TechSuggesterFormState = {
@@ -24,7 +24,7 @@ export async function getTechSuggestions(
 
   if (!parsed.success) {
     return {
-      message: "Invalid project description.",
+      message: "Descripción del proyecto no válida.",
       issues: parsed.error.issues.map((issue) => issue.message),
       success: false,
     };
@@ -34,16 +34,17 @@ export async function getTechSuggestions(
     const input: SuggestTechnologiesInput = {
       projectDescription: parsed.data.projectDescription,
     };
-    const result = await suggestTechnologies(input);
+    // La llamada al flow de Genkit y el prompt interno permanecerán en inglés
+    const result = await suggestTechnologies(input); 
     return {
-      message: "Technologies suggested successfully!",
+      message: "¡Tecnologías sugeridas con éxito!",
       success: true,
       suggestions: result,
     };
   } catch (error) {
-    console.error("Error getting tech suggestions:", error);
+    console.error("Error al obtener sugerencias tecnológicas:", error);
     return {
-      message: "An error occurred while generating suggestions. Please try again.",
+      message: "Ocurrió un error al generar las sugerencias. Por favor, inténtalo de nuevo.",
       success: false,
     };
   }
