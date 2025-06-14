@@ -25,8 +25,8 @@ h1, h2, h3, h4, h5, h6 {
     --popover: 240 10% 6%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 190 95% 60%; /* Fluorescent Turquoise/Light Blue */
-    --primary-foreground: 200 100% 10%; /* Dark text on fluorescent blue */
+    --primary: 140 70% 45%; /* Vibrant Green */
+    --primary-foreground: 140 100% 10%; /* Dark text on green */
 
     --secondary: 240 10% 10%; /* Darker secondary */
     --secondary-foreground: 0 0% 98%;
@@ -34,34 +34,34 @@ h1, h2, h3, h4, h5, h6 {
     --muted: 240 10% 8%; /* Very dark muted */
     --muted-foreground: 0 0% 60%; /* Lighter muted text */
 
-    --accent: 190 95% 65%; /* Brighter/Lighter Fluorescent Turquoise/Light Blue for accent */
-    --accent-foreground: 200 100% 10%; /* Dark text for on light fluorescent blue accent */
+    --accent: 140 70% 55%; /* Brighter/Lighter Green for accent */
+    --accent-foreground: 140 100% 10%; /* Dark text for on light green accent */
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 240 10% 12%; /* Dark border */
     --input: 240 10% 12%; /* Dark input background */
-    --ring: 190 95% 65%; /* Ring color related to new primary fluorescent blue */
+    --ring: 140 70% 55%; /* Ring color related to new primary green */
 
     --radius: 0.5rem;
 
-    /* Chart colors - adjust if needed to fit the new theme */
-    --chart-1: 190 80% 70%;
-    --chart-2: 210 70% 60%;
-    --chart-3: 180 60% 50%;
-    --chart-4: 200 85% 65%;
-    --chart-5: 195 90% 75%;
+    /* Chart colors - adjusted for green theme */
+    --chart-1: 140 60% 50%;
+    --chart-2: 140 70% 60%;
+    --chart-3: 140 50% 40%;
+    --chart-4: 140 65% 55%;
+    --chart-5: 140 75% 65%;
     
     /* Sidebar colors */
     --sidebar-background: 240 10% 5%;
     --sidebar-foreground: 0 0% 80%;
-    --sidebar-primary: 190 95% 60%; /* Fluorescent Turquoise/Light Blue */
-    --sidebar-primary-foreground: 200 100% 10%;
+    --sidebar-primary: 140 70% 45%; /* Vibrant Green */
+    --sidebar-primary-foreground: 140 100% 10%;
     --sidebar-accent: 240 10% 9%;
     --sidebar-accent-foreground: 0 0% 90%;
     --sidebar-border: 240 10% 11%;
-    --sidebar-ring: 190 95% 65%;
+    --sidebar-ring: 140 70% 55%;
   }
 
   .dark {
@@ -74,8 +74,8 @@ h1, h2, h3, h4, h5, h6 {
     --popover: 240 10% 5%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 190 95% 62%; /* Slightly brighter fluorescent blue for dark mode */
-    --primary-foreground: 200 100% 10%;
+    --primary: 140 70% 50%; /* Slightly brighter green for dark mode */
+    --primary-foreground: 140 100% 10%;
 
     --secondary: 240 10% 9%;
     --secondary-foreground: 0 0% 98%;
@@ -83,32 +83,32 @@ h1, h2, h3, h4, h5, h6 {
     --muted: 240 10% 7%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 190 95% 68%; /* Brighter fluorescent accent for dark mode */
-    --accent-foreground: 200 100% 10%;
+    --accent: 140 70% 60%; /* Brighter green accent for dark mode */
+    --accent-foreground: 140 100% 10%;
 
     --destructive: 0 62.8% 45.6%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 240 10% 10%;
     --input: 240 10% 10%;
-    --ring: 190 95% 70%;
+    --ring: 140 70% 60%;
     
-    /* Chart colors for dark mode - adjust if needed */
-    --chart-1: 190 80% 65%;
-    --chart-2: 210 70% 55%;
-    --chart-3: 180 60% 45%;
-    --chart-4: 200 85% 60%;
-    --chart-5: 195 90% 70%;
+    /* Chart colors for dark mode - adjusted for green theme */
+    --chart-1: 140 60% 45%;
+    --chart-2: 140 70% 55%;
+    --chart-3: 140 50% 35%;
+    --chart-4: 140 65% 50%;
+    --chart-5: 140 75% 60%;
 
     /* Sidebar colors for dark mode */
     --sidebar-background: 240 10% 4%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 190 95% 62%; /* Fluorescent Turquoise/Light Blue */
-    --sidebar-primary-foreground: 200 100% 10%;
+    --sidebar-primary: 140 70% 50%; /* Vibrant Green */
+    --sidebar-primary-foreground: 140 100% 10%;
     --sidebar-accent: 240 10% 7%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 240 10% 9%;
-    --sidebar-ring: 190 95% 70%;
+    --sidebar-ring: 140 70% 60%;
   }
 }
 
