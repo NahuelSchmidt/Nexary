@@ -25,8 +25,8 @@ h1, h2, h3, h4, h5, h6 {
     --popover: 240 10% 6%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 260 70% 55%; /* Violet */
-    --primary-foreground: 0 0% 98%; /* Light text on violet */
+    --primary: 190 95% 60%; /* Fluorescent Turquoise/Light Blue */
+    --primary-foreground: 200 100% 10%; /* Dark text on fluorescent blue */
 
     --secondary: 240 10% 10%; /* Darker secondary */
     --secondary-foreground: 0 0% 98%;
@@ -34,34 +34,34 @@ h1, h2, h3, h4, h5, h6 {
     --muted: 240 10% 8%; /* Very dark muted */
     --muted-foreground: 0 0% 60%; /* Lighter muted text */
 
-    --accent: 270 60% 65%; /* Lighter/brighter violet for accent */
-    --accent-foreground: 0 0% 9%; /* Dark text for on light violet accent */
+    --accent: 190 95% 65%; /* Brighter/Lighter Fluorescent Turquoise/Light Blue for accent */
+    --accent-foreground: 200 100% 10%; /* Dark text for on light fluorescent blue accent */
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 240 10% 12%; /* Dark border */
     --input: 240 10% 12%; /* Dark input background */
-    --ring: 260 70% 60%; /* Ring color related to new primary violet */
+    --ring: 190 95% 65%; /* Ring color related to new primary fluorescent blue */
 
     --radius: 0.5rem;
 
-    /* Brighter chart colors for the new "black" light theme */
-    --chart-1: 12 80% 70%;
-    --chart-2: 173 60% 50%;
-    --chart-3: 197 40% 40%;
-    --chart-4: 43 80% 70%;
-    --chart-5: 27 90% 75%;
+    /* Chart colors - adjust if needed to fit the new theme */
+    --chart-1: 190 80% 70%;
+    --chart-2: 210 70% 60%;
+    --chart-3: 180 60% 50%;
+    --chart-4: 200 85% 65%;
+    --chart-5: 195 90% 75%;
     
-    /* Sidebar colors for the new "black" light theme */
+    /* Sidebar colors */
     --sidebar-background: 240 10% 5%;
     --sidebar-foreground: 0 0% 80%;
-    --sidebar-primary: 260 70% 55%; /* Violet */
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary: 190 95% 60%; /* Fluorescent Turquoise/Light Blue */
+    --sidebar-primary-foreground: 200 100% 10%;
     --sidebar-accent: 240 10% 9%;
     --sidebar-accent-foreground: 0 0% 90%;
     --sidebar-border: 240 10% 11%;
-    --sidebar-ring: 260 70% 60%;
+    --sidebar-ring: 190 95% 65%;
   }
 
   .dark {
@@ -74,8 +74,8 @@ h1, h2, h3, h4, h5, h6 {
     --popover: 240 10% 5%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 260 70% 60%; /* Slightly brighter violet for dark mode */
-    --primary-foreground: 0 0% 98%;
+    --primary: 190 95% 62%; /* Slightly brighter fluorescent blue for dark mode */
+    --primary-foreground: 200 100% 10%;
 
     --secondary: 240 10% 9%;
     --secondary-foreground: 0 0% 98%;
@@ -83,32 +83,32 @@ h1, h2, h3, h4, h5, h6 {
     --muted: 240 10% 7%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 270 60% 70%; /* Brighter violet accent for dark mode */
-    --accent-foreground: 0 0% 9%;
+    --accent: 190 95% 68%; /* Brighter fluorescent accent for dark mode */
+    --accent-foreground: 200 100% 10%;
 
     --destructive: 0 62.8% 45.6%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 240 10% 10%;
     --input: 240 10% 10%;
-    --ring: 260 70% 65%;
+    --ring: 190 95% 70%;
     
-    /* Default dark theme chart colors, should work well */
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Chart colors for dark mode - adjust if needed */
+    --chart-1: 190 80% 65%;
+    --chart-2: 210 70% 55%;
+    --chart-3: 180 60% 45%;
+    --chart-4: 200 85% 60%;
+    --chart-5: 195 90% 70%;
 
     /* Sidebar colors for dark mode */
     --sidebar-background: 240 10% 4%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 260 70% 60%; /* Violet */
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary: 190 95% 62%; /* Fluorescent Turquoise/Light Blue */
+    --sidebar-primary-foreground: 200 100% 10%;
     --sidebar-accent: 240 10% 7%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 240 10% 9%;
-    --sidebar-ring: 260 70% 65%;
+    --sidebar-ring: 190 95% 70%;
   }
 }
 
