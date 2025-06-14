@@ -3,16 +3,58 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
+interface ParticleStyle {
+  left: string;
+  top: string;
+  animationDelay: string;
+  animationDuration: string;
+  transform: string; // For initial random Z position and scale
+}
 
 export default function HeroSection() {
+  const [particles, setParticles] = useState<Array<{id: number; style: ParticleStyle}>>([]);
+
+  useEffect(() => {
+    const numParticles = 70; // Number of particles
+    const newParticles = [];
+    for (let i = 0; i < numParticles; i++) {
+      const initialZ = Math.random() * -400 - 100; // Random initial Z between -100px and -500px
+      const initialScale = 0.3 + Math.random() * 0.4; // Random initial scale
+      newParticles.push({
+        id: i,
+        style: {
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          animationDelay: `${Math.random() * 7}s`, // Randomize start time up to 7s
+          animationDuration: `${4 + Math.random() * 4}s`, // Randomize duration (4s to 8s)
+          transform: `translateZ(${initialZ}px) scale(${initialScale})`,
+        },
+      });
+    }
+    setParticles(newParticles);
+  }, []);
+
   return (
     <section className="relative bg-gradient-to-br from-background via-muted to-background pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        {/* Decorative background elements if desired, e.g. subtle geometric patterns or blurred shapes */}
+      {/* Particle Container */}
+      <div className="particle-container">
+        {particles.map(p => (
+          <div
+            key={p.id}
+            className="particle animate-coming-forward"
+            style={p.style}
+          />
+        ))}
       </div>
+
+      {/* Optional: existing subtle background overlay, ensure it's behind particles or integrated */}
+      {/* <div className="absolute inset-0 opacity-10"></div> */}
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="text-center md:text-left">
@@ -59,7 +101,7 @@ export default function HeroSection() {
           </ScrollAnimationWrapper>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10"></div>
     </section>
   );
 }

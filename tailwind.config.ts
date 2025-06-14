@@ -95,13 +95,20 @@ export default {
         'subtle-pulse': {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '.9' },
-        }
+        },
+        'coming-forward': {
+          '0%': { opacity: '0' }, /* Start invisible, initial Z and scale handled by inline style */
+          '20%': { opacity: '0.7' }, /* Fade in */
+          '80%': { opacity: '1' }, /* Fully visible */
+          '100%': { transform: 'translateZ(100px) scale(1.2)', opacity: '0' }, /* Move to Z=100px, scale up slightly, fade out */
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 0.7s ease-out forwards',
         'subtle-pulse': 'subtle-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'coming-forward': 'coming-forward ease-out infinite', // Duration will be set inline
       },
     },
   },
