@@ -8,11 +8,18 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
-const navItems = [
+// Define los enlaces de navegación principales (sin "Contáctanos", que es un botón separado en escritorio)
+const primaryNavLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/portfolio', label: 'Portafolio' },
   { href: '/blog', label: 'Blog' },
   { href: '/tech-suggester', label: 'Asesor Tecnológico' },
+];
+
+// Enlaces para el menú móvil: incluye los primarios y "Contáctanos" como un enlace en la lista
+const mobileNavListLinks = [
+  ...primaryNavLinks,
+  { href: '/contact', label: 'Contáctanos' },
 ];
 
 export default function Navbar() {
@@ -26,10 +33,6 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
-  const desktopNavItems = navItems.filter(item => item.href !== '/contact');
 
   return (
     <header
@@ -49,7 +52,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-6 items-center">
-            {desktopNavItems.map((item) => (
+            {primaryNavLinks.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -68,7 +71,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" onClick={toggleMobileMenu} aria-label="Abrir menú">
+                <Button variant="ghost" size="icon" aria-label="Abrir menú">
                   <Menu className="h-6 w-6 text-foreground" />
                 </Button>
               </SheetTrigger>
@@ -79,14 +82,14 @@ export default function Navbar() {
                     <span className="font-headline text-xl font-bold text-foreground">OpenCode</span>
                   </Link>
                   <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon" onClick={toggleMobileMenu} aria-label="Cerrar menú">
+                    <Button variant="ghost" size="icon" aria-label="Cerrar menú">
                       <X className="h-6 w-6 text-foreground" />
                     </Button>
                   </SheetTrigger>
                 </div>
                 
                 <nav className="flex flex-col space-y-4 flex-grow">
-                  {[...desktopNavItems, { href: '/contact', label: 'Contáctanos' }].map((item) => (
+                  {mobileNavListLinks.map((item) => (
                     <Link
                       key={item.label}
                       href={item.href}
@@ -98,7 +101,7 @@ export default function Navbar() {
                   ))}
                 </nav>
                  <Button asChild className="w-full mt-auto" size="lg" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Link href="/contact">Ponte en Contacto</Link>
+                    <Link href="/contact">Contáctanos</Link>
                 </Button>
               </SheetContent>
             </Sheet>

@@ -1,7 +1,8 @@
 // src/app/contact/page.tsx
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react"; // Changed from "react-dom" and useFormState
+import { useFormStatus } from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
@@ -19,10 +20,11 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { contactFormSchema, submitContactForm, type ContactFormState } from "./actions";
+import { submitContactForm, type ContactFormState } from "./actions";
+import { contactFormSchema } from "./schema";
 import type { z } from "zod";
 import Section from "@/components/layout/section-layout";
-import { Mail, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { Mail, Loader2, AlertCircle } from "lucide-react";
 
 type Inputs = z.infer<typeof contactFormSchema>;
 
@@ -49,7 +51,7 @@ function SubmitButton() {
 }
 
 export default function ContactPage() {
-  const [state, formAction] = useFormState(submitContactForm, initialState);
+  const [state, formAction] = useActionState(submitContactForm, initialState); // Changed to useActionState
   const { toast } = useToast();
 
   const form = useForm<Inputs>({
@@ -66,19 +68,15 @@ export default function ContactPage() {
   useEffect(() => {
     if (state.message) {
       if (state.success) {
-        toast({
-          title: "¡Éxito!",
-          description: state.message,
-          variant: "default",
-          action: <CheckCircle className="text-green-500" />,
-        });
-        form.reset(); 
+        // For success, we don't show a toast as per the new requirement
+        // We just log and reset the form
+        console.log("Formulario enviado con éxito:", state.message);
+        form.reset();
       } else {
         toast({
           title: "Error",
           description: state.message || "Algo salió mal.",
           variant: "destructive",
-          action: <AlertCircle className="text-red-500" />,
         });
       }
     }
