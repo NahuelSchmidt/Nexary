@@ -13,7 +13,6 @@ const primaryNavLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/portfolio', label: 'Portafolio' },
   { href: '/blog', label: 'Blog' },
-  { href: '/tech-suggester', label: 'Asesor Tecnológico' },
 ];
 
 // Enlaces para el menú móvil: incluye los primarios y "Contáctanos" como un enlace en la lista

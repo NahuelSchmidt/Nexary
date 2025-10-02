@@ -7,7 +7,7 @@ import ProjectCard, { type Project } from '@/components/project-card';
 import ServiceCard, { type Service } from '@/components/service-card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, Cpu, Laptop, Palette, TrendingUp, Lightbulb } from 'lucide-react';
+import { ArrowRight, Laptop, Palette, TrendingUp, Lightbulb } from 'lucide-react';
 import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 
 // Sample data for previews
@@ -82,6 +82,12 @@ const serviceAnimationClasses = [
   'animate-fade-in-up', // Can repeat or add more specific ones
 ];
 
+const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        <path d="M14.05 16.95A8.91 8.91 0 0 1 12.03 16c-2.43-.5-4.32-2.39-4.82-4.82a8.91 8.91 0 0 1 .95-2.02"></path>
+    </svg>
+)
 
 export default function Home() {
   return (
@@ -138,16 +144,16 @@ export default function Home() {
         </ScrollAnimationWrapper>
       </Section>
       
-      <Section id="tech-suggester-cta" title="¿Necesitas Asesoramiento Tecnológico?" className="bg-background">
+      <Section id="whatsapp-cta" title="¿Listo para Empezar?" className="bg-background">
         <ScrollAnimationWrapper className="text-center max-w-2xl mx-auto opacity-0" animationClass="animate-fade-in-up">
-          <Cpu className="h-16 w-16 text-primary mx-auto mb-6 animate-subtle-pulse" />
-          <h3 className="font-headline text-3xl font-bold mb-4 text-foreground">Deja que Nuestra IA te Guíe</h3>
+          <WhatsAppIcon className="h-16 w-16 text-primary mx-auto mb-6 animate-subtle-pulse" />
+          <h3 className="font-headline text-3xl font-bold mb-4 text-foreground">Hablemos por WhatsApp</h3>
           <p className="text-lg text-muted-foreground mb-8">
-            ¿No estás seguro de qué tecnologías se adaptan a tu proyecto? Nuestra herramienta impulsada por IA analiza tus necesidades y sugiere el mejor stack tecnológico.
+            ¿Tienes una idea o un proyecto en mente? Contáctanos directamente por WhatsApp para una consulta rápida y sin compromiso. ¡Estamos aquí para ayudarte a empezar!
           </p>
-          <Button asChild size="lg" className="group">
-            <Link href="/tech-suggester">
-              Probar Asesor Tecnológico <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          <Button asChild size="lg" className="group bg-[#25D366] hover:bg-[#1DA851] text-white">
+            <Link href="https://wa.me/5491112345678" target="_blank" rel="noopener noreferrer">
+              Chatea con Nosotros <WhatsAppIcon className="ml-2 h-5 w-5" />
             </Link>
           </Button>
         </ScrollAnimationWrapper>
