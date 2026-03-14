@@ -32,7 +32,7 @@ export default function WhatsAppFloatingButton() {
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "bg-white text-black p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 animate-bounce-subtle border border-black/10",
+          "bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 animate-bounce-subtle",
           "flex items-center justify-center"
         )}
         aria-label="Contactar por WhatsApp"

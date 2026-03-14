@@ -150,7 +150,7 @@ export default function Home() {
           <p className="text-lg text-muted-foreground mb-8">
             ¿Tienes una idea en mente? Contáctanos directamente para una consulta rápida.
           </p>
-          <Button asChild size="lg" className="group bg-white text-black hover:bg-white/90">
+          <Button asChild size="lg" className="group bg-[#25D366] hover:bg-[#1DA851] text-white">
             <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
               Chatea con Nosotros <WhatsAppIcon className="ml-2 h-5 w-5" />
             </a>
