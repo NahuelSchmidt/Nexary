@@ -53,7 +53,7 @@ const blogPosts: BlogPost[] = [
 export default function BlogPage() {
   return (
     <div className="bg-gradient-to-b from-background via-muted to-background min-h-screen">
-    <Section id="blog" title="Ideas y Perspectivas de OpenCode" className="pt-28 md:pt-36">
+    <Section id="blog" title="Ideas y Perspectivas de Nexary" className="pt-28 md:pt-36">
       <p className="text-center text-lg md:text-xl text-muted-foreground mb-12 md:mb-16 max-w-2xl mx-auto">
         Mantente actualizado con las últimas tendencias, consejos y mejores prácticas en desarrollo web. Nuestros expertos comparten sus conocimientos para ayudarte a navegar el mundo digital en constante evolución.
       </p>
@@ -69,7 +69,6 @@ export default function BlogPage() {
           </ScrollAnimationWrapper>
         ))}
       </div>
-      {/* TODO: Agregar paginación o botón de cargar más si hay muchas publicaciones */}
     </Section>
     </div>
   );

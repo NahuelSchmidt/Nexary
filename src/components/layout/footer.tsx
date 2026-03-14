@@ -15,7 +15,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-2 group mb-4">
               <Code2 className="h-7 w-7 text-primary group-hover:text-accent transition-colors duration-300" />
               <span className="font-headline text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                OpenCode
+                Nexary
               </span>
             </Link>
             <p className="text-sm text-center md:text-left">
@@ -24,7 +24,7 @@ export default function Footer() {
           </div>
 
           <div className="text-center md:col-span-1">
-            <p className="text-sm">&copy; {currentYear} OpenCode. Todos los derechos reservados.</p>
+            <p className="text-sm">&copy; {currentYear} Nexary. Todos los derechos reservados.</p>
           </div>
 
           <div className="flex justify-center md:justify-end space-x-4">

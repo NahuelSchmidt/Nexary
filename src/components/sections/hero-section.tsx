@@ -63,7 +63,7 @@ export default function HeroSection() {
         </ScrollAnimationWrapper>
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.2s' }}>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            En OpenCode, transformamos tus ideas en aplicaciones web potentes, escalables y atractivas. Construyamos el futuro, juntos.
+            En Nexary, transformamos tus ideas en aplicaciones web potentes, escalables y atractivas. Construyamos el futuro, juntos.
           </p>
         </ScrollAnimationWrapper>
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.4s' }}>

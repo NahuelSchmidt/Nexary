@@ -18,8 +18,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'OpenCode - Expertos en Desarrollo Web',
-  description: 'OpenCode ofrece soluciones web innovadoras adaptadas a tus necesidades.',
+  title: 'Nexary - Expertos en Desarrollo Web',
+  description: 'Nexary ofrece soluciones web innovadoras adaptadas a tus necesidades.',
   icons: {
     icon: '/favicon.ico',
   },

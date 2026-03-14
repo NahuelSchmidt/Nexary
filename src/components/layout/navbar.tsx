@@ -1,4 +1,3 @@
-// src/components/layout/navbar.tsx
 "use client";
 
 import Link from 'next/link';
@@ -40,7 +39,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center space-x-2 group">
             <Code2 className="h-8 w-8 text-primary group-hover:text-accent transition-colors duration-300" />
             <span className="font-headline text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-              OpenCode
+              Nexary
             </span>
           </Link>
 
@@ -73,7 +72,7 @@ export default function Navbar() {
                 <div className="flex justify-between items-center mb-8">
                   <Link href="/" className="flex items-center space-x-2 group" onClick={() => setIsMobileMenuOpen(false)}>
                     <Code2 className="h-7 w-7 text-primary" />
-                    <span className="font-headline text-xl font-bold text-foreground">OpenCode</span>
+                    <span className="font-headline text-xl font-bold text-foreground">Nexary</span>
                   </Link>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="icon" aria-label="Cerrar menú">
