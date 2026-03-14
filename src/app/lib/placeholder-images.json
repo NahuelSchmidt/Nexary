@@ -2,15 +2,15 @@
 {
   "projects": {
     "mana": {
-      "url": "https://picsum.photos/seed/industrial-warehouse-mana/600/400",
+      "url": "https://picsum.photos/seed/mana/600/400",
       "hint": "industrial warehouse"
     },
     "portfolio": {
-      "url": "https://picsum.photos/seed/modern-portfolio-nahuel/600/400",
+      "url": "/portfolio.png",
       "hint": "minimalist portfolio"
     },
     "turnos": {
-      "url": "https://picsum.photos/seed/dashboard-saas-turnos/600/400",
+      "url": "https://picsum.photos/seed/turnos/600/400",
       "hint": "saas dashboard"
     }
   }
