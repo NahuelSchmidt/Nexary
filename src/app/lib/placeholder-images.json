@@ -1,0 +1,17 @@
+
+{
+  "projects": {
+    "mana": {
+      "url": "https://picsum.photos/seed/mana/600/400",
+      "hint": "industrial website"
+    },
+    "portfolio": {
+      "url": "https://picsum.photos/seed/dev/600/400",
+      "hint": "developer portfolio"
+    },
+    "turnos": {
+      "url": "https://picsum.photos/seed/turnos/600/400",
+      "hint": "saas dashboard"
+    }
+  }
+}

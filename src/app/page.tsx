@@ -1,3 +1,4 @@
+
 // src/app/page.tsx
 import HeroSection from '@/components/sections/hero-section';
 import MissionSection from '@/components/sections/mission-section';
@@ -9,34 +10,35 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, Laptop, Palette, TrendingUp, Lightbulb } from 'lucide-react';
 import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
+import placeholders from '@/app/lib/placeholder-images.json';
 
 const previewProjects: Project[] = [
   {
     id: 'mana',
     title: 'Insumos Mana',
     description: 'Web institucional para empresa industrial, diseñada para presentar el catálogo corporativo con una estética profesional y robusta.',
-    imageUrl: 'https://picsum.photos/seed/mana/600/400',
+    imageUrl: placeholders.projects.mana.url,
     techStack: ['HTML', 'CSS', 'JavaScript'],
-    liveUrl: '/portfolio',
-    dataAiHint: 'industrial warehouse'
+    liveUrl: 'https://www.insumosmana.net/',
+    dataAiHint: placeholders.projects.mana.hint
   },
   {
     id: 'portfolio',
     title: 'Portfolio Programador',
     description: 'Diseño y optimización de sitio personal enfocado en la marca personal, con tiempos de carga mínimos y alta performance.',
-    imageUrl: 'https://picsum.photos/seed/dev/600/400',
+    imageUrl: placeholders.projects.portfolio.url,
     techStack: ['Diseño UI/UX', 'Optimización'],
-    liveUrl: '/portfolio',
-    dataAiHint: 'clean developer website'
+    liveUrl: 'https://portfolio-nahuelschmidt.vercel.app/',
+    dataAiHint: placeholders.projects.portfolio.hint
   },
   {
     id: 'turnos-ya',
     title: 'Turnos Ya',
     description: 'Sistema integral de gestión de turnos que permite la reserva online y administración de agendas para comercios y profesionales.',
-    imageUrl: 'https://picsum.photos/seed/turnos/600/400',
+    imageUrl: placeholders.projects.turnos.url,
     techStack: ['Next.js', 'Tailwind CSS'],
-    liveUrl: '/portfolio',
-    dataAiHint: 'scheduling dashboard'
+    liveUrl: 'https://saas-turnos-ya.vercel.app/',
+    dataAiHint: placeholders.projects.turnos.hint
   },
 ];
 

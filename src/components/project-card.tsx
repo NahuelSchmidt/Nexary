@@ -1,3 +1,4 @@
+
 // src/components/project-card.tsx
 import Image from 'next/image';
 import Link from 'next/link';
@@ -51,7 +52,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.liveUrl && (
             <Button asChild variant="ghost" size="sm" className="text-accent hover:text-accent-foreground hover:bg-accent/20 group/action">
               <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                Demo en Vivo <ExternalLink className="ml-2 h-4 w-4 group-hover/action:translate-x-1 transition-transform" />
+                Ver Demo <ExternalLink className="ml-2 h-4 w-4 group-hover/action:translate-x-1 transition-transform" />
               </Link>
             </Button>
           )}
