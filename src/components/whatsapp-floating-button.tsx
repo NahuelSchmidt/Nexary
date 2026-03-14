@@ -23,7 +23,7 @@ export default function WhatsAppFloatingButton() {
     <div className="fixed bottom-6 right-6 z-[100] group flex items-center">
       {/* Texto Desplegable */}
       <div className="mr-3 px-4 py-2 bg-background border border-primary/20 shadow-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
-        <p className="text-primary font-bold text-sm">¿En qué podemos ayudarte?</p>
+        <p className="text-primary font-bold text-sm">👋 ¿En qué podemos ayudarte? Escribinos por WhatsApp.</p>
       </div>
 
       {/* Botón */}
