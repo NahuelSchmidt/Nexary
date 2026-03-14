@@ -105,7 +105,7 @@ export default function Home() {
           ))}
         </div>
         <ScrollAnimationWrapper className="text-center opacity-0" animationClass="animate-fade-in-up" style={{animationDelay: "0.4s"}}>
-          <Button asChild size="lg" className="group border-white bg-white text-black hover:bg-white/90">
+          <Button asChild size="lg" className="group bg-primary text-primary-foreground hover:bg-primary/90">
             <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
               Solicita una Cotización <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </a>
