@@ -25,9 +25,6 @@ export default function Footer() {
 
           <div className="text-center md:col-span-1">
             <p className="text-sm">&copy; {currentYear} OpenCode. Todos los derechos reservados.</p>
-            <p className="text-xs mt-1">
-              Construido con Next.js y Tailwind CSS.
-            </p>
           </div>
 
           <div className="flex justify-center md:justify-end space-x-4">
