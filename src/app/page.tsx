@@ -84,33 +84,10 @@ const whatsAppLink = "https://wa.me/2974299808";
 export default function Home() {
   return (
     <>
+      {/* 1. Banner */}
       <HeroSection />
-      <MissionSection />
 
-      <Section id="portfolio-preview" title="Proyectos Destacados" className="bg-background">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {previewProjects.map((project, index) => (
-             <ScrollAnimationWrapper
-              key={project.id}
-              className="opacity-0"
-              animationClass="animate-fade-in-up"
-              style={{ animationDelay: `${(index % 3) * 0.1 + 0.1}s` }}
-            >
-              <ProjectCard project={project} />
-            </ScrollAnimationWrapper>
-          ))}
-        </div>
-        <ScrollAnimationWrapper className="text-center opacity-0" animationClass="animate-fade-in-up" style={{animationDelay: "0.3s"}}>
-          <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground group">
-            <Link href="/portfolio">
-              Ver Todos los Proyectos <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
-        </ScrollAnimationWrapper>
-      </Section>
-
-      <SuccessStoriesSection />
-
+      {/* 2. Nuestros Servicios */}
       <Section id="services" title="Nuestros Servicios" className="bg-muted">
         <p className="text-center text-lg md:text-xl text-foreground mb-12 md:mb-16 max-w-3xl mx-auto">
           Ofrecemos una gama completa de servicios de desarrollo web y diseño para llevar tu proyecto al siguiente nivel.
@@ -135,7 +112,37 @@ export default function Home() {
           </Button>
         </ScrollAnimationWrapper>
       </Section>
+
+      {/* 3. Proyectos Destacados */}
+      <Section id="portfolio-preview" title="Proyectos Destacados" className="bg-background">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {previewProjects.map((project, index) => (
+             <ScrollAnimationWrapper
+              key={project.id}
+              className="opacity-0"
+              animationClass="animate-fade-in-up"
+              style={{ animationDelay: `${(index % 3) * 0.1 + 0.1}s` }}
+            >
+              <ProjectCard project={project} />
+            </ScrollAnimationWrapper>
+          ))}
+        </div>
+        <ScrollAnimationWrapper className="text-center opacity-0" animationClass="animate-fade-in-up" style={{animationDelay: "0.3s"}}>
+          <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground group">
+            <Link href="/portfolio">
+              Ver Todos los Proyectos <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
+        </ScrollAnimationWrapper>
+      </Section>
+
+      {/* 4. Casos de Éxito */}
+      <SuccessStoriesSection />
+
+      {/* 5. Misión y Valores */}
+      <MissionSection />
       
+      {/* CTA Final */}
       <Section id="whatsapp-cta" title="¿Listo para Empezar?" className="bg-background">
         <ScrollAnimationWrapper className="text-center max-w-2xl mx-auto opacity-0" animationClass="animate-fade-in-up">
           <WhatsAppIcon className="h-16 w-16 text-primary mx-auto mb-6 animate-subtle-pulse" />
