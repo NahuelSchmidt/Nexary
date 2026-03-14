@@ -17,7 +17,7 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function WhatsAppFloatingButton() {
-  const phoneNumber = "2974299808"; // Tu número configurado
+  const phoneNumber = "2974299808";
 
   return (
     <div className="fixed bottom-6 right-6 z-[100] group flex items-center">
