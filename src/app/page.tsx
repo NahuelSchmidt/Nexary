@@ -12,31 +12,31 @@ import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 
 const previewProjects: Project[] = [
   {
-    id: '1',
-    title: 'Plataforma E-commerce X',
-    description: 'Una plataforma de e-commerce completa con gestión avanzada de productos y pagos seguros.',
-    imageUrl: 'https://picsum.photos/seed/1/600/400',
-    techStack: ['Next.js', 'TypeScript', 'Stripe'],
+    id: 'mana',
+    title: 'Insumos Mana',
+    description: 'Web institucional para empresa industrial, diseñada para presentar el catálogo corporativo con una estética profesional y robusta.',
+    imageUrl: 'https://picsum.photos/seed/mana/600/400',
+    techStack: ['HTML', 'CSS', 'JavaScript'],
     liveUrl: '/portfolio',
-    dataAiHint: 'online store'
+    dataAiHint: 'industrial warehouse'
   },
   {
-    id: '2',
-    title: 'Dashboard SaaS Pro',
-    description: 'Un panel intuitivo para un producto SaaS, que proporciona análisis y gestión de usuarios.',
-    imageUrl: 'https://picsum.photos/seed/2/600/400',
-    techStack: ['React', 'Node.js', 'MongoDB'],
+    id: 'portfolio',
+    title: 'Portfolio Programador',
+    description: 'Diseño y optimización de sitio personal enfocado en la marca personal, con tiempos de carga mínimos y alta performance.',
+    imageUrl: 'https://picsum.photos/seed/dev/600/400',
+    techStack: ['Diseño UI/UX', 'Optimización'],
     liveUrl: '/portfolio',
-    dataAiHint: 'dashboard interface'
+    dataAiHint: 'clean developer website'
   },
   {
-    id: '3',
-    title: 'Foro ComunitarioHub',
-    description: 'Un foro comunitario dinámico con debates en tiempo real y herramientas de moderación.',
-    imageUrl: 'https://picsum.photos/seed/3/600/400',
-    techStack: ['Vue.js', 'Firebase', 'Nuxt.js'],
+    id: 'turnos-ya',
+    title: 'Turnos Ya',
+    description: 'Sistema integral de gestión de turnos que permite la reserva online y administración de agendas para comercios y profesionales.',
+    imageUrl: 'https://picsum.photos/seed/turnos/600/400',
+    techStack: ['Next.js', 'Tailwind CSS'],
     liveUrl: '/portfolio',
-    dataAiHint: 'forum discussion'
+    dataAiHint: 'scheduling dashboard'
   },
 ];
 
@@ -105,7 +105,7 @@ export default function Home() {
           ))}
         </div>
         <ScrollAnimationWrapper className="text-center opacity-0" animationClass="animate-fade-in-up" style={{animationDelay: "0.4s"}}>
-          <Button asChild size="lg" className="group">
+          <Button asChild size="lg" className="group border-white bg-white text-black hover:bg-white/90">
             <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
               Solicita una Cotización <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </a>
@@ -150,7 +150,7 @@ export default function Home() {
           <p className="text-lg text-muted-foreground mb-8">
             ¿Tienes una idea en mente? Contáctanos directamente para una consulta rápida.
           </p>
-          <Button asChild size="lg" className="group bg-[#25D366] hover:bg-[#1DA851] text-white">
+          <Button asChild size="lg" className="group bg-white text-black hover:bg-white/90">
             <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
               Chatea con Nosotros <WhatsAppIcon className="ml-2 h-5 w-5" />
             </a>

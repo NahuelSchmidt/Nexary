@@ -22,8 +22,8 @@ export default function WhatsAppFloatingButton() {
   return (
     <div className="fixed bottom-6 right-6 z-[100] group flex items-center">
       {/* Texto Desplegable */}
-      <div className="mr-3 px-4 py-2 bg-background border border-primary/20 shadow-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
-        <p className="text-primary font-bold text-sm">¿En qué podemos ayudarte? Escribinos por WhatsApp.</p>
+      <div className="mr-3 px-4 py-2 bg-white border border-black/10 shadow-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
+        <p className="text-black font-bold text-sm">¿En qué podemos ayudarte? Escribinos por WhatsApp.</p>
       </div>
 
       {/* Botón */}
@@ -32,7 +32,7 @@ export default function WhatsAppFloatingButton() {
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 animate-bounce-subtle",
+          "bg-white text-black p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 animate-bounce-subtle border border-black/10",
           "flex items-center justify-center"
         )}
         aria-label="Contactar por WhatsApp"
