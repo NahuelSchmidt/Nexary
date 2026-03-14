@@ -10,8 +10,8 @@ import { cn } from '@/lib/utils';
 
 const primaryNavLinks = [
   { href: '/', label: 'Inicio' },
-  { href: '/portfolio', label: 'Portafolio' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/#services', label: 'Servicios' },
+  { href: '/#portfolio-preview', label: 'Proyectos' },
 ];
 
 const whatsAppLink = "https://wa.me/2974299808";
