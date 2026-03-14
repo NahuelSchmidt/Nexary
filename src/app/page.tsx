@@ -1,7 +1,7 @@
 // src/app/page.tsx
 import HeroSection from '@/components/sections/hero-section';
 import MissionSection from '@/components/sections/mission-section';
-import TestimonialsSection from '@/components/sections/testimonials-section';
+import SuccessStoriesSection from '@/components/sections/success-stories-section';
 import Section from '@/components/layout/section-layout';
 import ProjectCard, { type Project } from '@/components/project-card';
 import ServiceCard, { type Service } from '@/components/service-card';
@@ -10,13 +10,12 @@ import Link from 'next/link';
 import { ArrowRight, Laptop, Palette, TrendingUp, Lightbulb } from 'lucide-react';
 import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 
-// Sample data for previews
 const previewProjects: Project[] = [
   {
     id: '1',
     title: 'Plataforma E-commerce X',
     description: 'Una plataforma de e-commerce completa con gestión avanzada de productos y pagos seguros.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://picsum.photos/seed/1/600/400',
     techStack: ['Next.js', 'TypeScript', 'Stripe'],
     liveUrl: '/portfolio',
     dataAiHint: 'online store'
@@ -25,7 +24,7 @@ const previewProjects: Project[] = [
     id: '2',
     title: 'Dashboard SaaS Pro',
     description: 'Un panel intuitivo para un producto SaaS, que proporciona análisis y gestión de usuarios.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://picsum.photos/seed/2/600/400',
     techStack: ['React', 'Node.js', 'MongoDB'],
     liveUrl: '/portfolio',
     dataAiHint: 'dashboard interface'
@@ -34,7 +33,7 @@ const previewProjects: Project[] = [
     id: '3',
     title: 'Foro ComunitarioHub',
     description: 'Un foro comunitario dinámico con debates en tiempo real y herramientas de moderación.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://picsum.photos/seed/3/600/400',
     techStack: ['Vue.js', 'Firebase', 'Nuxt.js'],
     liveUrl: '/portfolio',
     dataAiHint: 'forum discussion'
@@ -68,24 +67,16 @@ const ourServices: Service[] = [
   }
 ];
 
-
-const projectAnimationClasses = [
-  'animate-fade-in-left',
-  'animate-fade-in-up',
-  'animate-fade-in-right',
-];
-
-const serviceAnimationClasses = [
-  'animate-fade-in-left',
-  'animate-fade-in-up',
-  'animate-fade-in-right',
-  'animate-fade-in-up', // Can repeat or add more specific ones
-];
-
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-    </svg>
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    width="24"
+    height="24"
+    {...props}
+  >
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 0 5.414 0 12.05c0 2.12.552 4.19 1.598 6.02L0 24l6.125-1.606a11.82 11.82 0 005.922 1.597h.005c6.635 0 12.05-5.414 12.05-12.05 0-3.212-1.25-6.232-3.522-8.503z" />
+  </svg>
 )
 
 export default function Home() {
@@ -100,8 +91,8 @@ export default function Home() {
              <ScrollAnimationWrapper
               key={project.id}
               className="opacity-0"
-              animationClass={projectAnimationClasses[index % projectAnimationClasses.length]}
-              style={{ animationDelay: `${(index % projectAnimationClasses.length) * 0.1 + 0.1}s` }}
+              animationClass="animate-fade-in-up"
+              style={{ animationDelay: `${(index % 3) * 0.1 + 0.1}s` }}
             >
               <ProjectCard project={project} />
             </ScrollAnimationWrapper>
@@ -116,19 +107,19 @@ export default function Home() {
         </ScrollAnimationWrapper>
       </Section>
 
-      <TestimonialsSection />
+      <SuccessStoriesSection />
 
       <Section id="services" title="Nuestros Servicios" className="bg-muted">
         <p className="text-center text-lg md:text-xl text-foreground mb-12 md:mb-16 max-w-3xl mx-auto">
-          Ofrecemos una gama completa de servicios de desarrollo web y diseño para llevar tu proyecto al siguiente nivel, creando soluciones digitales impactantes y a medida.
+          Ofrecemos una gama completa de servicios de desarrollo web y diseño para llevar tu proyecto al siguiente nivel.
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {ourServices.map((service, index) => (
             <ScrollAnimationWrapper
               key={service.id}
               className="opacity-0"
-              animationClass={serviceAnimationClasses[index % serviceAnimationClasses.length]}
-              style={{ animationDelay: `${(index % serviceAnimationClasses.length) * 0.1 + 0.1}s` }}
+              animationClass="animate-fade-in-up"
+              style={{ animationDelay: `${(index % 4) * 0.1 + 0.1}s` }}
             >
               <ServiceCard service={service} />
             </ScrollAnimationWrapper>
@@ -148,10 +139,10 @@ export default function Home() {
           <WhatsAppIcon className="h-16 w-16 text-primary mx-auto mb-6 animate-subtle-pulse" />
           <h3 className="font-headline text-3xl font-bold mb-4 text-foreground">Hablemos por WhatsApp</h3>
           <p className="text-lg text-muted-foreground mb-8">
-            ¿Tienes una idea o un proyecto en mente? Contáctanos directamente por WhatsApp para una consulta rápida y sin compromiso. ¡Estamos aquí para ayudarte a empezar!
+            ¿Tienes una idea en mente? Contáctanos directamente para una consulta rápida.
           </p>
           <Button asChild size="lg" className="group bg-[#25D366] hover:bg-[#1DA851] text-white">
-            <Link href="https://wa.me/5491112345678" target="_blank" rel="noopener noreferrer">
+            <Link href="https://wa.me/2974299808" target="_blank" rel="noopener noreferrer">
               Chatea con Nosotros <WhatsAppIcon className="ml-2 h-5 w-5" />
             </Link>
           </Button>

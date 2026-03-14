@@ -4,6 +4,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
+import WhatsAppFloatingButton from '@/components/whatsapp-floating-button';
 import { cn } from '@/lib/utils';
 
 const inter = Inter({
@@ -31,13 +32,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={cn(inter.variable, spaceGrotesk.variable)}>
-      <head>
-        {/* Additional head elements can go here */}
-      </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
+        <WhatsAppFloatingButton />
         <Toaster />
       </body>
     </html>

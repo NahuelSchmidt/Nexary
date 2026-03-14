@@ -16,99 +16,26 @@ h1, h2, h3, h4, h5, h6 {
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%; /* Very dark blue-gray, almost black */
-    --foreground: 0 0% 98%; /* Nearly white */
-
-    --card: 240 10% 6%; /* Slightly lighter than background */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 6%;
     --card-foreground: 0 0% 98%;
-
     --popover: 240 10% 6%;
     --popover-foreground: 0 0% 98%;
-
-    --primary: 140 70% 45%; /* Vibrant Green */
-    --primary-foreground: 140 100% 10%; /* Dark text on green */
-
-    --secondary: 240 10% 10%; /* Darker secondary */
+    --primary: 140 70% 45%;
+    --primary-foreground: 140 100% 10%;
+    --secondary: 240 10% 10%;
     --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 10% 8%; /* Very dark muted */
-    --muted-foreground: 0 0% 60%; /* Lighter muted text */
-
-    --accent: 140 70% 55%; /* Brighter/Lighter Green for accent */
-    --accent-foreground: 140 100% 10%; /* Dark text for on light green accent */
-
+    --muted: 240 10% 8%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 140 70% 55%;
+    --accent-foreground: 140 100% 10%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 240 10% 12%; /* Dark border */
-    --input: 240 10% 12%; /* Dark input background */
-    --ring: 140 70% 55%; /* Ring color related to new primary green */
-
+    --border: 240 10% 12%;
+    --input: 240 10% 12%;
+    --ring: 140 70% 55%;
     --radius: 0.5rem;
-
-    /* Chart colors - adjusted for green theme */
-    --chart-1: 140 60% 50%;
-    --chart-2: 140 70% 60%;
-    --chart-3: 140 50% 40%;
-    --chart-4: 140 65% 55%;
-    --chart-5: 140 75% 65%;
-    
-    /* Sidebar colors */
-    --sidebar-background: 240 10% 5%;
-    --sidebar-foreground: 0 0% 80%;
-    --sidebar-primary: 140 70% 45%; /* Vibrant Green */
-    --sidebar-primary-foreground: 140 100% 10%;
-    --sidebar-accent: 240 10% 9%;
-    --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 240 10% 11%;
-    --sidebar-ring: 140 70% 55%;
-  }
-
-  .dark {
-    --background: 240 10% 2.5%; /* Even darker for dark mode */
-    --foreground: 0 0% 98%;
-
-    --card: 240 10% 5%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 5%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 140 70% 50%; /* Slightly brighter green for dark mode */
-    --primary-foreground: 140 100% 10%;
-
-    --secondary: 240 10% 9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 10% 7%;
-    --muted-foreground: 0 0% 63.9%;
-
-    --accent: 140 70% 60%; /* Brighter green accent for dark mode */
-    --accent-foreground: 140 100% 10%;
-
-    --destructive: 0 62.8% 45.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 10% 10%;
-    --input: 240 10% 10%;
-    --ring: 140 70% 60%;
-    
-    /* Chart colors for dark mode - adjusted for green theme */
-    --chart-1: 140 60% 45%;
-    --chart-2: 140 70% 55%;
-    --chart-3: 140 50% 35%;
-    --chart-4: 140 65% 50%;
-    --chart-5: 140 75% 60%;
-
-    /* Sidebar colors for dark mode */
-    --sidebar-background: 240 10% 4%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 140 70% 50%; /* Vibrant Green */
-    --sidebar-primary-foreground: 140 100% 10%;
-    --sidebar-accent: 240 10% 7%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 240 10% 9%;
-    --sidebar-ring: 140 70% 60%;
   }
 }
 
@@ -123,7 +50,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Particle animation styles */
 .particle-container {
   position: absolute;
   top: 0;
@@ -131,9 +57,9 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  perspective: 600px; /* Adjust for 3D depth */
-  z-index: 0; /* Ensure it's behind content which is z-10 */
-  pointer-events: none; /* Particles should not be interactive */
+  perspective: 600px;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .particle {
@@ -142,9 +68,35 @@ h1, h2, h3, h4, h5, h6 {
   height: 4px;
   background-color: hsl(var(--primary));
   border-radius: 50%;
-  /* Glow effect for particles */
-  box-shadow: 0 0 6px hsl(var(--primary)), 
-              0 0 10px hsl(var(--primary)), 
-              0 0 14px hsl(var(--primary));
-  will-change: transform, opacity; /* Optimize animation */
+  box-shadow: 0 0 6px hsl(var(--primary));
+  will-change: transform, opacity;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 3s ease-in-out infinite;
+}
+
+@keyframes coming-forward {
+  0% { opacity: 0; transform: translateZ(-200px); }
+  20% { opacity: 0.7; }
+  80% { opacity: 1; }
+  100% { transform: translateZ(100px); opacity: 0; }
+}
+
+.animate-coming-forward {
+  animation: coming-forward 5s ease-out infinite;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease-out forwards;
 }
