@@ -8,18 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
-// Define los enlaces de navegación principales (sin "Contáctanos", que es un botón separado en escritorio)
 const primaryNavLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/portfolio', label: 'Portafolio' },
   { href: '/blog', label: 'Blog' },
 ];
 
-// Enlaces para el menú móvil: incluye los primarios y "Contáctanos" como un enlace en la lista
-const mobileNavListLinks = [
-  ...primaryNavLinks,
-  { href: '/contact', label: 'Contáctanos' },
-];
+const whatsAppLink = "https://wa.me/2974299808";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -62,7 +57,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300">
-                <Link href="/contact">Contáctanos</Link>
+                <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">Contáctanos</a>
             </Button>
           </nav>
 
@@ -88,7 +83,7 @@ export default function Navbar() {
                 </div>
                 
                 <nav className="flex flex-col space-y-4 flex-grow">
-                  {mobileNavListLinks.map((item) => (
+                  {primaryNavLinks.map((item) => (
                     <Link
                       key={item.label}
                       href={item.href}
@@ -98,9 +93,18 @@ export default function Navbar() {
                       {item.label}
                     </Link>
                   ))}
+                  <a
+                    href={whatsAppLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Contáctanos
+                  </a>
                 </nav>
                  <Button asChild className="w-full mt-auto" size="lg" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Link href="/contact">Contáctanos</Link>
+                    <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">Chatear ahora</a>
                 </Button>
               </SheetContent>
             </Sheet>

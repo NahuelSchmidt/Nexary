@@ -15,6 +15,8 @@ interface ParticleStyle {
   transform: string;
 }
 
+const whatsAppLink = "https://wa.me/2974299808";
+
 export default function HeroSection() {
   const [particles, setParticles] = useState<Array<{id: number; style: ParticleStyle}>>([]);
 
@@ -67,9 +69,9 @@ export default function HeroSection() {
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.4s' }}>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="group transition-all duration-300 ease-in-out hover:shadow-lg transform hover:-translate-y-1">
-              <Link href="/contact">
+              <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
                 Comienza Tu Proyecto <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="group transition-all duration-300 ease-in-out hover:shadow-lg transform hover:-translate-y-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Link href="/portfolio">
