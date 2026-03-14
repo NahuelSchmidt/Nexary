@@ -6,7 +6,7 @@ import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 const successStories: SuccessStory[] = [
   {
     id: '1',
-    client: 'Grupo Industrial Atlas',
+    client: 'Insumos Mana',
     project: 'Desarrollo Web Institucional',
     result: 'Incremento del 55% en consultas comerciales online.',
     description: 'Rediseñamos el sitio institucional de una empresa de insumos industriales, optimizando la estructura del catálogo y la experiencia de navegación. Mejoramos la velocidad del sitio y el SEO técnico para facilitar el contacto con nuevos clientes del sector industrial.',
