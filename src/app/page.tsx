@@ -8,7 +8,7 @@ import ProjectCard, { type Project } from '@/components/project-card';
 import ServiceCard, { type Service } from '@/components/service-card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, Laptop, Palette, TrendingUp, Lightbulb } from 'lucide-react';
+import { ArrowRight, Laptop, LayoutDashboard, Zap, ShieldCheck } from 'lucide-react';
 import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 import placeholders from '@/app/lib/placeholder-images.json';
 
@@ -16,7 +16,7 @@ const previewProjects: Project[] = [
   {
     id: 'mana',
     title: 'Insumos Mana',
-    description: 'Web institucional para empresa industrial, diseñada para presentar el catálogo corporativo con una estética profesional y robusta.',
+    description: 'Plataforma web institucional con catálogo optimizado, diseñada para centralizar la presencia digital y captar clientes B2B de forma eficiente.',
     imageUrl: placeholders.projects.mana.url,
     techStack: ['HTML', 'CSS', 'JavaScript'],
     liveUrl: 'https://www.insumosmana.net/',
@@ -25,7 +25,7 @@ const previewProjects: Project[] = [
   {
     id: 'portfolio',
     title: 'Portfolio Programador',
-    description: 'Diseño y optimización de sitio personal enfocado en la marca personal, con tiempos de carga mínimos y alta performance.',
+    description: 'Sitio personal de alta performance enfocado en marca personal, optimizado para una carga instantánea y máxima visibilidad en buscadores.',
     imageUrl: placeholders.projects.portfolio.url,
     techStack: ['Diseño UI/UX', 'Optimización'],
     liveUrl: 'https://portfolio-nahuelschmidt.vercel.app/',
@@ -34,7 +34,7 @@ const previewProjects: Project[] = [
   {
     id: 'turnos-ya',
     title: 'Turnos Ya',
-    description: 'Sistema integral de gestión de turnos que permite la reserva online y administración de agendas para comercios y profesionales.',
+    description: 'SaaS integral de gestión de turnos que automatiza la agenda y reservas online, reduciendo el trabajo manual administrativo en un 80%.',
     imageUrl: placeholders.projects.turnos.url,
     techStack: ['Next.js', 'Tailwind CSS'],
     liveUrl: 'https://saas-turnos-ya.vercel.app/',
@@ -46,26 +46,26 @@ const ourServices: Service[] = [
   {
     id: '1',
     icon: <Laptop className="h-10 w-10 text-primary mb-4" />,
-    title: 'Desarrollo Web Moderno',
-    description: 'Creamos aplicaciones web rápidas, seguras y escalables utilizando las últimas tecnologías del stack frontend y backend.',
+    title: 'Desarrollo de Plataformas Web',
+    description: 'Creamos sitios rápidos y seguros que proyectan profesionalismo y están diseñados para convertir visitantes en oportunidades reales de negocio.',
   },
   {
     id: '2',
-    icon: <Palette className="h-10 w-10 text-primary mb-4" />,
-    title: 'Diseño UI/UX Centrado en el Usuario',
-    description: 'Diseñamos interfaces intuitivas y atractivas que garantizan una experiencia de usuario excepcional y memorable.',
+    icon: <LayoutDashboard className="h-10 w-10 text-primary mb-4" />,
+    title: 'Sistemas de Gestión a Medida',
+    description: 'Diseñamos paneles administrativos y herramientas internas que centralizan tu información y te permiten controlar toda tu operación en un solo lugar.',
   },
   {
     id: '3',
-    icon: <TrendingUp className="h-10 w-10 text-primary mb-4" />,
-    title: 'Optimización y Rendimiento',
-    description: 'Mejoramos la velocidad de carga, la accesibilidad y el SEO de tu sitio web para alcanzar tus objetivos de negocio.',
+    icon: <Zap className="h-10 w-10 text-primary mb-4" />,
+    title: 'Automatización de Procesos',
+    description: 'Eliminamos tareas manuales repetitivas mediante flujos de trabajo inteligentes, permitiendo que tu equipo se enfoque en lo que realmente genera valor.',
   },
   {
     id: '4',
-    icon: <Lightbulb className="h-10 w-10 text-primary mb-4" />,
-    title: 'Consultoría Tecnológica Estratégica',
-    description: 'Te asesoramos en la selección de tecnologías, arquitectura de sistemas y estrategias digitales para asegurar el éxito de tu proyecto.',
+    icon: <ShieldCheck className="h-10 w-10 text-primary mb-4" />,
+    title: 'Software Escalable y Moderno',
+    description: 'Utilizamos tecnologías de vanguardia para construir soluciones robustas que crecen al mismo ritmo que las demandas de tu empresa.',
   }
 ];
 
@@ -90,9 +90,9 @@ export default function Home() {
       <HeroSection />
 
       {/* 2. Nuestros Servicios */}
-      <Section id="services" title="Nuestros Servicios" className="bg-muted">
+      <Section id="services" title="Soluciones Tecnológicas Estratégicas" className="bg-muted">
         <p className="text-center text-lg md:text-xl text-foreground mb-12 md:mb-16 max-w-3xl mx-auto">
-          Ofrecemos una gama completa de servicios de desarrollo web y diseño para llevar tu proyecto al siguiente nivel.
+          Nos enfocamos en resolver cuellos de botella operativos mediante software robusto, escalable y fácil de usar.
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {ourServices.map((service, index) => (
@@ -109,14 +109,14 @@ export default function Home() {
         <ScrollAnimationWrapper className="text-center opacity-0" animationClass="animate-fade-in-up" style={{animationDelay: "0.4s"}}>
           <Button asChild size="lg" className="group bg-primary text-primary-foreground hover:bg-primary/90">
             <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
-              Solicita una Cotización <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              Solicitar Cotización a Medida <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </Button>
         </ScrollAnimationWrapper>
       </Section>
 
       {/* 3. Proyectos Destacados */}
-      <Section id="portfolio-preview" title="Proyectos Destacados" className="bg-background">
+      <Section id="portfolio-preview" title="Sistemas y Plataformas en Acción" className="bg-background">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {previewProjects.map((project, index) => (
              <ScrollAnimationWrapper
@@ -132,7 +132,7 @@ export default function Home() {
         <ScrollAnimationWrapper className="text-center opacity-0" animationClass="animate-fade-in-up" style={{animationDelay: "0.3s"}}>
           <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground group">
             <Link href="/portfolio">
-              Ver Todos los Proyectos <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              Explorar Más Soluciones <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
         </ScrollAnimationWrapper>
@@ -145,16 +145,16 @@ export default function Home() {
       <MissionSection />
       
       {/* CTA Final */}
-      <Section id="whatsapp-cta" title="¿Listo para Empezar?" className="bg-background">
+      <Section id="whatsapp-cta" title="¿Tu Empresa está Lista para el Siguiente Nivel?" className="bg-background">
         <ScrollAnimationWrapper className="text-center max-w-2xl mx-auto opacity-0" animationClass="animate-fade-in-up">
           <WhatsAppIcon className="h-16 w-16 text-primary mx-auto mb-6 animate-subtle-pulse" />
-          <h3 className="font-headline text-3xl font-bold mb-4 text-foreground">Hablemos por WhatsApp</h3>
+          <h3 className="font-headline text-3xl font-bold mb-4 text-foreground">Hablemos sobre tu Próximo Sistema</h3>
           <p className="text-lg text-muted-foreground mb-8">
-            ¿Tienes una idea en mente? Contáctanos directamente para una consulta rápida.
+            ¿Tenés un proceso manual que te quita tiempo o necesitás una herramienta a medida? Agendá una consulta rápida hoy mismo.
           </p>
           <Button asChild size="lg" className="group bg-[#25D366] hover:bg-[#1DA851] text-white">
             <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
-              Chatea con Nosotros <WhatsAppIcon className="ml-2 h-5 w-5" />
+              Consultar por WhatsApp <WhatsAppIcon className="ml-2 h-5 w-5" />
             </a>
           </Button>
         </ScrollAnimationWrapper>

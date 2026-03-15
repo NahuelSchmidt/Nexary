@@ -1,38 +1,39 @@
+
 // src/components/sections/mission-section.tsx
-import { Rocket, Lightbulb, Users, Zap } from 'lucide-react';
+import { Rocket, ShieldCheck, Users, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Section from '@/components/layout/section-layout';
 import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
 
 const values = [
   {
-    icon: <Rocket className="h-10 w-10 text-primary mb-4" />,
-    title: 'Innovación',
-    description: 'Exploramos continuamente nuevas tecnologías y enfoques para ofrecer soluciones de vanguardia que impulsan el éxito.',
+    icon: <Zap className="h-10 w-10 text-primary mb-4" />,
+    title: 'Eficiencia',
+    description: 'Nuestra prioridad es eliminar fricciones operativas. Creamos software que ahorra tiempo real y recursos a tu equipo.',
   },
   {
-    icon: <Lightbulb className="h-10 w-10 text-primary mb-4" />,
-    title: 'Calidad',
-    description: 'Nuestro compromiso con la excelencia garantiza aplicaciones web robustas, confiables y de alto rendimiento en todo momento.',
+    icon: <ShieldCheck className="h-10 w-10 text-primary mb-4" />,
+    title: 'Confiabilidad',
+    description: 'Entregamos sistemas robustos y seguros, construidos con tecnología moderna que garantiza estabilidad a largo plazo.',
+  },
+  {
+    icon: <Rocket className="h-10 w-10 text-primary mb-4" />,
+    title: 'Escalabilidad',
+    description: 'Desarrollamos soluciones preparadas para el futuro. Tu software crecerá junto con tu volumen de negocio sin límites técnicos.',
   },
   {
     icon: <Users className="h-10 w-10 text-primary mb-4" />,
-    title: 'Colaboración',
-    description: 'Trabajamos en estrecha colaboración con nuestros clientes, fomentando la comunicación abierta para alcanzar metas y visiones compartidas.',
-  },
-  {
-    icon: <Zap className="h-10 w-10 text-primary mb-4" />,
-    title: 'Agilidad',
-    description: 'Adaptándonos al cambio de manera rápida y eficiente, aseguramos que tu proyecto se mantenga en curso y satisfaga las demandas cambiantes del mercado.',
+    title: 'Enfoque de Negocio',
+    description: 'No solo escribimos código; entendemos tus metas empresariales para construir la herramienta exacta que necesitás.',
   },
 ];
 
 export default function MissionSection() {
   return (
-    <Section id="mission" title="Nuestra Misión y Valores" className="bg-muted">
+    <Section id="mission" title="Eficiencia y Crecimiento a través de la Tecnología" className="bg-muted">
       <ScrollAnimationWrapper className="text-center max-w-3xl mx-auto mb-12 md:mb-16 opacity-0" animationClass="animate-fade-in-up">
         <p className="text-lg md:text-xl text-foreground">
-          Empoderar a las empresas con soluciones web transformadoras que impulsen el crecimiento, mejoren las experiencias de usuario y creen valor duradero. Creemos en el poder de la tecnología para dar forma a un futuro mejor.
+          En Nexary, nuestra misión es empoderar a las empresas mediante software estratégico que impulse la productividad, mejore la experiencia del cliente y cree valor duradero. Creemos en la tecnología como el motor de la eficiencia empresarial.
         </p>
       </ScrollAnimationWrapper>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

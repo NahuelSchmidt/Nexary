@@ -1,3 +1,4 @@
+
 // src/components/sections/hero-section.tsx
 "use client";
 
@@ -56,26 +57,24 @@ export default function HeroSection() {
       <div className="relative z-10 text-center">
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0">
           <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground">
-            Creando <span className="text-primary">Excelencia Digital</span>,
-            <br />
-            Una Línea de Código a la Vez.
+            Sistemas a Medida y <span className="text-primary">Automatización Inteligente</span> para tu Empresa.
           </h1>
         </ScrollAnimationWrapper>
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.2s' }}>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            En Nexary, transformamos tus ideas en aplicaciones web potentes, escalables y atractivas. Construyamos el futuro, juntos.
+            En Nexary diseñamos plataformas web, paneles de gestión y soluciones escalables que optimizan tus procesos internos y potencian tu crecimiento digital.
           </p>
         </ScrollAnimationWrapper>
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.4s' }}>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="group transition-all duration-300 ease-in-out hover:shadow-lg transform hover:-translate-y-1">
               <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
-                Comienza Tu Proyecto <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                Solicitar Presupuesto <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="group transition-all duration-300 ease-in-out hover:shadow-lg transform hover:-translate-y-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Link href="/portfolio">
-                Ver Nuestro Trabajo
+                Ver Soluciones Desarrolladas
               </Link>
             </Button>
           </div>
