@@ -1,4 +1,3 @@
-
 // src/components/sections/hero-section.tsx
 "use client";
 
@@ -57,12 +56,12 @@ export default function HeroSection() {
       <div className="relative z-10 text-center">
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0">
           <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground">
-            Sistemas a Medida y <span className="text-primary">Automatización Inteligente</span> para tu Empresa.
+            Desarrollamos Sistemas Web y <span className="text-primary">Soluciones Digitales a Medida</span> para Empresas
           </h1>
         </ScrollAnimationWrapper>
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.2s' }}>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            En Nexary diseñamos plataformas web, paneles de gestión y soluciones escalables que optimizan tus procesos internos y potencian tu crecimiento digital.
+            En Nexary diseñamos plataformas, paneles de gestión y herramientas digitales que automatizan procesos, optimizan la operación y ayudan a las empresas a crecer con tecnología.
           </p>
         </ScrollAnimationWrapper>
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.4s' }}>
