@@ -18,6 +18,8 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export default function WhatsAppFloatingButton() {
   const phoneNumber = "2974299808";
+  const message = "Hola! Vi la web de Nexary y me interesa desarrollar una web o sistema para mi empresa. ¿Podemos hablar sobre el proyecto?";
+  const whatsAppLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <div className="fixed bottom-6 right-6 z-[100] group flex items-center">
@@ -28,7 +30,7 @@ export default function WhatsAppFloatingButton() {
 
       {/* Botón */}
       <Link
-        href={`https://wa.me/${phoneNumber}`}
+        href={whatsAppLink}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(

@@ -13,7 +13,7 @@ const primaryNavLinks = [
   { href: '/#portfolio-preview', label: 'Proyectos' },
 ];
 
-const whatsAppLink = "https://wa.me/2974299808";
+const whatsAppLink = "https://wa.me/2974299808?text=Hola!%20Vi%20la%20web%20de%20Nexary%20y%20me%20interesa%20desarrollar%20una%20web%20o%20sistema%20para%20mi%20empresa.%20%C2%BFPodemos%20hablar%20sobre%20el%20proyecto%3F";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
