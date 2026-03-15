@@ -58,7 +58,7 @@ export default function HeroSection() {
           <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground max-w-5xl mx-auto">
             Desarrollamos Sistemas Web y <span className="text-primary">Soluciones</span>
             <br className="hidden lg:block" />
-            <span className="text-primary"> Digitales a Medida</span> para Empresas
+            <span className="text-primary">Digitales a Medida</span> para Empresas
           </h1>
         </ScrollAnimationWrapper>
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.2s' }}>
