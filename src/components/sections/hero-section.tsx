@@ -1,3 +1,4 @@
+
 // src/components/sections/hero-section.tsx
 "use client";
 
@@ -55,7 +56,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 text-center">
         <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0">
-          <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground max-w-none mx-auto flex flex-col items-center">
+          <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground max-w-none mx-auto text-center">
             <span className="block lg:whitespace-nowrap">
               Desarrollamos Sistemas Web y <span className="text-primary">Soluciones</span>
             </span>

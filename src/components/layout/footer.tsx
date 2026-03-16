@@ -1,3 +1,4 @@
+
 // src/components/layout/footer.tsx
 import Link from 'next/link';
 import { Github, Linkedin, Twitter, Code2 } from 'lucide-react';
@@ -24,17 +25,37 @@ export default function Footer() {
             </div>
 
             <div className="text-center md:col-span-1">
-              <p className="text-sm">&copy; {currentYear} Nexary. Todos los derechos reservados.</p>
+              <p className="text-sm">
+                &copy; {currentYear} Nexary. Todos los derechos reservados.
+              </p>
             </div>
 
             <div className="flex justify-center md:justify-end space-x-4">
-              <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-muted-foreground hover:text-primary transition-colors duration-300">
+              <Link
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
                 <Twitter className="h-6 w-6" />
               </Link>
-              <Link href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-muted-foreground hover:text-primary transition-colors duration-300">
+              <Link
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
                 <Github className="h-6 w-6" />
               </Link>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors duration-300">
+              <Link
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
                 <Linkedin className="h-6 w-6" />
               </Link>
             </div>
