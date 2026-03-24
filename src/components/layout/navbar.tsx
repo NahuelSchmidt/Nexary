@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -36,11 +36,8 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center space-x-2 group">
-            <Code2 className="h-8 w-8 text-primary group-hover:text-accent transition-colors duration-300" />
-            <span className="font-headline text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-              Nexary
-            </span>
+          <Link href="/" className="flex items-center group">
+            <img src="/Nexary.png" alt="Nexary" className="header-logo h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -70,9 +67,8 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-background p-6 flex flex-col">
                 <div className="flex justify-between items-center mb-8">
-                  <Link href="/" className="flex items-center space-x-2 group" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Code2 className="h-7 w-7 text-primary" />
-                    <span className="font-headline text-xl font-bold text-foreground">Nexary</span>
+                  <Link href="/" className="flex items-center group" onClick={() => setIsMobileMenuOpen(false)}>
+                    <img src="/Nexary.png" alt="Nexary" className="header-logo h-8 w-auto" />
                   </Link>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="icon" aria-label="Cerrar menú">
