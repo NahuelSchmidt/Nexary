@@ -37,7 +37,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center group">
-            <img src="/Nexary.png" alt="Nexary" className="header-logo h-10 w-auto" />
+            <img src="/Nexary.png" alt="Nexary" className="header-logo h-16 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -68,7 +68,7 @@ export default function Navbar() {
               <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-background p-6 flex flex-col">
                 <div className="flex justify-between items-center mb-8">
                   <Link href="/" className="flex items-center group" onClick={() => setIsMobileMenuOpen(false)}>
-                    <img src="/Nexary.png" alt="Nexary" className="header-logo h-8 w-auto" />
+                    <img src="/Nexary.png" alt="Nexary" className="header-logo h-12 w-auto" />
                   </Link>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="icon" aria-label="Cerrar menú">
