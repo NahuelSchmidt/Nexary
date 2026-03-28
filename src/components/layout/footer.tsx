@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="grid md:grid-cols-3 gap-8 items-center">
             <div className="flex flex-col items-center md:items-start">
               <Link href="/" className="flex items-center space-x-2 group mb-4">
-                <img src="/Nexary.png" alt="Nexary" className="h-8 w-auto" />
+                <img src="/img/Nexary.png" alt="Nexary" className="h-8 w-auto" />
               </Link>
               <p className="text-sm text-center md:text-left">
                 Creando excelencia digital, una línea de código a la vez.

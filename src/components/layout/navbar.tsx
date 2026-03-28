@@ -37,7 +37,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center space-x-3 group">
-            <img src="/Nexary.png" alt="Nexary" className="header-logo h-16 w-auto" />
+            <img src="/img/Nexary.png" alt="Nexary" className="header-logo h-16 w-auto" />
             <span className="font-headline text-2xl font-bold text-foreground">Nexary</span>
           </Link>
 
