@@ -69,7 +69,7 @@ export default function Navbar() {
               <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-background p-6 flex flex-col">
                 <div className="flex justify-between items-center mb-8">
                   <Link href="/" className="flex items-center space-x-2 group" onClick={() => setIsMobileMenuOpen(false)}>
-                    <img src="/Nexary.png" alt="Nexary" className="header-logo h-12 w-auto" />
+                    <img src="/img/Nexary.png" alt="Nexary" className="header-logo h-12 w-auto" />
                     <span className="font-headline text-xl font-bold text-foreground">Nexary</span>
                   </Link>
                   <SheetTrigger asChild>
