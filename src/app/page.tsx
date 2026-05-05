@@ -36,7 +36,7 @@ const previewProjects: Project[] = [
     description: 'SaaS integral de gestión de turnos que automatiza la agenda y reservas online, reduciendo el trabajo manual administrativo en un 80%.',
     imageUrl: placeholders.projects.turnos.url,
     techStack: ['Next.js', 'Tailwind CSS'],
-    liveUrl: 'https://saas-turnos-ya.vercel.app/',
+    liveUrl: 'https://turnos-ya-demo.vercel.app/',
     dataAiHint: placeholders.projects.turnos.hint
   },
 ];
