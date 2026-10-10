@@ -1,62 +1,68 @@
 import Link from 'next/link';
-import { Github, Linkedin, Twitter } from 'lucide-react';
-import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
+import { ArrowUpRight, Github } from 'lucide-react';
+import { GITHUB_URL, navLinks, whatsAppLink } from '@/lib/site';
+import Logo from '@/components/layout/logo';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-muted text-muted-foreground border-t border-border">
-      <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-3 gap-8 items-center">
-            <div className="flex flex-col items-center md:items-start">
-              <Link href="/" className="flex items-center space-x-2 group mb-4">
-                <img src="/img/Nexary.png" alt="Nexary" className="h-8 w-auto" />
-              </Link>
-              <p className="text-sm text-center md:text-left">
-                Creando excelencia digital, una línea de código a la vez.
-              </p>
-            </div>
-
-            <div className="text-center md:col-span-1">
-              <p className="text-sm">
-                &copy; {currentYear} Nexary. Todos los derechos reservados.
-              </p>
-            </div>
-
-            <div className="flex justify-center md:justify-end space-x-4">
-              <Link
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <Twitter className="h-6 w-6" />
-              </Link>
-              <Link
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <Github className="h-6 w-6" />
-              </Link>
-              <Link
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <Linkedin className="h-6 w-6" />
-              </Link>
-            </div>
-          </div>
+    <footer className="relative overflow-hidden border-t border-ink/[0.07]">
+      <div className="container-x grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <Logo />
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            Software a medida para empresas que quieren crecer con tecnología.
+          </p>
         </div>
-      </ScrollAnimationWrapper>
+
+        <div>
+          <p className="eyebrow mb-4 text-muted-foreground">Navegación</p>
+          <ul className="space-y-3 text-sm">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="text-muted-foreground transition-colors hover:text-foreground">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link href="/portfolio" className="text-muted-foreground transition-colors hover:text-foreground">
+                Todos los proyectos
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="eyebrow mb-4 text-muted-foreground">Contacto</p>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-primary">
+                WhatsApp <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            </li>
+            <li>
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary">
+                <Github className="h-4 w-4" /> GitHub
+              </a>
+            </li>
+            <li className="text-muted-foreground">La Plata, Buenos Aires, AR</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Oversized wordmark */}
+      <div className="container-x select-none" aria-hidden="true">
+        <p className="bg-gradient-to-b from-ink/[0.09] to-transparent bg-clip-text text-center text-[22vw] font-semibold leading-[0.8] tracking-[-0.06em] text-transparent md:text-[17vw] lg:text-[220px]">
+          nexary
+        </p>
+      </div>
+
+      <div className="container-x flex flex-col items-center justify-between gap-2 border-t border-ink/[0.07] py-6 font-mono text-xs text-muted-foreground sm:flex-row">
+        <span>© {year} Nexary. Todos los derechos reservados.</span>
+        <span>34.92° S — 57.95° W</span>
+      </div>
     </footer>
   );
 }

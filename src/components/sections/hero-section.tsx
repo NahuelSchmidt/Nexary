@@ -1,91 +1,64 @@
-
-// src/components/sections/hero-section.tsx
-"use client";
-
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { ScrollAnimationWrapper } from '@/components/scroll-animation-wrapper';
-import { useEffect, useState } from 'react';
-
-interface ParticleStyle {
-  left: string;
-  top: string;
-  animationDelay: string;
-  animationDuration: string;
-  transform: string;
-}
-
-const whatsAppLink = "https://wa.me/2216229441?text=Hola!%20Vi%20la%20web%20de%20Nexary%20y%20me%20interesa%20desarrollar%20una%20web%20o%20sistema%20para%20mi%20empresa.%20%C2%BFPodemos%20hablar%20sobre%20el%20proyecto%3F";
+import ParticleSphere from '@/components/effects/particle-sphere';
+import Magnetic from '@/components/effects/magnetic';
+import Reveal from '@/components/effects/reveal';
+import { whatsAppLink } from '@/lib/site';
+import { projects } from '@/lib/projects';
 
 export default function HeroSection() {
-  const [particles, setParticles] = useState<Array<{id: number; style: ParticleStyle}>>([]);
-
-  useEffect(() => {
-    const numParticles = 70;
-    const newParticles = [];
-    for (let i = 0; i < numParticles; i++) {
-      const initialZ = Math.random() * -400 - 100;
-      const initialScale = 0.3 + Math.random() * 0.4;
-      newParticles.push({
-        id: i,
-        style: {
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 7}s`,
-          animationDuration: `${4 + Math.random() * 4}s`,
-          transform: `translateZ(${initialZ}px) scale(${initialScale})`,
-        },
-      });
-    }
-    setParticles(newParticles);
-  }, []);
-
   return (
-    <section className="relative bg-gradient-to-br from-background via-muted to-background min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
-      {/* Particle Container */}
-      <div className="particle-container">
-        {particles.map(p => (
-          <div
-            key={p.id}
-            className="particle animate-coming-forward"
-            style={p.style}
-          />
-        ))}
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden">
+      <div className="grid-bg pointer-events-none absolute inset-0 opacity-50" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-[radial-gradient(ellipse_60%_50%_at_50%_110%,hsl(var(--primary)/0.14),transparent_70%)]" />
+      <ParticleSphere className="absolute inset-0 h-full w-full" />
+
+      <div className="container-x relative z-10 pb-[360px] pt-32 md:pb-24 md:pt-28">
+        <div className="max-w-[580px]">
+          <Reveal as="p" className="eyebrow">
+            {'// Nexary studio — software a medida'}
+          </Reveal>
+          <Reveal
+            as="h1"
+            delay={0.12}
+            className="mt-6 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-[4.4rem]"
+          >
+            Construimos el sistema que tu empresa <span className="text-primary">necesita.</span>
+          </Reveal>
+          <Reveal as="p" delay={0.24} className="mt-6 max-w-[470px] text-base font-light leading-relaxed text-muted-foreground md:text-lg">
+            Plataformas web, paneles de gestión y automatización de procesos. Del Excel a un software que trabaja por vos.
+          </Reveal>
+          <Reveal delay={0.36} className="mt-9 flex flex-wrap gap-3">
+            <Magnetic>
+              <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                Empezar proyecto <ArrowRight className="arrow h-4 w-4" />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <Link href="#proyectos" className="btn btn-ghost">
+                Ver proyectos
+              </Link>
+            </Magnetic>
+          </Reveal>
+          <Reveal delay={0.5} className="mt-14 flex flex-wrap gap-x-7 gap-y-2 font-mono text-xs text-muted-foreground/70">
+            <span>
+              <b className="font-medium text-foreground">{projects.length}+</b> sistemas
+            </span>
+            <span>
+              <b className="font-medium text-foreground">Next.js</b> · React · Node
+            </span>
+            <span>
+              <b className="font-medium text-foreground">La Plata</b>, AR
+            </span>
+          </Reveal>
+        </div>
       </div>
 
-      <div className="relative z-10 text-center">
-        <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0">
-          <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground max-w-none mx-auto text-center">
-            <span className="block lg:whitespace-nowrap">
-              Desarrollamos Sistemas Web y <span className="text-primary">Soluciones</span>
-            </span>
-            <span className="block lg:whitespace-nowrap">
-              <span className="text-primary">Digitales a Medida</span> para Empresas
-            </span>
-          </h1>
-        </ScrollAnimationWrapper>
-        <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.2s' }}>
-          <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            En Nexary diseñamos plataformas, paneles de gestión y herramientas digitales que automatizan procesos, optimizan la operación y ayudan a las empresas a crecer con tecnología.
-          </p>
-        </ScrollAnimationWrapper>
-        <ScrollAnimationWrapper animationClass="animate-fade-in-up" className="opacity-0" style={{ animationDelay: '0.4s' }}>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="group transition-all duration-300 ease-in-out hover:shadow-lg transform hover:-translate-y-1">
-              <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">
-                Solicitar Presupuesto <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="group transition-all duration-300 ease-in-out hover:shadow-lg transform hover:-translate-y-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Link href="/portfolio">
-                Ver Soluciones Desarrolladas
-              </Link>
-            </Button>
-          </div>
-        </ScrollAnimationWrapper>
+      <div className="pointer-events-none absolute bottom-8 left-8 hidden flex-col gap-3 font-mono text-[11px] text-muted-foreground/60 md:flex">
+        <span>SCROLL</span>
+        <span className="h-9 w-px origin-top animate-[scroll-line_2s_ease-in-out_infinite] bg-gradient-to-b from-primary to-transparent" />
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"></div>
+      <style>{`@keyframes scroll-line { 0% { transform: scaleY(0) } 50% { transform: scaleY(1) } 100% { transform: scaleY(1); opacity: 0 } }`}</style>
     </section>
   );
 }

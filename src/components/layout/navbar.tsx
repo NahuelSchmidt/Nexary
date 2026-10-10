@@ -1,112 +1,89 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { useEffect, useState } from 'react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const primaryNavLinks = [
-  { href: '/', label: 'Inicio' },
-  { href: '/#services', label: 'Servicios' },
-  { href: '/#portfolio-preview', label: 'Proyectos' },
-];
-
-const whatsAppLink = "https://wa.me/2216229441?text=Hola!%20Vi%20la%20web%20de%20Nexary%20y%20me%20interesa%20desarrollar%20una%20web%20o%20sistema%20para%20mi%20empresa.%20%C2%BFPodemos%20hablar%20sobre%20el%20proyecto%3F";
+import { navLinks, whatsAppLink } from '@/lib/site';
+import Logo from '@/components/layout/logo';
+import Magnetic from '@/components/effects/magnetic';
+import ThemeToggle from '@/components/layout/theme-toggle';
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+  }, [open]);
+
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out',
-        isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      )}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center space-x-3 group">
-            <img src="/img/Nexary.png" alt="Nexary" className="header-logo h-16 w-auto" />
-            <span className="font-headline text-2xl font-bold text-foreground">Nexary</span>
-          </Link>
+    <header className="fixed inset-x-0 top-4 z-50 px-4">
+      <div
+        className={cn(
+          'mx-auto flex max-w-[1180px] items-center justify-between rounded-full border py-2.5 pl-5 pr-2.5 transition-all duration-500',
+          scrolled || open ? 'border-ink/10 bg-surface/70 backdrop-blur-xl' : 'border-transparent bg-transparent'
+        )}
+      >
+        <Logo onClick={() => setOpen(false)} />
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6 items-center">
-            {primaryNavLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="font-medium text-foreground hover:text-primary transition-colors duration-300 relative group"
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
-              </Link>
-            ))}
-            <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300">
-                <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">Contáctanos</a>
-            </Button>
-          </nav>
+        <nav className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="group relative text-sm text-muted-foreground transition-colors hover:text-foreground">
+              {link.label}
+              <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+            </Link>
+          ))}
+        </nav>
 
-          {/* Mobile Navigation Trigger */}
-          <div className="md:hidden">
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Abrir menú">
-                  <Menu className="h-6 w-6 text-foreground" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-background p-6 flex flex-col">
-                <div className="flex justify-between items-center mb-8">
-                  <Link href="/" className="flex items-center space-x-2 group" onClick={() => setIsMobileMenuOpen(false)}>
-                    <img src="/img/Nexary.png" alt="Nexary" className="header-logo h-12 w-auto" />
-                    <span className="font-headline text-xl font-bold text-foreground">Nexary</span>
-                  </Link>
-                  <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon" aria-label="Cerrar menú">
-                      <X className="h-6 w-6 text-foreground" />
-                    </Button>
-                  </SheetTrigger>
-                </div>
-                
-                <nav className="flex flex-col space-y-4 flex-grow">
-                  {primaryNavLinks.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                  <a
-                    href={whatsAppLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Contáctanos
-                  </a>
-                </nav>
-                 <Button asChild className="w-full mt-auto" size="lg" onClick={() => setIsMobileMenuOpen(false)}>
-                    <a href={whatsAppLink} target="_blank" rel="noopener noreferrer">Chatear ahora</a>
-                </Button>
-              </SheetContent>
-            </Sheet>
-          </div>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Magnetic>
+            <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary hidden px-5 py-2.5 sm:inline-flex">
+              Hablemos
+            </a>
+          </Magnetic>
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={open}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/10 md:hidden"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
+      </div>
+
+      {/* Mobile menu */}
+      <div
+        className={cn(
+          'fixed inset-x-4 top-[84px] rounded-3xl border border-ink/10 bg-surface/95 p-6 backdrop-blur-xl transition-all duration-300 md:hidden',
+          open ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-3 opacity-0'
+        )}
+      >
+        <nav className="flex flex-col">
+          {navLinks.map((link, i) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between border-b border-ink/5 py-4 text-2xl font-medium tracking-tight"
+            >
+              {link.label}
+              <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
+            </Link>
+          ))}
+        </nav>
+        <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="btn btn-primary mt-6 w-full py-4">
+          Empezar un proyecto <ArrowUpRight className="h-4 w-4" />
+        </a>
       </div>
     </header>
   );
