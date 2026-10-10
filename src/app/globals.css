@@ -6,23 +6,11 @@
   :root {
     --background: 150 25% 1.6%;
     --foreground: 0 0% 98%;
-    --card: 150 10% 4%;
-    --card-foreground: 0 0% 98%;
-    --popover: 150 10% 4%;
-    --popover-foreground: 0 0% 98%;
     --primary: 142 71% 45%;
     --primary-foreground: 145 74% 5%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
     --muted: 150 8% 5%;
     --muted-foreground: 0 0% 62%;
-    --accent: 142 71% 45%;
-    --accent-foreground: 145 74% 5%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
     --border: 0 0% 100% / 0.09;
-    --input: 0 0% 100% / 0.12;
-    --ring: 142 71% 45%;
     --radius: 0.75rem;
 
     /* Theme helpers (rgb triplets for Tailwind alpha modifiers) */
@@ -41,21 +29,11 @@
   html.light {
     --background: 60 9% 98%;
     --foreground: 150 10% 5%;
-    --card: 0 0% 100%;
-    --card-foreground: 150 10% 5%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 150 10% 5%;
     --primary: 142 76% 36%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 60 5% 94%;
-    --secondary-foreground: 150 10% 5%;
     --muted: 60 5% 95%;
     --muted-foreground: 150 4% 38%;
-    --accent: 142 76% 36%;
-    --accent-foreground: 0 0% 100%;
     --border: 150 10% 5% / 0.09;
-    --input: 150 10% 5% / 0.12;
-    --ring: 142 76% 36%;
 
     --ink: 12 15 13;
     --surface: 255 255 255;

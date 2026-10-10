@@ -48,7 +48,7 @@ export default function TestimonialsSection() {
               Lo que dicen <span className="text-muted-foreground">quienes ya lo usan.</span>
             </>
           }
-          description="Negocios reales que dejaron de dar turnos a mano gracias a software que desarrollamos."
+          description="Gimnasios y negocios reales que automatizaron su día a día con software que desarrollamos."
         />
 
         <Reveal>

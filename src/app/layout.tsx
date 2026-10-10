@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Sora, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import WhatsAppFloatingButton from '@/components/whatsapp-floating-button';
@@ -50,7 +49,6 @@ export default function RootLayout({
         <Footer />
         <WhatsAppFloatingButton />
         <CustomCursor />
-        <Toaster />
       </body>
     </html>
   );

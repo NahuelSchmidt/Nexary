@@ -7,8 +7,27 @@ export type Testimonial = {
   quote: string;
 };
 
-// Real testimonials. Source: Turnify landing (turnos-ya-demo.vercel.app).
+// Real testimonials. Sources: NexaGym landing (saas-gym-orpin.vercel.app)
+// and Turnify landing (turnos-ya-demo.vercel.app).
 export const testimonials: Testimonial[] = [
+  {
+    name: 'Martín Rearte',
+    role: 'Dueño, Fuerza Box CrossFit',
+    projectId: 'nexagym',
+    quote: 'Dejé de perder plata en cuotas vencidas. NexaGym cobra solo y yo me enfoco en entrenar a mi gente.',
+  },
+  {
+    name: 'Carolina Ibarra',
+    role: 'Dueña, Estudio Flow Pilates',
+    projectId: 'nexagym',
+    quote: 'Antes tardaba dos días en cerrar la caja del mes. Ahora tengo el reporte listo en un click.',
+  },
+  {
+    name: 'Diego Salvatierra',
+    role: 'Dueño, Titanium Gym',
+    projectId: 'nexagym',
+    quote: 'El control de accesos solo me cambió el negocio: nadie entrena más si no pagó la cuota.',
+  },
   {
     name: 'Martín',
     role: 'Barbería',
