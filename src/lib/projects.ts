@@ -52,6 +52,43 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    id: 'stock-ventas',
+    title: 'Stock y Ventas',
+    category: 'SaaS · Comercios',
+    year: '2026',
+    description:
+      'Sistema de stock y ventas para comercios: punto de venta, caja, fiado, proveedores y un catálogo online que recibe pedidos y reserva el stock solo.',
+    highlights: ['Punto de venta y caja', 'Catálogo online con pedidos', 'Precios en dólares y cuotas'],
+    techStack: ['Next.js', 'TypeScript', 'PostgreSQL'],
+    imageUrl: '/img/stock-ventas.jpg',
+    liveUrl: 'https://stock-ventas.vercel.app/',
+    featured: true,
+  },
+  {
+    id: 'demo-gym',
+    title: 'El Gimnasio',
+    category: 'Landing · Fitness',
+    year: '2026',
+    description:
+      'Landing de alto impacto para un gimnasio: servicios, planes con precios, galería, horarios y contacto, pensada para convertir visitas en socios.',
+    highlights: ['Planes y precios', 'Diseño de alto impacto'],
+    techStack: ['React', 'Vite'],
+    imageUrl: '/img/demo-gym.jpg',
+    liveUrl: 'https://demo-gym-sigma.vercel.app/',
+  },
+  {
+    id: 'demo-cabanas',
+    title: 'Patagonia Lodge',
+    category: 'Landing · Turismo',
+    year: '2026',
+    description:
+      'Landing para un complejo de cabañas en la Patagonia: experiencias, galería y reservas por WhatsApp, con una estética cálida y premium.',
+    highlights: ['Reservas por WhatsApp', 'Estética premium'],
+    techStack: ['React', 'Vite'],
+    imageUrl: '/img/demo-cabanas.jpg',
+    liveUrl: 'https://demo-cabanias.vercel.app/',
+  },
+  {
     id: 'mana',
     title: 'Insumos Mana',
     category: 'Web institucional · B2B',
