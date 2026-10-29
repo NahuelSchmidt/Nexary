@@ -44,11 +44,11 @@ export const projects: Project[] = [
     category: 'SaaS · Agenda',
     year: '2025',
     description:
-      'Gestión integral de turnos que automatiza la agenda y las reservas online, reduciendo el trabajo administrativo manual.',
-    highlights: ['Reservas online 24/7', 'Agenda centralizada', 'Recordatorios automáticos'],
+      'Página de reservas para negocios que trabajan con turnos: los clientes eligen el horario, pagan la seña y reciben la confirmación por WhatsApp.',
+    highlights: ['Agenda online 24/7', 'Seña al reservar', 'Confirmación y recordatorios por WhatsApp'],
     techStack: ['Next.js', 'Tailwind CSS'],
     imageUrl: '/img/turnify.jpg',
-    liveUrl: 'https://turnos-ya-demo.vercel.app/',
+    liveUrl: 'https://www.turnify.pro/',
     featured: true,
   },
   {

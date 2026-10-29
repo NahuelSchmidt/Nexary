@@ -8,7 +8,7 @@ export type Testimonial = {
 };
 
 // Real testimonials. Sources: NexaGym landing (saas-gym-orpin.vercel.app)
-// and Turnify landing (turnos-ya-demo.vercel.app).
+// and Turnify landing (turnify.pro).
 export const testimonials: Testimonial[] = [
   {
     name: 'Martín Rearte',
