@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import { projects } from '@/lib/projects';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { easeInOut, easeOut, lerp, seg, useProgress } from './use-progress';
 import { keyClick } from './keys';
 
@@ -111,20 +111,43 @@ export function PillScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const lines = ['DISEÑAMOS &', 'DESARROLLAMOS', 'TU SISTEMA'];
   const total = lines.join('').length;
-  const typed = Math.floor(seg(p, 0.05, 0.6) * total);
-  const grow = easeOut(seg(p, 0.35, 0.85));
-  // a key sound for every new character (forward only)
-  const prev = useRef(typed);
+  // Types itself once the section is on screen, at a human pace, one key sound per letter.
   const flat = lines.join('');
+  const [typed, setTyped] = useState(0);
+  const active = p > 0.04;
   useEffect(() => {
-    if (typed > prev.current) keyClick(flat[typed - 1] === ' ');
-    prev.current = typed;
-  }, [typed, flat]);
+    if (!active) {
+      setTyped(0);
+      return;
+    }
+    let i = 0;
+    let t: ReturnType<typeof setTimeout>;
+    const next = () => {
+      i++;
+      setTyped(i);
+      keyClick(flat[i - 1] === ' ');
+      if (i < flat.length) {
+        const ch = flat[i - 1];
+        // a little human rhythm: quicker inside words, a beat after spaces and line ends
+        const lineEnd = lines.some((_, li) => lines.slice(0, li + 1).join('').length === i);
+        t = setTimeout(next, lineEnd ? 260 : ch === ' ' ? 140 : 55 + Math.random() * 55);
+      }
+    };
+    t = setTimeout(next, 350);
+    return () => clearTimeout(t);
+  }, [active, flat]);
+  const done = typed >= total;
+  const grow = easeOut(seg(p, 0.4, 0.85));
+  const [blink, setBlink] = useState(true);
+  useEffect(() => {
+    const id = setInterval(() => setBlink((b) => !b), 530);
+    return () => clearInterval(id);
+  }, []);
   let used = 0;
   return (
-    <Pinned vh={240} innerRef={ref} className="bg-black text-white">
+    <Pinned vh={300} innerRef={ref} className="bg-black text-white">
       <div className="relative grid h-full place-items-center px-6">
-        <div className="relative w-full max-w-[760px]">
+        <div className="relative w-full max-w-[760px]" data-done={done}>
           {[0, 1, 2].map((i) => (
             <div
               key={i}
@@ -140,18 +163,19 @@ export function PillScene() {
           ))}
           <div
             className="v2-pill relative mx-auto rounded-full px-8 py-12 text-center text-[clamp(1.8rem,4.2vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em]"
-            style={{ width: `${lerp(36, 100, grow)}%`, opacity: seg(p, 0.3, 0.5) * 0.99 + 0.01 }}
+            style={{ width: `${lerp(36, 100, grow)}%`, opacity: seg(p, 0.35, 0.55) * 0.99 + 0.01 }}
           />
           <div className="absolute inset-0 grid place-items-center text-center text-[clamp(1.8rem,4.2vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em]">
             <div>
               {lines.map((l, li) => {
                 const shown = Math.max(0, Math.min(l.length, typed - used));
                 used += l.length;
-                const caret = typed < total && shown > 0 && shown < l.length;
+                const lineStart = used - l.length;
+                const caret = active && (typed < total ? typed >= lineStart && typed < lineStart + l.length + (li === lines.length - 1 ? 1 : 0) && (shown < l.length || li === lines.length - 1) : li === lines.length - 1 && blink);
                 return (
                   <div key={li} className="whitespace-pre">
                     {l.slice(0, shown)}
-                    {caret && <span className="ml-1 inline-block h-[0.9em] w-[0.5em] translate-y-[0.1em] bg-lime-300" />}
+                    {caret && <span className="ml-1 inline-block h-[0.9em] w-[0.08em] translate-y-[0.1em] bg-lime-300" style={{ opacity: typed < total || blink ? 1 : 0 }} />}
                     <span className="opacity-0">{l.slice(shown)}</span>
                   </div>
                 );
