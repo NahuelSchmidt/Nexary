@@ -5,7 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import { projects } from '@/lib/projects';
+import { useEffect, useRef } from 'react';
 import { easeInOut, easeOut, lerp, seg, useProgress } from './use-progress';
+import { keyClick } from './keys';
 
 /** Words rise out of a mask, one after the other, as the block scrolls into view. */
 export function RiseText({ text, className, accent, as: Tag = 'h2' }: { text: string; className?: string; accent?: string[]; as?: 'h2' | 'p' | 'span' }) {
@@ -111,6 +113,13 @@ export function PillScene() {
   const total = lines.join('').length;
   const typed = Math.floor(seg(p, 0.05, 0.6) * total);
   const grow = easeOut(seg(p, 0.35, 0.85));
+  // a key sound for every new character (forward only)
+  const prev = useRef(typed);
+  const flat = lines.join('');
+  useEffect(() => {
+    if (typed > prev.current) keyClick(flat[typed - 1] === ' ');
+    prev.current = typed;
+  }, [typed, flat]);
   let used = 0;
   return (
     <Pinned vh={240} innerRef={ref} className="bg-black text-white">
