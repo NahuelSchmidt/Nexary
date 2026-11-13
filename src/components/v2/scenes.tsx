@@ -3,8 +3,8 @@
 // Scroll scenes: pinned (sticky) sections whose animation is driven by scroll progress.
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
-import { projects } from '@/lib/projects';
+import { ArrowUpRight, Check, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
+import { customProjects, saasProjects } from '@/lib/projects';
 import { useEffect, useRef, useState } from 'react';
 import { easeInOut, easeOut, lerp, seg, useProgress } from './use-progress';
 import { keyClick } from './keys';
@@ -356,16 +356,117 @@ export function ProductsScene() {
   );
 }
 
-/** The project shots fly out from the center to their places around the headline. */
+/**
+ * Subscription products, one at a time: each card holds for a moment, then the next one
+ * slides up over it while the one behind shrinks and dims.
+ */
+export function SaasScene() {
+  const [ref, p] = useProgress<HTMLDivElement>('pinned');
+  const items = saasProjects;
+  const n = items.length;
+  // continuous position 0 → n-1, holding still on each card for the first part of every step
+  const raw = seg(p, 0.08, 0.94) * (n - 1);
+  const step = Math.min(n - 2, Math.floor(raw));
+  const pos = raw >= n - 1 ? n - 1 : step + easeInOut(seg(raw - step, 0.3, 1));
+  const current = Math.min(n - 1, Math.round(pos));
+  const intro = easeOut(seg(p, 0, 0.08));
+  return (
+    <Pinned vh={100 + n * 85} innerRef={ref} className="bg-[#070908] text-white">
+      <div id="proyectos" className="absolute -top-20" />
+      <div className="mx-auto flex h-full max-w-[1200px] flex-col px-5 pb-6 pt-20 md:px-6 md:pb-10 md:pt-24">
+        <div
+          className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between md:gap-10"
+          style={{ opacity: 0.4 + intro * 0.6, transform: `translateY(${(1 - intro) * 20}px)` }}
+        >
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Sistemas por suscripción</p>
+            <h2 className="mt-2 text-[clamp(1.6rem,3.4vw,2.8rem)] font-medium leading-[1.05] tracking-[-0.04em]">
+              Productos propios, listos para usar.
+            </h2>
+          </div>
+          <p className="hidden max-w-md text-sm leading-relaxed text-white/55 md:block">
+            Plataformas que desarrollamos y mantenemos nosotros. El negocio paga una cuota mensual y las usa desde el
+            primer día, con mejoras y soporte incluidos.
+          </p>
+        </div>
+
+        <div className="relative mt-5 flex-1 md:mt-8">
+          {items.map((pr, i) => {
+            const d = pos - i; // < 0 still coming, 0 on screen, > 0 covered by the next one
+            if (d < -1 || d > 1.6) return null;
+            // the covered card rises a little so its edge peeks above the new one
+            const y = d < 0 ? -d * 110 : -Math.min(1, d) * 4;
+            const behind = Math.max(0, d);
+            return (
+              <article
+                key={pr.id}
+                className="absolute inset-0 grid origin-top content-center gap-5 overflow-hidden rounded-[1.75rem] bg-[#0d1310] p-4 ring-1 ring-white/10 md:grid-cols-12 md:items-center md:gap-12 md:p-10"
+                style={{
+                  transform: `translateY(${y}%) scale(${1 - Math.min(1, behind) * 0.08})`,
+                  filter: `brightness(${1 - Math.min(1, behind) * 0.55})`,
+                  zIndex: i,
+                  boxShadow: '0 -30px 80px -30px rgba(0,0,0,0.9)',
+                }}
+                aria-hidden={i !== current}
+              >
+                <a
+                  href={pr.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabIndex={i === current ? 0 : -1}
+                  className="group block overflow-hidden rounded-xl ring-1 ring-white/10 md:col-span-7"
+                >
+                  <Image
+                    src={pr.imageUrl}
+                    alt={pr.title}
+                    width={1200}
+                    height={750}
+                    className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </a>
+                <div className="md:col-span-5">
+                  <div className="flex items-center gap-3 font-mono text-[11px] text-white/50">
+                    <span className="text-primary">{String(i + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}</span>
+                    <span className="h-px w-8 bg-white/15" />
+                    <span>{pr.category}</span>
+                  </div>
+                  <h3 className="mt-3 text-[clamp(1.8rem,3.6vw,3rem)] font-medium tracking-[-0.045em]">{pr.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60 md:mt-4 md:text-base">{pr.description}</p>
+                  <ul className="mt-5 hidden space-y-2.5 md:block">
+                    {pr.highlights.map((h) => (
+                      <li key={h} className="flex items-center gap-3 text-sm text-white/85">
+                        <span className="grid h-5 w-5 place-items-center rounded-full bg-primary/15 text-primary">
+                          <Check className="h-3 w-3" />
+                        </span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={pr.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    tabIndex={i === current ? 0 : -1}
+                    className="mt-5 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-black md:mt-7"
+                  >
+                    Ver demo <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </Pinned>
+  );
+}
+
+/** Custom work: the shots fly out from the center to their places around the headline. */
 const PHONE_SPOTS = [
-  { x: 2, y: 4, w: 46, r: -6 },
-  { x: 52, y: 7, w: 46, r: 6 },
-  { x: 14, y: 21, w: 40, r: 4 },
-  { x: 56, y: 24, w: 40, r: -5 },
-  { x: 2, y: 66, w: 46, r: 5 },
-  { x: 52, y: 63, w: 46, r: -6 },
-  { x: 10, y: 81, w: 40, r: -3 },
-  { x: 52, y: 80, w: 44, r: 4 },
+  { x: 3, y: 12, w: 46, r: -6 },
+  { x: 51, y: 16, w: 46, r: 6 },
+  { x: 3, y: 70, w: 46, r: 5 },
+  { x: 51, y: 75, w: 46, r: -6 },
 ];
 
 export function CollageScene() {
@@ -377,25 +478,20 @@ export function CollageScene() {
     window.addEventListener('resize', on);
     return () => window.removeEventListener('resize', on);
   }, []);
-  const shots = projects.slice(0, 8);
+  const shots = customProjects.slice(0, 4);
   const desk = [
-    { x: 4, y: 6, w: 28, r: -8 },
-    { x: 37, y: 2, w: 25, r: 4 },
-    { x: 70, y: 7, w: 27, r: 10 },
-    { x: 1, y: 42, w: 23, r: 6 },
-    { x: 75, y: 44, w: 24, r: -7 },
-    { x: 8, y: 72, w: 27, r: -4 },
-    { x: 40, y: 76, w: 23, r: 3 },
-    { x: 68, y: 72, w: 27, r: 8 },
+    { x: 3, y: 14, w: 29, r: -7 },
+    { x: 68, y: 12, w: 29, r: 8 },
+    { x: 5, y: 60, w: 28, r: 5 },
+    { x: 67, y: 62, w: 29, r: -6 },
   ];
   const spots = phone ? PHONE_SPOTS : desk;
   return (
     <Pinned vh={210} innerRef={ref} className="bg-[#070908] text-white">
-      <div id="proyectos" className="absolute -top-20" />
       <div className="relative mx-auto h-full max-w-[1400px]">
         {shots.map((pr, i) => {
           const s = spots[i];
-          const t = easeOut(seg(p, 0.02 + i * 0.04, 0.45 + i * 0.04));
+          const t = easeOut(seg(p, 0.02 + i * 0.07, 0.45 + i * 0.07));
           const cx = lerp(50 - s.w / 2, s.x, t);
           const cy = lerp(40, s.y, t);
           return (
@@ -426,11 +522,15 @@ export function CollageScene() {
         })}
         <div className="pointer-events-none absolute inset-0 grid place-items-center">
           <div className="pointer-events-auto text-center" style={{ opacity: seg(p, 0.35, 0.55), transform: `scale(${lerp(0.9, 1, seg(p, 0.35, 0.6))})` }}>
-            <h2 className="text-[clamp(2.2rem,5.5vw,4.6rem)] font-medium leading-[1.02] tracking-[-0.045em] drop-shadow-[0_6px_30px_rgba(0,0,0,0.9)]">
-              Diseños que se usan
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Trabajos a medida</p>
+            <h2 className="mt-3 text-[clamp(2.2rem,5.5vw,4.6rem)] font-medium leading-[1.02] tracking-[-0.045em] drop-shadow-[0_6px_30px_rgba(0,0,0,0.9)]">
+              Hechos para
               <br />
-              todos los días.
+              cada cliente.
             </h2>
+            <p className="mx-auto mt-4 max-w-sm px-6 text-sm leading-relaxed text-white/60 drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)] md:max-w-md md:text-base">
+              Páginas web, landings y sistemas diseñados desde cero según la marca, los procesos y los objetivos de cada negocio.
+            </p>
             <Link href="/portfolio" className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-black">
               Ver proyectos <ArrowUpRight className="h-4 w-4" />
             </Link>

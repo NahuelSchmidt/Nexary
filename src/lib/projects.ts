@@ -1,5 +1,9 @@
+export type ProjectKind = 'saas' | 'custom';
+
 export type Project = {
   id: string;
+  /** saas: own product sold by subscription · custom: built to order for one client */
+  kind: ProjectKind;
   title: string;
   category: string;
   year: string;
@@ -14,6 +18,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 'nexagym',
+    kind: 'saas',
     title: 'NexaGym',
     category: 'SaaS · Fitness',
     year: '2026',
@@ -27,6 +32,7 @@ export const projects: Project[] = [
   },
   {
     id: 'sportnex',
+    kind: 'saas',
     title: 'SportNex',
     category: 'SaaS · Deportes',
     year: '2026',
@@ -40,6 +46,7 @@ export const projects: Project[] = [
   },
   {
     id: 'turnos-ya',
+    kind: 'saas',
     title: 'Turnify',
     category: 'SaaS · Agenda',
     year: '2025',
@@ -53,6 +60,7 @@ export const projects: Project[] = [
   },
   {
     id: 'stock-ventas',
+    kind: 'saas',
     title: 'Stock y Ventas',
     category: 'SaaS · Comercios',
     year: '2026',
@@ -66,6 +74,7 @@ export const projects: Project[] = [
   },
   {
     id: 'demo-gym',
+    kind: 'custom',
     title: 'El Gimnasio',
     category: 'Landing · Fitness',
     year: '2026',
@@ -78,6 +87,7 @@ export const projects: Project[] = [
   },
   {
     id: 'demo-cabanas',
+    kind: 'custom',
     title: 'Patagonia Lodge',
     category: 'Landing · Turismo',
     year: '2026',
@@ -90,6 +100,7 @@ export const projects: Project[] = [
   },
   {
     id: 'mana',
+    kind: 'custom',
     title: 'Insumos Mana',
     category: 'Web institucional · B2B',
     year: '2025',
@@ -102,6 +113,7 @@ export const projects: Project[] = [
   },
   {
     id: 'portfolio',
+    kind: 'custom',
     title: 'Portfolio Dev',
     category: 'Marca personal',
     year: '2025',
@@ -113,3 +125,6 @@ export const projects: Project[] = [
     liveUrl: 'https://portfolio-nahuelschmidt.vercel.app/',
   },
 ];
+
+export const saasProjects = projects.filter((p) => p.kind === 'saas');
+export const customProjects = projects.filter((p) => p.kind === 'custom');
