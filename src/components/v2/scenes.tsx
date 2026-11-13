@@ -347,10 +347,6 @@ export function CollageScene() {
                   style={{ ['--rot' as string]: `${s.r * t}deg` }}
                 >
                   <Image src={pr.imageUrl} alt={pr.title} width={800} height={500} className="aspect-[16/10] w-full object-cover object-top" />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <span className="pointer-events-none absolute bottom-3 left-3 flex translate-y-2 items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-black opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                    Ver {pr.title} <ArrowUpRight className="h-3.5 w-3.5" />
-                  </span>
                   <span className="pointer-events-none absolute right-2.5 top-2.5 grid h-7 w-7 place-items-center rounded-full bg-black/55 text-white backdrop-blur transition-colors duration-500 group-hover:bg-primary group-hover:text-black">
                     <ArrowUpRight className="h-3.5 w-3.5" />
                   </span>
