@@ -167,7 +167,7 @@ const Cube = ({ size, delay = 0 }: { size: number; delay?: number }) => (
 );
 
 export function Products() {
-  const names = ['NexaGym', 'Turnify', 'SportNex', 'Stock y Ventas', 'Insumos Mana'];
+  const names = ['NexaGym', 'Turnify', 'SportNex', 'Folium', 'Insumos Mana'];
   return (
     <section className="overflow-hidden bg-[#070908] py-28 text-white">
       <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-6">

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Check, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import { customProjects, saasProjects } from '@/lib/projects';
 import { useEffect, useRef, useState } from 'react';
-import { easeInOut, easeOut, lerp, seg, useProgress } from './use-progress';
+import { clamp01, easeInOut, easeOut, lerp, seg, useProgress } from './use-progress';
 import { keyClick } from './keys';
 
 /** Words rise out of a mask, one after the other, as the block scrolls into view. */
@@ -319,7 +319,7 @@ const Cube = ({ size, spin }: { size: number; spin: number }) => (
 /** "Ya funcionan con ___": the name changes with the scroll while the cubes turn. */
 export function ProductsScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
-  const names = ['NexaGym', 'Turnify', 'SportNex', 'Stock y Ventas', 'Insumos Mana', 'tu negocio'];
+  const names = ['NexaGym', 'Turnify', 'SportNex', 'Folium', 'Insumos Mana', 'tu negocio'];
   const idx = Math.min(names.length - 1, Math.floor(seg(p, 0.05, 0.9) * names.length));
   const local = (seg(p, 0.05, 0.9) * names.length) % 1;
   const last = idx === names.length - 1;
@@ -357,104 +357,119 @@ export function ProductsScene() {
 }
 
 /**
- * Subscription products, one at a time: each card holds for a moment, then the next one
- * slides up over it while the one behind shrinks and dims.
+ * Subscription products: the list of names stays on the left and one fixed screen on the
+ * right; scrolling lights up the next name and the screen slides to that product.
  */
 export function SaasScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const items = saasProjects;
   const n = items.length;
-  // continuous position 0 → n-1, holding still on each card for the first part of every step
-  const raw = seg(p, 0.08, 0.94) * (n - 1);
+  // continuous position 0 → n-1, holding still on each product for the first part of every step
+  const raw = seg(p, 0.06, 0.94) * (n - 1);
   const step = Math.min(n - 2, Math.floor(raw));
-  const pos = raw >= n - 1 ? n - 1 : step + easeInOut(seg(raw - step, 0.3, 1));
+  const pos = raw >= n - 1 ? n - 1 : step + easeInOut(seg(raw - step, 0.35, 1));
   const current = Math.min(n - 1, Math.round(pos));
-  const intro = easeOut(seg(p, 0, 0.08));
+  const active = items[current];
+  const intro = easeOut(seg(p, 0, 0.06));
   return (
-    <Pinned vh={100 + n * 85} innerRef={ref} className="bg-[#070908] text-white">
+    <Pinned vh={100 + n * 70} innerRef={ref} className="bg-[#070908] text-white">
       <div id="proyectos" className="absolute -top-20" />
-      <div className="mx-auto flex h-full max-w-[1200px] flex-col px-5 pb-6 pt-20 md:px-6 md:pb-10 md:pt-24">
-        <div
-          className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between md:gap-10"
-          style={{ opacity: 0.4 + intro * 0.6, transform: `translateY(${(1 - intro) * 20}px)` }}
-        >
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Sistemas por suscripción</p>
-            <h2 className="mt-2 text-[clamp(1.6rem,3.4vw,2.8rem)] font-medium leading-[1.05] tracking-[-0.04em]">
-              Productos propios, listos para usar.
-            </h2>
-          </div>
-          <p className="hidden max-w-md text-sm leading-relaxed text-white/55 md:block">
-            Plataformas que desarrollamos y mantenemos nosotros. El negocio paga una cuota mensual y las usa desde el
-            primer día, con mejoras y soporte incluidos.
+      <div
+        className="mx-auto grid h-full max-w-[1200px] grid-rows-[auto_auto_1fr] gap-5 px-5 pb-6 pt-20 md:grid-cols-12 md:grid-rows-1 md:items-center md:gap-12 md:px-6 md:pb-10 md:pt-24"
+        style={{ opacity: 0.4 + intro * 0.6 }}
+      >
+        {/* left: heading + product list + details of the active one */}
+        <div className="md:col-span-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Sistemas por suscripción</p>
+          <h2 className="mt-2 text-[clamp(1.6rem,3.2vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.04em]">
+            Productos propios, listos para usar.
+          </h2>
+          <p className="mt-3 hidden text-sm leading-relaxed text-white/55 md:block">
+            Los desarrollamos y mantenemos nosotros. El negocio paga una cuota mensual y los usa desde el primer día, con
+            mejoras y soporte incluidos.
           </p>
+
+          <ol className="mt-5 flex gap-2 overflow-x-auto md:mt-8 md:flex-col md:gap-0 md:overflow-visible">
+            {items.map((pr, i) => {
+              const on = i === current;
+              // how far this item's bar has filled while it is the active one
+              const fill = i < current ? 1 : on ? (i === n - 1 ? 1 : clamp01(raw - i + 0.0001)) : 0;
+              return (
+                <li key={pr.id} className="shrink-0 md:border-t md:border-white/10">
+                  <div className="relative isolate flex items-baseline gap-3 rounded-full px-3 py-1.5 md:rounded-none md:px-0 md:py-3.5">
+                    <span className={`hidden font-mono text-[11px] md:inline ${on ? 'text-primary' : 'text-white/30'}`}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className={`text-sm font-medium tracking-[-0.02em] transition-colors duration-500 md:text-[clamp(1.4rem,2.4vw,2rem)] ${
+                        on ? 'text-white' : 'text-white/30'
+                      }`}
+                    >
+                      {pr.title}
+                    </span>
+                    <span className="ml-auto hidden font-mono text-[11px] text-white/35 md:inline">{pr.category.replace('SaaS · ', '')}</span>
+                    {/* progress line: a filled pill on phones, a bar under the row on desktop */}
+                    <span className={`absolute inset-0 -z-10 rounded-full md:hidden ${on ? 'bg-white/10' : ''}`} />
+                    <span className="absolute -top-px left-0 hidden h-px bg-primary md:block" style={{ width: `${fill * 100}%` }} />
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+
+          <div key={active.id} className="v2-fade-in mt-4 md:mt-6">
+            <p className="text-sm leading-relaxed text-white/65 md:text-base">{active.description}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <a
+                href={active.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-black"
+              >
+                Ver demo <ArrowUpRight className="h-4 w-4" />
+              </a>
+              <ul className="hidden flex-wrap gap-x-4 gap-y-1.5 lg:flex">
+                {active.highlights.slice(0, 2).map((h) => (
+                  <li key={h} className="flex items-center gap-1.5 text-xs text-white/60">
+                    <Check className="h-3.5 w-3.5 text-primary" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        <div className="relative mt-5 flex-1 md:mt-8">
-          {items.map((pr, i) => {
-            const d = pos - i; // < 0 still coming, 0 on screen, > 0 covered by the next one
-            if (d < -1 || d > 1.6) return null;
-            // the covered card rises a little so its edge peeks above the new one
-            const y = d < 0 ? -d * 110 : -Math.min(1, d) * 4;
-            const behind = Math.max(0, d);
-            return (
-              <article
-                key={pr.id}
-                className="absolute inset-0 grid origin-top content-center gap-5 overflow-hidden rounded-[1.75rem] bg-[#0d1310] p-4 ring-1 ring-white/10 md:grid-cols-12 md:items-center md:gap-12 md:p-10"
-                style={{
-                  transform: `translateY(${y}%) scale(${1 - Math.min(1, behind) * 0.08})`,
-                  filter: `brightness(${1 - Math.min(1, behind) * 0.55})`,
-                  zIndex: i,
-                  boxShadow: '0 -30px 80px -30px rgba(0,0,0,0.9)',
-                }}
-                aria-hidden={i !== current}
-              >
-                <a
-                  href={pr.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  tabIndex={i === current ? 0 : -1}
-                  className="group block overflow-hidden rounded-xl ring-1 ring-white/10 md:col-span-7"
-                >
-                  <Image
-                    src={pr.imageUrl}
-                    alt={pr.title}
-                    width={1200}
-                    height={750}
-                    className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
-                </a>
-                <div className="md:col-span-5">
-                  <div className="flex items-center gap-3 font-mono text-[11px] text-white/50">
-                    <span className="text-primary">{String(i + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}</span>
-                    <span className="h-px w-8 bg-white/15" />
-                    <span>{pr.category}</span>
-                  </div>
-                  <h3 className="mt-3 text-[clamp(1.8rem,3.6vw,3rem)] font-medium tracking-[-0.045em]">{pr.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/60 md:mt-4 md:text-base">{pr.description}</p>
-                  <ul className="mt-5 hidden space-y-2.5 md:block">
-                    {pr.highlights.map((h) => (
-                      <li key={h} className="flex items-center gap-3 text-sm text-white/85">
-                        <span className="grid h-5 w-5 place-items-center rounded-full bg-primary/15 text-primary">
-                          <Check className="h-3 w-3" />
-                        </span>
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={pr.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    tabIndex={i === current ? 0 : -1}
-                    className="mt-5 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-black md:mt-7"
+        {/* right: one fixed screen whose content slides to the active product */}
+        <div className="row-start-2 md:col-span-7 md:row-start-1">
+          <div className="overflow-hidden rounded-2xl bg-[#0d1310] shadow-[0_40px_120px_-30px_rgba(34,197,94,0.25)] ring-1 ring-white/10">
+            <div className="flex items-center gap-1.5 border-b border-white/[0.07] px-4 py-2.5">
+              <span className="h-2 w-2 rounded-full bg-white/15" />
+              <span className="h-2 w-2 rounded-full bg-white/15" />
+              <span className="h-2 w-2 rounded-full bg-white/15" />
+              <span className="ml-3 truncate rounded-md bg-white/[0.05] px-3 py-0.5 font-mono text-[10px] text-white/50">
+                {new URL(active.liveUrl).host.replace('www.', '')}
+              </span>
+            </div>
+            <a href={active.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${active.title}`} className="relative block aspect-[16/10] overflow-hidden">
+              {items.map((pr, i) => {
+                const d = i - pos; // 0 on screen, 1 the next one waiting below
+                if (d < -1 || d > 1) return null;
+                return (
+                  <div
+                    key={pr.id}
+                    className="absolute inset-0"
+                    style={{
+                      transform: `translateY(${d * 100}%) scale(${1 - Math.abs(d) * 0.06})`,
+                      filter: `brightness(${1 - Math.min(1, Math.abs(d)) * 0.5})`,
+                    }}
                   >
-                    Ver demo <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                </div>
-              </article>
-            );
-          })}
+                    <Image src={pr.imageUrl} alt={pr.title} fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover object-top" />
+                  </div>
+                );
+              })}
+            </a>
+          </div>
         </div>
       </div>
     </Pinned>

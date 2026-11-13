@@ -61,7 +61,7 @@ export const projects: Project[] = [
   {
     id: 'stock-ventas',
     kind: 'saas',
-    title: 'Stock y Ventas',
+    title: 'Folium',
     category: 'SaaS · Comercios',
     year: '2026',
     description:
@@ -126,5 +126,9 @@ export const projects: Project[] = [
   },
 ];
 
-export const saasProjects = projects.filter((p) => p.kind === 'saas');
+/** Subscription products in the order the home page presents them. */
+const SAAS_ORDER = ['turnos-ya', 'stock-ventas', 'sportnex', 'nexagym'];
+export const saasProjects = projects
+  .filter((p) => p.kind === 'saas')
+  .sort((a, b) => SAAS_ORDER.indexOf(a.id) - SAAS_ORDER.indexOf(b.id));
 export const customProjects = projects.filter((p) => p.kind === 'custom');
