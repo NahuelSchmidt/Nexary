@@ -67,7 +67,7 @@ export default function HeroTyper({ phrases, startDelay = 2600 }: { phrases: str
   }, [phrases, startDelay]);
 
   return (
-    <span ref={ref} className="relative whitespace-nowrap">
+    <span ref={ref} className="relative md:whitespace-nowrap">
       <span className="v2-grad-text">{text}</span>
       <span
         aria-hidden="true"

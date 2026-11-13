@@ -81,14 +81,14 @@ const Pinned = ({ vh, children, className = '', innerRef }: { vh: number; childr
 export function OrbScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const t = easeInOut(p);
-  const x = lerp(78, 24, t);
-  const y = lerp(10, 82, t) - Math.sin(t * Math.PI) * 6;
+  const x = lerp(76, 26, t);
+  const y = lerp(16, 80, t) - Math.sin(t * Math.PI) * 6;
   const s = lerp(0.8, 1.15, Math.sin(t * Math.PI));
   return (
     <Pinned vh={260} innerRef={ref} className="bg-black text-white">
       <div className="v2-dots absolute inset-0 opacity-[0.14]" />
       <div className="absolute" style={{ left: `${x}%`, top: `${y}%`, transform: `translate(-50%,-50%) scale(${s})` }}>
-        <div className="relative h-56 w-56 md:h-72 md:w-72">
+        <div className="relative h-36 w-36 md:h-72 md:w-72">
           <div className="v2-orb-ring absolute inset-0 rounded-full" />
           <div className="absolute inset-3 rounded-full bg-[radial-gradient(circle_at_40%_35%,rgba(34,197,94,0.25),transparent_70%)]" />
           <div className="v2-dot-sphere absolute inset-4" style={{ backgroundPosition: `${p * 400}px 0` }} />
@@ -211,8 +211,8 @@ export function ExperienceScene() {
             const t = easeOut(seg(p, 0.4 + i * 0.1, 0.62 + i * 0.1));
             return (
               <div key={label} className="flex flex-col items-center gap-6" style={{ transform: `translateY(${(1 - t) * 120}px)`, opacity: t }}>
-                <Icon className="v2-neon h-20 w-20 md:h-32 md:w-32" strokeWidth={1.1} style={{ color }} />
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/50">{label}</span>
+                <Icon className="v2-neon h-14 w-14 md:h-32 md:w-32" strokeWidth={1.1} style={{ color }} />
+                <span className="max-w-[9rem] text-center font-mono text-[10px] uppercase leading-snug tracking-[0.12em] text-white/50 md:text-xs md:tracking-[0.2em]">{label}</span>
               </div>
             );
           })}
@@ -309,10 +309,28 @@ export function ProductsScene() {
 }
 
 /** The project shots fly out from the center to their places around the headline. */
+const PHONE_SPOTS = [
+  { x: 2, y: 4, w: 46, r: -6 },
+  { x: 52, y: 7, w: 46, r: 6 },
+  { x: 14, y: 21, w: 40, r: 4 },
+  { x: 56, y: 24, w: 40, r: -5 },
+  { x: 2, y: 66, w: 46, r: 5 },
+  { x: 52, y: 63, w: 46, r: -6 },
+  { x: 10, y: 81, w: 40, r: -3 },
+  { x: 52, y: 80, w: 44, r: 4 },
+];
+
 export function CollageScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
+  const [phone, setPhone] = useState(false);
+  useEffect(() => {
+    const on = () => setPhone(window.innerWidth < 768);
+    on();
+    window.addEventListener('resize', on);
+    return () => window.removeEventListener('resize', on);
+  }, []);
   const shots = projects.slice(0, 8);
-  const spots = [
+  const desk = [
     { x: 4, y: 6, w: 28, r: -8 },
     { x: 37, y: 2, w: 25, r: 4 },
     { x: 70, y: 7, w: 27, r: 10 },
@@ -322,6 +340,7 @@ export function CollageScene() {
     { x: 40, y: 76, w: 23, r: 3 },
     { x: 68, y: 72, w: 27, r: 8 },
   ];
+  const spots = phone ? PHONE_SPOTS : desk;
   return (
     <Pinned vh={230} innerRef={ref} className="bg-[#070908] text-white">
       <div id="proyectos" className="absolute -top-20" />

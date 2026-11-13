@@ -28,7 +28,7 @@ export function Hero() {
         <div className="v2-rays-dots" />
       </div>
       <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col items-center justify-center px-6 pb-16 pt-32 text-center">
-        <h1 className="text-[clamp(2.8rem,8vw,6.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
+        <h1 className="min-h-[3.1em] text-[clamp(2.4rem,10.5vw,6.5rem)] font-semibold leading-[1.02] tracking-[-0.045em] md:min-h-0">
           <BlurWords lines={[['Tu', 'negocio,']]} accentFrom={[9, 0]} />
           <span className="block">
             <span className="v2-in" style={{ animationDelay: '0.33s' }}>
