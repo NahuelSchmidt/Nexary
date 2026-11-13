@@ -252,7 +252,13 @@ export function Faq() {
 export function FinalCta() {
   return (
     <section className="relative overflow-hidden bg-black text-white">
-      <div className="v2-corner-glow pointer-events-none absolute inset-y-0 left-0 w-[22%] min-w-[140px]" />
+      <div className="v2-rays">
+        <div className="v2-ray d" />
+        <div className="v2-ray a" />
+        <div className="v2-ray b" />
+        <div className="v2-ray c" />
+        <div className="v2-rays-dots" />
+      </div>
       <div className="relative mx-auto flex min-h-[80vh] max-w-[1200px] flex-col items-center justify-center px-6 py-32 text-center">
         <h2 className="text-[clamp(2.6rem,7vw,5.6rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
           ¿Y vos, estás listo

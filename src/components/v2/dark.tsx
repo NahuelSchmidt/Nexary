@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import Reveal from '@/components/effects/reveal';
+import ShowcaseVideo from '@/components/v2/showcase-video';
 import { projects } from '@/lib/projects';
 import { whatsAppLink } from '@/lib/site';
 
@@ -16,8 +17,13 @@ const Lines = ({ widths }: { widths: number[] }) => (
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-black text-white">
-      <div className="v2-corner-glow pointer-events-none absolute inset-y-0 left-0 w-[22%] min-w-[140px]" />
-      <div className="v2-dots pointer-events-none absolute inset-y-0 left-0 w-[22%] min-w-[140px] opacity-40" />
+      <div className="v2-rays">
+        <div className="v2-ray d" />
+        <div className="v2-ray a" />
+        <div className="v2-ray b" />
+        <div className="v2-ray c" />
+        <div className="v2-rays-dots" />
+      </div>
       <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col items-center justify-center px-6 pb-16 pt-32 text-center">
         <h1 className="animate-fade-in-up text-[clamp(2.8rem,8vw,6.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
           Tu negocio,
@@ -49,23 +55,7 @@ export function Showcase() {
   return (
     <section className="bg-black pb-10 text-white">
       <Reveal className="mx-auto max-w-[1100px] px-6">
-        <div className="v2-showcase relative aspect-[16/8] overflow-hidden rounded-2xl">
-          <div className="absolute left-1/2 top-[12%] h-28 w-28 -translate-x-1/2 md:h-40 md:w-40">
-            <div className="v2-blob h-full w-full" />
-          </div>
-          <div className="absolute inset-0 grid place-items-center">
-            <span className="select-none text-[clamp(3rem,13vw,10rem)] font-extrabold uppercase tracking-[-0.05em] text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.25)]">
-              A medida.
-            </span>
-          </div>
-          <div className="v2-shine absolute inset-0 mix-blend-overlay" />
-          <div className="absolute inset-x-6 bottom-5 flex items-center gap-4 text-xs text-black/60">
-            <span className="h-1 flex-1 rounded-full bg-black/15">
-              <span className="block h-1 w-1/3 rounded-full bg-black/50" />
-            </span>
-            <span className="font-mono">nexary.solutions</span>
-          </div>
-        </div>
+        <ShowcaseVideo />
       </Reveal>
       <div className="mx-auto mt-24 max-w-md px-6">
         <Lines widths={[100, 70, 45, 30]} />
