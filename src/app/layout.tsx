@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Sora, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import '@/components/v2/v2.css';
 import Navbar from '@/components/v2/header';
 import Footer from '@/components/v2/footer';
 import WhatsAppFloatingButton from '@/components/whatsapp-floating-button';

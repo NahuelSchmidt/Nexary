@@ -1,4 +1,3 @@
-import '@/components/v2/v2.css';
 import { Hero, Showcase } from '@/components/v2/dark';
 import { CollageScene, ExperienceScene, OrbScene, PillScene, ProductsScene, WordScene } from '@/components/v2/scenes';
 import { Challenge, Faq, FinalCta, Process, Services, Voices } from '@/components/v2/light';
