@@ -220,9 +220,15 @@ export function WordScene({ paragraphs }: { paragraphs: string[] }) {
   const typed = Math.floor(seg(p, 0.04, 0.8) * total);
   // a key sound as letters appear (forward only; the player never fires faster than a real typist)
   const prev = useRef(typed);
+  const lastKey = useRef(0);
   const flat = paragraphs.join('');
   useEffect(() => {
-    if (typed > prev.current) keyClick(flat[typed - 1] === ' ');
+    // scrolling fast types many letters per frame: cap it at a fast typist (~18 keys/s), never a buzz
+    const now = performance.now();
+    if (typed > prev.current && now - lastKey.current > 55) {
+      keyClick(flat[typed - 1] === ' ');
+      lastKey.current = now;
+    }
     prev.current = typed;
   }, [typed, flat]);
   const [blink, setBlink] = useState(true);
