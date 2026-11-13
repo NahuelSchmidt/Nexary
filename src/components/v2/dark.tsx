@@ -5,6 +5,7 @@ import Reveal from '@/components/effects/reveal';
 import ShowcaseVideo from '@/components/v2/showcase-video';
 import { DrawLines } from '@/components/v2/scenes';
 import { BlurWords, Magnetic } from '@/components/v2/interact';
+import HeroTyper from '@/components/v2/hero-typer';
 import { projects } from '@/lib/projects';
 import { whatsAppLink } from '@/lib/site';
 
@@ -28,7 +29,15 @@ export function Hero() {
       </div>
       <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col items-center justify-center px-6 pb-16 pt-32 text-center">
         <h1 className="text-[clamp(2.8rem,8vw,6.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
-          <BlurWords lines={[['Tu', 'negocio,'], ['en', 'piloto', 'automático.']]} accentFrom={[1, 2]} />
+          <BlurWords lines={[['Tu', 'negocio,']]} accentFrom={[9, 0]} />
+          <span className="block">
+            <span className="v2-in" style={{ animationDelay: '0.33s' }}>
+              en&nbsp;
+            </span>
+            <span className="v2-in" style={{ animationDelay: '0.42s' }}>
+              <HeroTyper phrases={['piloto automático.', 'orden.', 'marcha.', 'un solo sistema.']} />
+            </span>
+          </span>
         </h1>
         <div className="mt-10 w-full max-w-3xl">
           <div className="v2-line v2-draw" style={{ animationDelay: '0.7s' }} />
