@@ -335,11 +335,27 @@ export function CollageScene() {
               href={pr.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              title={pr.title}
-              className="absolute overflow-hidden rounded-2xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] ring-1 ring-white/10"
-              style={{ left: `${cx}%`, top: `${cy}%`, width: `${s.w}%`, transform: `rotate(${s.r * t}deg) scale(${lerp(0.5, 1, t)})`, opacity: t }}
+              aria-label={`Abrir ${pr.title}`}
+              className="group absolute hover:z-30"
+              style={{ left: `${cx}%`, top: `${cy}%`, width: `${s.w}%`, transform: `scale(${lerp(0.5, 1, t)})`, opacity: t }}
             >
-              <Image src={pr.imageUrl} alt={pr.title} width={800} height={500} className="aspect-[16/10] w-full object-cover object-top" />
+              {/* idle float (its own rhythm per card) */}
+              <div className="v2-float" style={{ animationDelay: `${-i * 1.3}s`, animationDuration: `${6 + (i % 3)}s` }}>
+                {/* the tilt straightens, lifts and grows on hover */}
+                <div
+                  className="relative overflow-hidden rounded-2xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] ring-1 ring-white/10 transition-[transform,box-shadow] duration-500 ease-out [transform:rotate(var(--rot))] group-hover:shadow-[0_40px_100px_-20px_rgba(34,197,94,0.45)] group-hover:ring-2 group-hover:ring-primary/70 group-hover:[transform:rotate(0deg)_translateY(-10px)_scale(1.07)]"
+                  style={{ ['--rot' as string]: `${s.r * t}deg` }}
+                >
+                  <Image src={pr.imageUrl} alt={pr.title} width={800} height={500} className="aspect-[16/10] w-full object-cover object-top" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="pointer-events-none absolute bottom-3 left-3 flex translate-y-2 items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-black opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                    Ver {pr.title} <ArrowUpRight className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="pointer-events-none absolute right-2.5 top-2.5 grid h-7 w-7 place-items-center rounded-full bg-black/55 text-white backdrop-blur transition-colors duration-500 group-hover:bg-primary group-hover:text-black">
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              </div>
             </a>
           );
         })}
