@@ -1,13 +1,17 @@
-import { ChevronRight, Check, Globe, LayoutDashboard, MessageCircle, Plus, Workflow, Boxes } from 'lucide-react';
+import { ChevronRight, Check, Plus } from 'lucide-react';
 import Reveal from '@/components/effects/reveal';
 import { testimonials } from '@/lib/testimonials';
 import { RiseText, ZoomScene } from '@/components/v2/scenes';
+import { MockBuild, MockChat, MockLaunch, MockProposal } from '@/components/v2/mocks';
+import { Magnetic, SpotCard } from '@/components/v2/interact';
 import { whatsAppLink } from '@/lib/site';
 
 const Btn = ({ children = 'Agendá una charla' }: { children?: React.ReactNode }) => (
-  <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="inline-block rounded-md bg-primary px-5 py-3 text-sm font-medium text-black transition-transform hover:-translate-y-0.5">
-    {children}
-  </a>
+  <Magnetic>
+    <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="inline-block rounded-md bg-primary px-5 py-3 text-sm font-medium text-black shadow-[0_10px_40px_-12px_rgba(34,197,94,0.7)]">
+      {children}
+    </a>
+  </Magnetic>
 );
 
 export function Challenge() {
@@ -26,25 +30,21 @@ export function Challenge() {
 
 const SERVICES = [
   {
-    Icon: LayoutDashboard,
     title: 'Sistemas de gestión',
     text: 'Paneles a medida que centralizan tu operación: stock, ventas, turnos, cobros y reportes en un solo lugar.',
     links: ['Gestión y administración', 'Stock, ventas y caja', 'Turnos y reservas'],
   },
   {
-    Icon: Globe,
     title: 'Sitios web',
     text: 'Sitios rápidos y seguros que proyectan profesionalismo y convierten visitas en oportunidades reales.',
     links: ['Landings y sitios a medida', 'Catálogos online'],
   },
   {
-    Icon: Boxes,
     title: 'SaaS y aplicaciones',
     text: 'Productos web que crecen con vos: desde la primera versión hasta las funciones que pide tu negocio.',
     links: ['Plataformas SaaS', 'Aplicaciones web'],
   },
   {
-    Icon: Workflow,
     title: 'Automatización',
     text: 'Eliminamos tareas repetitivas con flujos que trabajan solos: cobros, recordatorios, reservas y avisos.',
     links: ['Avisos por WhatsApp', 'Integraciones y cobros'],
@@ -67,7 +67,8 @@ export function Services() {
         </Reveal>
         <div className="mt-16 grid gap-4 md:grid-cols-2">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.06} className="v2-card-light flex flex-col rounded-2xl p-7 md:p-8">
+            <Reveal key={s.title} delay={i * 0.06}>
+             <SpotCard className="v2-card-light flex h-full flex-col rounded-2xl p-7 transition-colors md:p-8">
               <div className="flex items-center gap-2.5 text-lg font-medium">
                 <span className="h-2 w-2 rounded-full bg-primary" />
                 {s.title}
@@ -81,6 +82,7 @@ export function Services() {
                   </a>
                 ))}
               </div>
+             </SpotCard>
             </Reveal>
           ))}
         </div>
@@ -88,67 +90,6 @@ export function Services() {
     </section>
   );
 }
-
-const MockChat = () => (
-  <div className="v2-mock relative h-full rounded-xl p-5">
-    <div className="flex items-center gap-2 text-xs font-medium">
-      <span className="grid h-7 w-7 place-items-center rounded-full bg-[#25D366] text-white">
-        <MessageCircle className="h-4 w-4" />
-      </span>
-      WhatsApp · Nexary
-    </div>
-    <div className="mt-4 space-y-2 text-[11px]">
-      <div className="w-[80%] rounded-lg rounded-tl-none bg-white px-3 py-2 shadow-sm">Hola! Tengo un gimnasio y anoto todo en planillas…</div>
-      <div className="ml-auto w-[75%] rounded-lg rounded-tr-none bg-[#dcfce7] px-3 py-2 shadow-sm">¡Buenísimo! Contame cómo cobrás las cuotas hoy.</div>
-    </div>
-  </div>
-);
-const MockProposal = () => (
-  <div className="v2-mock relative h-full rounded-xl p-5">
-    <div className="mx-auto w-[78%] rotate-[-3deg] rounded-lg bg-white p-4 shadow-md">
-      <div className="text-[11px] font-medium">Tu proyecto</div>
-      <div className="mt-3 space-y-1.5">
-        <div className="h-1.5 w-full rounded bg-black/10" />
-        <div className="h-1.5 w-4/5 rounded bg-black/10" />
-        <div className="h-1.5 w-3/5 rounded bg-black/10" />
-      </div>
-      <div className="mt-4 flex gap-2 text-[10px] text-primary">
-        <span className="rounded-full bg-[#dcfce7] px-2 py-0.5">Alcance</span>
-        <span className="rounded-full bg-[#dcfce7] px-2 py-0.5">Prototipo</span>
-      </div>
-    </div>
-  </div>
-);
-const MockBuild = () => (
-  <div className="v2-mock relative h-full rounded-xl p-5">
-    <div className="flex items-center justify-between text-[11px] font-medium">
-      Avance semanal <span className="rounded-full bg-[#dcfce7] px-2 py-0.5 text-primary">Semana 3</span>
-    </div>
-    {[
-      ['Pantallas', 100],
-      ['Código', 70],
-      ['Pruebas', 40],
-    ].map(([l, v]) => (
-      <div key={l} className="mt-3">
-        <div className="flex justify-between text-[10px] text-black/50">
-          <span>{l}</span>
-          <span>{v}%</span>
-        </div>
-        <div className="mt-1 h-1.5 rounded bg-black/10">
-          <div className="h-1.5 rounded bg-primary" style={{ width: `${v}%` }} />
-        </div>
-      </div>
-    ))}
-  </div>
-);
-const MockLaunch = () => (
-  <div className="v2-mock relative grid h-full place-items-center rounded-xl p-5">
-    <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs shadow-md ring-1 ring-primary/30">
-      <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> tu-negocio.com
-      <span className="ml-2 rounded-full bg-[#dcfce7] px-2 py-0.5 text-[10px] text-primary">Online</span>
-    </div>
-  </div>
-);
 
 const STEPS = [
   { title: 'Descubrimiento', text: 'Entendemos tu negocio, tus procesos y dónde se pierde tiempo o dinero.', Mock: MockChat },

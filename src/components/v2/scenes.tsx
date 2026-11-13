@@ -61,10 +61,10 @@ export function DrawLines({ widths, dashes = false }: { widths: number[]; dashes
 
 /** The showcase card grows toward full width as you scroll down from the hero. */
 export function Grow({ children }: { children: React.ReactNode }) {
-  const [ref, p] = useProgress<HTMLDivElement>('enter', { endAt: 0.15 });
+  const [ref, p] = useProgress<HTMLDivElement>('enter', { endAt: 0.05 });
   const t = easeOut(p);
   return (
-    <div ref={ref} style={{ transform: `translateY(${(1 - t) * 60}px) scale(${lerp(0.74, 1, t)})`, transformOrigin: '50% 0%' }}>
+    <div ref={ref} style={{ transform: `translateY(${(1 - t) * 60}px) scale(${lerp(0.62, 1, t)})`, transformOrigin: '50% 0%' }}>
       {children}
     </div>
   );

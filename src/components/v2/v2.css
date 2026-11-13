@@ -177,3 +177,38 @@
 @media (prefers-reduced-motion: reduce) {
   .v2-ray, .v2-rays { animation: none; }
 }
+
+/* hero entrance: words come out of a blur, one after the other */
+.v2-in {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(0.35em) scale(1.04);
+  animation: v2-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes v2-in {
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+.v2-draw {
+  transform: scaleX(0);
+  animation: v2-draw 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes v2-draw { to { transform: scaleX(1); } }
+
+/* cards: a green light follows the pointer */
+.v2-spot { position: relative; isolation: isolate; }
+.v2-spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.v2-spot:hover::before { opacity: 1; }
+.v2-spot:hover { border-color: rgba(34, 197, 94, 0.35); }
+@media (prefers-reduced-motion: reduce) {
+  .v2-in, .v2-draw { animation: none; opacity: 1; filter: none; transform: none; }
+}

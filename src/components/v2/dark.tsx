@@ -4,6 +4,7 @@ import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-rea
 import Reveal from '@/components/effects/reveal';
 import ShowcaseVideo from '@/components/v2/showcase-video';
 import { DrawLines, Grow } from '@/components/v2/scenes';
+import { BlurWords, Magnetic } from '@/components/v2/interact';
 import { projects } from '@/lib/projects';
 import { whatsAppLink } from '@/lib/site';
 
@@ -26,24 +27,28 @@ export function Hero() {
         <div className="v2-rays-dots" />
       </div>
       <div className="relative mx-auto flex min-h-[100svh] max-w-[1200px] flex-col items-center justify-center px-6 pb-16 pt-32 text-center">
-        <h1 className="animate-fade-in-up text-[clamp(2.8rem,8vw,6.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
-          Tu negocio,
-          <br />
-          en piloto <span className="v2-grad-text">automático.</span>
+        <h1 className="text-[clamp(2.8rem,8vw,6.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
+          <BlurWords lines={[['Tu', 'negocio,'], ['en', 'piloto', 'automático.']]} accentFrom={[1, 2]} />
         </h1>
         <div className="mt-10 w-full max-w-3xl">
-          <div className="v2-line" />
-          <p className="py-3 text-base text-white/85 md:text-lg">Sistemas de gestión, SaaS, aplicaciones web y sitios. Todo a medida.</p>
-          <div className="v2-line" />
+          <div className="v2-line v2-draw" style={{ animationDelay: '0.7s' }} />
+          <p className="v2-in py-3 text-base text-white/85 md:text-lg" style={{ animationDelay: '0.85s' }}>
+            Sistemas de gestión, SaaS, aplicaciones web y sitios. Todo a medida.
+          </p>
+          <div className="v2-line v2-draw" style={{ animationDelay: '0.8s' }} />
         </div>
-        <a
-          href={whatsAppLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-8 rounded-md bg-primary px-6 py-3.5 text-base font-medium text-black transition-transform hover:-translate-y-0.5"
-        >
-          Contanos tu idea
-        </a>
+        <div className="v2-in mt-8" style={{ animationDelay: '1.05s' }}>
+          <Magnetic>
+            <a
+              href={whatsAppLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-md bg-primary px-6 py-3.5 text-base font-medium text-black shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)]"
+            >
+              Contanos tu idea
+            </a>
+          </Magnetic>
+        </div>
         <div className="mt-16 w-full max-w-xl">
           <DrawLines widths={[100, 60]} />
         </div>
@@ -55,7 +60,7 @@ export function Hero() {
 export function Showcase() {
   return (
     <section className="bg-black pb-10 text-white">
-      <div className="mx-auto max-w-[1180px] px-6">
+      <div className="mx-auto w-[94vw] max-w-[1640px]">
         <Grow>
           <ShowcaseVideo />
         </Grow>

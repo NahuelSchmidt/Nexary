@@ -5,6 +5,7 @@ import Navbar from '@/components/v2/header';
 import Footer from '@/components/v2/footer';
 import WhatsAppFloatingButton from '@/components/whatsapp-floating-button';
 import CustomCursor from '@/components/effects/custom-cursor';
+import SmoothScroll from '@/components/v2/smooth-scroll';
 import { cn } from '@/lib/utils';
 
 const sora = Sora({
@@ -48,6 +49,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppFloatingButton />
         <CustomCursor />
+        <SmoothScroll />
       </body>
     </html>
   );

@@ -25,11 +25,21 @@ export function WhatsAppIcon({ className }: { className?: string }) {
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [onLight, setOnLight] = useState(false);
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 40);
-    on();
-    window.addEventListener('scroll', on, { passive: true });
-    return () => window.removeEventListener('scroll', on);
+    let raf = 0;
+    const on = () => {
+      setScrolled(window.scrollY > 40);
+      // the header turns light while it sits over a white section
+      const y = 40;
+      setOnLight([...document.querySelectorAll('.v2-light, [data-light]')].some((el) => {
+        const r = el.getBoundingClientRect();
+        return r.top <= y && r.bottom >= y;
+      }));
+      raf = requestAnimationFrame(on);
+    };
+    raf = requestAnimationFrame(on);
+    return () => cancelAnimationFrame(raf);
   }, []);
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -40,16 +50,16 @@ export default function Header() {
       <header
         className={cn(
           'fixed inset-x-0 top-0 z-50 transition-all duration-500',
-          scrolled ? 'bg-black/70 backdrop-blur-xl' : 'bg-transparent',
+          onLight ? 'bg-white/80 text-[#0c0f0d] shadow-[0_1px_0_rgba(12,15,13,0.06)] backdrop-blur-xl' : scrolled ? 'bg-black/70 text-white backdrop-blur-xl' : 'bg-transparent text-white',
         )}
       >
         <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-6 md:px-10">
-          <Link href="/" className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-white">
+          <Link href="/" className="flex items-center gap-2.5 text-lg font-semibold tracking-tight transition-colors">
             <LogoMark className="h-7 w-7" />
             Nexary<span className="text-primary">.</span>
           </Link>
           <div className="flex items-center gap-5">
-            <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-white/90 transition-colors hover:text-primary">
+            <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="opacity-90 transition-colors hover:text-primary">
               <WhatsAppIcon className="h-6 w-6" />
             </a>
             <a
@@ -61,8 +71,8 @@ export default function Header() {
               Tengo una idea
             </a>
             <button aria-label="Abrir menú" onClick={() => setOpen(true)} className="flex h-10 w-10 flex-col items-center justify-center gap-[7px]">
-              <span className="block h-[2px] w-7 bg-white" />
-              <span className="block h-[2px] w-7 bg-white" />
+              <span className="block h-[2px] w-7 bg-current transition-colors" />
+              <span className="block h-[2px] w-7 bg-current transition-colors" />
             </button>
           </div>
         </div>

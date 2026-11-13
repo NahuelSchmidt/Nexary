@@ -10,7 +10,7 @@ import { useEffect, useRef, useState, type RefObject } from 'react';
  */
 export function useProgress<T extends HTMLElement>(
   mode: 'pinned' | 'enter' = 'pinned',
-  { endAt = 0.35, ease = 0.14 }: { endAt?: number; ease?: number } = {},
+  { endAt = 0.35, ease = 0.3 }: { endAt?: number; ease?: number } = {},
 ): [RefObject<T>, number] {
   const ref = useRef<T>(null);
   const [p, setP] = useState(0);
