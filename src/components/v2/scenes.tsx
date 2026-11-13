@@ -110,30 +110,9 @@ export function PillScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const lines = ['DISEÑAMOS &', 'DESARROLLAMOS', 'TU SISTEMA'];
   const total = lines.join('').length;
-  // Types itself once the section is on screen, at a human pace (silent: the key sound lives only in the hero).
-  const flat = lines.join('');
-  const [typed, setTyped] = useState(0);
-  const active = p > 0.04;
-  useEffect(() => {
-    if (!active) {
-      setTyped(0);
-      return;
-    }
-    let i = 0;
-    let t: ReturnType<typeof setTimeout>;
-    const next = () => {
-      i++;
-      setTyped(i);
-      if (i < flat.length) {
-        const ch = flat[i - 1];
-        // a little human rhythm: quicker inside words, a beat after spaces and line ends
-        const lineEnd = lines.some((_, li) => lines.slice(0, li + 1).join('').length === i);
-        t = setTimeout(next, lineEnd ? 260 : ch === ' ' ? 140 : 55 + Math.random() * 55);
-      }
-    };
-    t = setTimeout(next, 350);
-    return () => clearTimeout(t);
-  }, [active, flat]);
+  // Typed by the scroll: always finished before the section moves on (silent: the key sound lives only in the hero).
+  const typed = Math.floor(seg(p, 0.06, 0.55) * total);
+  const active = p > 0.03;
   const done = typed >= total;
   const grow = easeOut(seg(p, 0.4, 0.85));
   const [blink, setBlink] = useState(true);
