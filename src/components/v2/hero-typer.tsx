@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { keyBack, keyClick } from './keys';
 
 /**
@@ -11,6 +11,16 @@ export default function HeroTyper({ phrases, startDelay = 2600 }: { phrases: str
   const [text, setText] = useState(phrases[0]);
   const [busy, setBusy] = useState(false);
   const [blink, setBlink] = useState(true);
+  // only types (and only makes noise) while the hero is on screen
+  const ref = useRef<HTMLSpanElement>(null);
+  const visible = useRef(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => (visible.current = e.isIntersecting), { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     const id = setInterval(() => setBlink((b) => !b), 530);
@@ -27,6 +37,7 @@ export default function HeroTyper({ phrases, startDelay = 2600 }: { phrases: str
       let cur = phrases[0];
       await wait(startDelay);
       while (alive) {
+        while (alive && !visible.current) await wait(250); // paused while scrolled away
         const next = phrases[(i + 1) % phrases.length];
         setBusy(true);
         // erase back to nothing
@@ -56,7 +67,7 @@ export default function HeroTyper({ phrases, startDelay = 2600 }: { phrases: str
   }, [phrases, startDelay]);
 
   return (
-    <span className="relative whitespace-nowrap">
+    <span ref={ref} className="relative whitespace-nowrap">
       <span className="v2-grad-text">{text}</span>
       <span
         aria-hidden="true"
