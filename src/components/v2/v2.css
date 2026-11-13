@@ -212,3 +212,37 @@
 @media (prefers-reduced-motion: reduce) {
   .v2-in, .v2-draw { animation: none; opacity: 1; filter: none; transform: none; }
 }
+
+/* "keep scrolling" cue under the video */
+.v2-mouse {
+  position: relative;
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 14px;
+}
+.v2-mouse::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: #22c55e;
+  animation: v2-wheel 1.6s ease-in-out infinite;
+}
+@keyframes v2-wheel {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(13px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+.v2-bounce { animation: v2-bounce 1.6s ease-in-out infinite; }
+@keyframes v2-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50% { transform: translateY(9px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-mouse::after, .v2-bounce { animation: none; }
+}

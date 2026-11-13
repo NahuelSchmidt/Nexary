@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import Reveal from '@/components/effects/reveal';
 import ShowcaseVideo from '@/components/v2/showcase-video';
 import { DrawLines } from '@/components/v2/scenes';
@@ -72,8 +72,15 @@ export function Showcase() {
       <Reveal className="mx-auto w-[88vw] max-w-[1110px] md:w-[77vw]">
         <ShowcaseVideo />
       </Reveal>
-      <div className="mx-auto mt-24 max-w-md px-6">
-        <DrawLines widths={[100, 70, 45, 30]} dashes />
+      <div className="mx-auto mt-20 max-w-md px-6">
+        <DrawLines widths={[100, 70, 45, 30]} />
+      </div>
+      {/* keep-scrolling cue: the page never looks like it stopped */}
+      <div className="mt-14 flex flex-col items-center gap-4 pb-6 text-white/60">
+        <div className="v2-mouse hidden md:block" aria-hidden="true" />
+        <ChevronDown className="v2-bounce h-7 w-7 text-primary md:hidden" aria-hidden="true" />
+        <span className="font-mono text-[11px] uppercase tracking-[0.3em]">Seguí bajando</span>
+        <ChevronDown className="v2-bounce hidden h-5 w-5 text-primary md:block" aria-hidden="true" style={{ animationDelay: '0.2s' }} />
       </div>
     </section>
   );

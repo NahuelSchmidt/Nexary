@@ -112,7 +112,7 @@ export function PillScene() {
   const total = lines.join('').length;
   // Typed by the scroll: always finished before the section moves on (silent: the key sound lives only in the hero).
   const typed = Math.floor(seg(p, 0.06, 0.55) * total);
-  const active = p > 0.03;
+  const active = p > 0.0;
   const done = typed >= total;
   const grow = easeOut(seg(p, 0.4, 0.85));
   const [blink, setBlink] = useState(true);
@@ -152,7 +152,7 @@ export function PillScene() {
                 return (
                   <div key={li} className="whitespace-pre">
                     {l.slice(0, shown)}
-                    {caret && <span className="ml-1 inline-block h-[0.9em] w-[0.08em] translate-y-[0.1em] bg-lime-300" style={{ opacity: typed < total || blink ? 1 : 0 }} />}
+                    {caret && <span className="ml-1 inline-block h-[0.9em] w-[0.08em] translate-y-[0.1em] bg-lime-300" style={{ opacity: (typed > 0 && typed < total) || blink ? 1 : 0 }} />}
                     <span className="opacity-0">{l.slice(shown)}</span>
                   </div>
                 );
@@ -202,29 +202,54 @@ export function ExperienceScene() {
 }
 
 /** The studio paragraph lights up word by word while it is pinned. */
+/** Paints "+10 proyectos" (any figure + "proyectos") in the brand green. */
+const Highlight = ({ text }: { text: string }) => {
+  const parts = text.split(/(\+?\d+ proyectos)/);
+  return (
+    <>
+      {parts.map((t, i) => (i % 2 ? <span key={i} className="text-primary">{t}</span> : <span key={i}>{t}</span>))}
+    </>
+  );
+};
+
+/** The studio paragraph types itself as you scroll (silent), with a blinking caret. */
 export function WordScene({ paragraphs }: { paragraphs: string[] }) {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
-  const words = paragraphs.map((t) => t.split(' '));
-  const total = words.flat().length;
-  let k = 0;
+  const total = paragraphs.reduce((n, t) => n + t.length, 0);
+  const typed = Math.floor(seg(p, 0.04, 0.8) * total);
+  const [blink, setBlink] = useState(true);
+  useEffect(() => {
+    const id = setInterval(() => setBlink((b) => !b), 530);
+    return () => clearInterval(id);
+  }, []);
+  let used = 0;
   return (
-    <Pinned vh={180} innerRef={ref} className="bg-black text-white">
-      <div className="mx-auto grid h-full max-w-2xl place-items-center px-6">
-        <div className="space-y-8 text-xl leading-relaxed md:text-2xl">
-          {words.map((ws, pi) => (
-            <p key={pi}>
-              {ws.map((w, wi) => {
-                const t = seg(p, (k / total) * 0.85, (k / total) * 0.85 + 0.06);
-                k++;
-                const hot = /^[+\d]|proyectos/.test(w);
-                return (
-                  <span key={wi} style={{ color: hot && t > 0.5 ? '#22c55e' : undefined, opacity: 0.18 + t * 0.82 }}>
-                    {w}{' '}
-                  </span>
-                );
-              })}
-            </p>
-          ))}
+    <Pinned vh={220} innerRef={ref} className="bg-black text-white">
+      <div className="mx-auto grid h-full max-w-[44rem] place-items-center px-6">
+        <div className="space-y-8 text-[1.3rem] leading-relaxed md:text-[1.7rem]">
+          {paragraphs.map((t, pi) => {
+            const start = used;
+            used += t.length;
+            const shown = Math.max(0, Math.min(t.length, typed - start));
+            const here = typed >= start && (typed < start + t.length || (pi === paragraphs.length - 1 && typed >= total));
+            const caret = p > 0.01 && (here || (pi === 0 && typed === 0));
+            return (
+              <p key={pi}>
+                {/* the not-yet-typed rest stays in place, invisible, so nothing reflows while typing */}
+                <Highlight text={t.slice(0, shown)} />
+                {caret && (
+                  <span
+                    aria-hidden="true"
+                    className="ml-0.5 inline-block h-[1em] w-[0.08em] translate-y-[0.15em] bg-primary"
+                    style={{ opacity: typed < total || blink ? 1 : 0 }}
+                  />
+                )}
+                <span className="opacity-0">
+                  <Highlight text={t.slice(shown)} />
+                </span>
+              </p>
+            );
+          })}
         </div>
       </div>
     </Pinned>
