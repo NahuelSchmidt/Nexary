@@ -213,24 +213,47 @@ const Highlight = ({ text }: { text: string }) => {
   );
 };
 
-/** The agency paragraph types itself as you scroll, with a blinking caret and the key sound. */
+/**
+ * The agency paragraph types itself at a human pace once you reach it, with the key sound at a
+ * natural rhythm (not tied to how fast you scroll). Scroll on before it finishes and the rest
+ * appears at once, silently, so it is never left half-written.
+ */
 export function WordScene({ paragraphs }: { paragraphs: string[] }) {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const total = paragraphs.reduce((n, t) => n + t.length, 0);
-  const typed = Math.floor(seg(p, 0.04, 0.8) * total);
-  // a key sound as letters appear (forward only; the player never fires faster than a real typist)
-  const prev = useRef(typed);
-  const lastKey = useRef(0);
   const flat = paragraphs.join('');
+  const [typed, setTyped] = useState(0);
+  const started = p > 0.02;
+  const rushed = p > 0.72;
+  const rushedRef = useRef(false);
+  rushedRef.current = rushed;
   useEffect(() => {
-    // scrolling fast types many letters per frame: cap it at a fast typist (~18 keys/s), never a buzz
-    const now = performance.now();
-    if (typed > prev.current && now - lastKey.current > 55) {
-      keyClick(flat[typed - 1] === ' ');
-      lastKey.current = now;
+    if (!started) {
+      setTyped(0);
+      return;
     }
-    prev.current = typed;
-  }, [typed, flat]);
+    let i = 0;
+    let tick = 0;
+    let t: ReturnType<typeof setTimeout>;
+    const step = () => {
+      if (rushedRef.current) {
+        setTyped(total);
+        return;
+      }
+      i = Math.min(total, i + 2);
+      setTyped(i);
+      // the key sound every other step, with a little jitter: ~11 keys a second, like a real typist
+      if (tick++ % 2 === 0) keyClick(flat[i - 1] === ' ');
+      if (i >= total) return;
+      const ch = flat[i - 1];
+      t = setTimeout(step, ch === '.' || ch === ':' ? 320 : ch === ',' ? 160 : 40 + Math.random() * 18);
+    };
+    t = setTimeout(step, 250);
+    return () => clearTimeout(t);
+  }, [started, total, flat]);
+  useEffect(() => {
+    if (rushed) setTyped(total);
+  }, [rushed, total]);
   const [blink, setBlink] = useState(true);
   useEffect(() => {
     const id = setInterval(() => setBlink((b) => !b), 530);
