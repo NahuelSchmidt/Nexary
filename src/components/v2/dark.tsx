@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import Reveal from '@/components/effects/reveal';
 import ShowcaseVideo from '@/components/v2/showcase-video';
-import { DrawLines, Grow } from '@/components/v2/scenes';
+import { DrawLines } from '@/components/v2/scenes';
 import { BlurWords, Magnetic } from '@/components/v2/interact';
 import { projects } from '@/lib/projects';
 import { whatsAppLink } from '@/lib/site';
@@ -60,11 +60,9 @@ export function Hero() {
 export function Showcase() {
   return (
     <section className="bg-black pb-10 text-white">
-      <div className="mx-auto w-[94vw] max-w-[1640px]">
-        <Grow>
-          <ShowcaseVideo />
-        </Grow>
-      </div>
+      <Reveal className="mx-auto w-[88vw] max-w-[1110px] md:w-[77vw]">
+        <ShowcaseVideo />
+      </Reveal>
       <div className="mx-auto mt-24 max-w-md px-6">
         <DrawLines widths={[100, 70, 45, 30]} dashes />
       </div>
