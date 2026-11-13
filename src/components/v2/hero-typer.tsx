@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { keyClick } from './keys';
+import { keyBack, keyClick } from './keys';
 
 /**
  * The end of the hero headline erases itself and types the next phrase, in a loop,
@@ -33,7 +33,7 @@ export default function HeroTyper({ phrases, startDelay = 2600 }: { phrases: str
         while (alive && cur.length) {
           cur = cur.slice(0, -1);
           setText(cur);
-          keyClick(false);
+          keyBack();
           await wait(70 + Math.random() * 30);
         }
         await wait(320);

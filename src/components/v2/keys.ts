@@ -1,65 +1,67 @@
 'use client';
 
-// Keyboard clicks synthesized with Web Audio (no audio file). Browsers only allow sound after the
-// visitor has clicked/tapped/pressed a key somewhere, so before that this stays silent.
+// Real keyboard sounds: single keystrokes cut from royalty-free Mixkit recordings
+// (laptop typing #2531, backspace #2539), packed in /sounds/keys.mp3 with their offsets in
+// /sounds/keys.json. One random keystroke per letter, so the sound always matches the typing.
+// Browsers only allow sound after the visitor has clicked, tapped or pressed a key; before that
+// this stays silent.
 let ctx: AudioContext | null = null;
-let noise: AudioBuffer | null = null;
-let unlocked = false;
+let sprite: AudioBuffer | null = null;
+let offsets: { k: number[][]; s: number[][]; b: number[][] } | null = null;
+let loading: Promise<void> | null = null;
 let last = 0;
+let lastPick = -1;
 
-function ensure() {
-  if (typeof window === 'undefined') return null;
-  if (!ctx) {
-    const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-    if (!AC) return null;
-    ctx = new AC();
-    noise = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.05), ctx.sampleRate);
-    const d = noise.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
-  }
-  return ctx;
+function load() {
+  if (loading || typeof window === 'undefined') return loading;
+  const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+  if (!AC) return null;
+  ctx = new AC();
+  loading = Promise.all([
+    fetch('/sounds/keys.json').then((r) => r.json()),
+    fetch('/sounds/keys.mp3').then((r) => r.arrayBuffer()).then((b) => ctx!.decodeAudioData(b)),
+  ])
+    .then(([o, buf]) => {
+      offsets = o;
+      sprite = buf;
+    })
+    .catch(() => {});
+  return loading;
 }
 
 if (typeof window !== 'undefined') {
   const unlock = () => {
-    const c = ensure();
-    c?.resume().then(() => (unlocked = true)).catch(() => {});
+    load();
+    ctx?.resume().catch(() => {});
   };
   ['pointerdown', 'keydown', 'touchstart'].forEach((e) => window.addEventListener(e, unlock, { passive: true }));
 }
 
-/** One key press. `space` gives the deeper, longer thock of the space bar. */
-export function keyClick(space = false) {
-  const c = ctx;
-  if (!c || !unlocked || !noise || c.state !== 'running') return;
-  const now = c.currentTime;
-  if (now - last < 0.028) return; // never a buzz, even when scrolling fast
+function play(kind: 'k' | 's' | 'b', gain: number) {
+  if (!ctx || !sprite || !offsets || ctx.state !== 'running') return;
+  const now = ctx.currentTime;
+  if (now - last < 0.025) return;
   last = now;
-  const out = c.createGain();
-  out.gain.value = space ? 0.22 : 0.16 + Math.random() * 0.05;
-  out.connect(c.destination);
-  // the click: a short filtered noise burst
-  const src = c.createBufferSource();
-  src.buffer = noise;
-  src.playbackRate.value = 0.85 + Math.random() * 0.4;
-  const bp = c.createBiquadFilter();
-  bp.type = 'bandpass';
-  bp.frequency.value = space ? 900 : 2200 + Math.random() * 1600;
-  bp.Q.value = 1.2;
-  const env = c.createGain();
-  env.gain.setValueAtTime(1, now);
-  env.gain.exponentialRampToValueAtTime(0.001, now + (space ? 0.07 : 0.04));
-  src.connect(bp).connect(env).connect(out);
-  src.start(now);
-  // the body of the key bottoming out
-  const osc = c.createOscillator();
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(space ? 120 : 180 + Math.random() * 60, now);
-  osc.frequency.exponentialRampToValueAtTime(60, now + 0.05);
-  const g = c.createGain();
-  g.gain.setValueAtTime(space ? 0.5 : 0.28, now);
-  g.gain.exponentialRampToValueAtTime(0.001, now + (space ? 0.08 : 0.05));
-  osc.connect(g).connect(out);
-  osc.start(now);
-  osc.stop(now + 0.1);
+  const list = offsets[kind];
+  let i = Math.floor(Math.random() * list.length);
+  if (list.length > 1 && i === lastPick) i = (i + 1) % list.length; // never the same key twice in a row
+  lastPick = i;
+  const [at, dur] = list[i];
+  const src = ctx.createBufferSource();
+  src.buffer = sprite;
+  src.playbackRate.value = 0.94 + Math.random() * 0.12;
+  const g = ctx.createGain();
+  g.gain.value = gain * (0.85 + Math.random() * 0.3);
+  src.connect(g).connect(ctx.destination);
+  src.start(now, at, dur);
+}
+
+/** One key press; `space` plays the space bar. */
+export function keyClick(space = false) {
+  play(space ? 's' : 'k', 0.55);
+}
+
+/** One backspace while erasing. */
+export function keyBack() {
+  play('b', 0.5);
 }
