@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import { Sora, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/layout/navbar';
-import Footer from '@/components/layout/footer';
+import Navbar from '@/components/v2/header';
+import Footer from '@/components/v2/footer';
 import WhatsAppFloatingButton from '@/components/whatsapp-floating-button';
 import CustomCursor from '@/components/effects/custom-cursor';
-import { themeInitScript } from '@/lib/theme';
 import { cn } from '@/lib/utils';
 
 const sora = Sora({
@@ -41,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={cn(sora.variable, geistMono.variable)} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/* v2: always dark chrome; light sections set their own colors */}
       </head>
       <body className="flex min-h-screen flex-col">
         <Navbar />

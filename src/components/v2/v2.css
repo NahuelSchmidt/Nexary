@@ -1,0 +1,131 @@
+/* Nexary v2 — an editorial, dark-to-light layout. Brand green #22c55e, teal and lime as glow partners. */
+.v2-grad-text {
+  background: linear-gradient(90deg, #16a34a 0%, #22c55e 35%, #86efac 70%, #d9f99d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.v2-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.v2-dots-dark {
+  background-image: radial-gradient(rgba(12, 15, 13, 0.12) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.v2-corner-glow {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0) 55%, #000 100%),
+    linear-gradient(165deg, #4ade80 0%, #22c55e 18%, #0d9488 42%, rgba(13, 148, 136, 0.35) 62%, rgba(0, 0, 0, 0) 85%);
+}
+.v2-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(134, 239, 172, 0.55), transparent);
+}
+.v2-showcase {
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #dcfce7 0%, #4ade80 45%, #16a34a 100%);
+}
+.v2-blob {
+  background: radial-gradient(circle at 35% 35%, #86efac, #22c55e 45%, #0d9488 100%);
+  filter: blur(1px);
+  border-radius: 50%;
+  animation: v2-morph 9s ease-in-out infinite;
+}
+@keyframes v2-morph {
+  0%, 100% { border-radius: 42% 58% 60% 40% / 45% 45% 55% 55%; transform: rotate(0deg) scale(1); }
+  50% { border-radius: 60% 40% 38% 62% / 58% 40% 60% 42%; transform: rotate(40deg) scale(1.08); }
+}
+.v2-shine {
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  background-size: 250% 100%;
+  animation: v2-shine 6s ease-in-out infinite;
+}
+@keyframes v2-shine {
+  0% { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
+}
+.v2-neon {
+  filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 18px currentColor);
+}
+.v2-pill {
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0.35) 55%, rgba(20, 184, 166, 0.75) 100%);
+}
+.v2-ring {
+  border: 1.5px solid rgba(134, 239, 172, 0.45);
+}
+.v2-orb-ring {
+  background: conic-gradient(from 0deg, #22c55e, #14b8a6, #a3e635, #22c55e);
+  -webkit-mask: radial-gradient(circle, transparent 62%, #000 63%);
+  mask: radial-gradient(circle, transparent 62%, #000 63%);
+  animation: v2-spin 12s linear infinite;
+}
+@keyframes v2-spin { to { transform: rotate(360deg); } }
+
+/* wireframe cubes */
+.v2-cube-wrap { perspective: 600px; }
+.v2-cube {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: v2-cube 14s linear infinite;
+}
+.v2-cube > span {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(134, 239, 172, 0.55);
+  box-shadow: inset 0 0 18px rgba(34, 197, 94, 0.15);
+}
+.v2-cube > span:nth-child(1) { transform: translateZ(var(--h)); }
+.v2-cube > span:nth-child(2) { transform: rotateY(180deg) translateZ(var(--h)); }
+.v2-cube > span:nth-child(3) { transform: rotateY(90deg) translateZ(var(--h)); }
+.v2-cube > span:nth-child(4) { transform: rotateY(-90deg) translateZ(var(--h)); }
+.v2-cube > span:nth-child(5) { transform: rotateX(90deg) translateZ(var(--h)); }
+.v2-cube > span:nth-child(6) { transform: rotateX(-90deg) translateZ(var(--h)); }
+@keyframes v2-cube {
+  from { transform: rotateX(-24deg) rotateY(0deg); }
+  to { transform: rotateX(-24deg) rotateY(360deg); }
+}
+
+/* project collage */
+.v2-float { animation: v2-float 7s ease-in-out infinite; }
+@keyframes v2-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -14px; }
+}
+
+/* light part */
+.v2-light {
+  background: #fff;
+  color: #0c0f0d;
+  --muted-foreground: 150 4% 38%;
+  --border: 150 10% 5% / 0.09;
+  color-scheme: light;
+}
+.v2-sky {
+  background: linear-gradient(180deg, #fff 0%, #fff 35%, #dcfce7 62%, #4ade80 88%, #22c55e 100%);
+}
+.v2-card-light {
+  background: #f6f8f7;
+  border: 1px solid rgba(12, 15, 13, 0.06);
+}
+.v2-mock {
+  background: linear-gradient(180deg, #f0fdf4, #ffffff);
+  border: 1px solid rgba(12, 15, 13, 0.06);
+}
+.v2-faq summary::-webkit-details-marker { display: none; }
+.v2-faq[open] .v2-plus { transform: rotate(45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .v2-blob, .v2-shine, .v2-cube, .v2-float, .v2-orb-ring { animation: none; }
+}
+
+.v2-dot-sphere {
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(134, 239, 172, 0.95) 1.1px, transparent 1.6px);
+  background-size: 9px 9px;
+  -webkit-mask: radial-gradient(circle at 42% 38%, #000 0%, rgba(0, 0, 0, 0.85) 45%, transparent 71%);
+  mask: radial-gradient(circle at 42% 38%, #000 0%, rgba(0, 0, 0, 0.85) 45%, transparent 71%);
+  animation: v2-drift 10s linear infinite;
+}
+@keyframes v2-drift { to { background-position: 90px 0; } }

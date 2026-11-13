@@ -1,23 +1,22 @@
-import HeroSection from '@/components/sections/hero-section';
-import TechMarquee from '@/components/sections/tech-marquee';
-import ServicesSection from '@/components/sections/services-section';
-import ProjectsSection from '@/components/sections/projects-section';
-import ProcessSection from '@/components/sections/process-section';
-import ValuesSection from '@/components/sections/values-section';
-import TestimonialsSection from '@/components/sections/testimonials-section';
-import CtaSection from '@/components/sections/cta-section';
+import '@/components/v2/v2.css';
+import { Collage, Experience, Hero, Products, Showcase, Statement } from '@/components/v2/dark';
+import { Challenge, Faq, FinalCta, Process, Services, Voices } from '@/components/v2/light';
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
-      <TechMarquee />
-      <ServicesSection />
-      <ProjectsSection />
-      <ProcessSection />
-      <ValuesSection />
-      <TestimonialsSection />
-      <CtaSection />
+      <Hero />
+      <Showcase />
+      <Experience />
+      <Statement />
+      <Products />
+      <Collage />
+      <Challenge />
+      <Services />
+      <Process />
+      <Voices />
+      <Faq />
+      <FinalCta />
     </>
   );
 }
