@@ -122,7 +122,7 @@ export function PillScene() {
   }, []);
   let used = 0;
   return (
-    <Pinned vh={200} innerRef={ref} className="bg-black text-white">
+    <Pinned vh={260} innerRef={ref} className="bg-black text-white">
       <div className="relative grid h-full place-items-center px-6">
         <div className="relative w-full max-w-[760px]" data-done={done}>
           {[0, 1, 2].map((i) => (
@@ -175,7 +175,7 @@ export function ExperienceScene() {
     { Icon: MessagesSquare, color: '#a3e635', label: 'Conectado con WhatsApp' },
   ];
   return (
-    <Pinned vh={160} innerRef={ref} className="bg-black text-white">
+    <Pinned vh={200} innerRef={ref} className="bg-black text-white">
       <div className="relative h-full">
         <h2
           className="absolute inset-x-0 top-1/2 text-center text-[clamp(2.4rem,5.5vw,4.6rem)] font-medium leading-[1.05] tracking-[-0.04em]"
@@ -208,7 +208,7 @@ export function WordScene({ paragraphs }: { paragraphs: string[] }) {
   const total = words.flat().length;
   let k = 0;
   return (
-    <Pinned vh={150} innerRef={ref} className="bg-black text-white">
+    <Pinned vh={180} innerRef={ref} className="bg-black text-white">
       <div className="mx-auto grid h-full max-w-2xl place-items-center px-6">
         <div className="space-y-8 text-xl leading-relaxed md:text-2xl">
           {words.map((ws, pi) => (
@@ -256,7 +256,7 @@ export function ProductsScene() {
   const last = idx === names.length - 1;
   const spin = p * 540;
   return (
-    <Pinned vh={220} innerRef={ref} className="text-white" >
+    <Pinned vh={280} innerRef={ref} className="text-white" >
       <div className="absolute inset-0 transition-colors duration-700" style={{ background: last ? '#0b120e' : '#070908' }} />
       <div className="relative flex h-full flex-col justify-between py-16">
         <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6">
@@ -321,7 +321,7 @@ export function CollageScene() {
   ];
   const spots = phone ? PHONE_SPOTS : desk;
   return (
-    <Pinned vh={170} innerRef={ref} className="bg-[#070908] text-white">
+    <Pinned vh={210} innerRef={ref} className="bg-[#070908] text-white">
       <div id="proyectos" className="absolute -top-20" />
       <div className="relative mx-auto h-full max-w-[1400px]">
         {shots.map((pr, i) => {
@@ -379,7 +379,7 @@ export function ZoomScene() {
   const scale = 1 + Math.pow(z, 3) * 70;
   const white = seg(p, 0.78, 0.95);
   return (
-    <Pinned vh={220} innerRef={ref} className="bg-black">
+    <Pinned vh={270} innerRef={ref} className="bg-black">
       <div className="v2-rays" style={{ opacity: 1 - seg(p, 0.1, 0.4) }}>
         <div className="v2-ray d" />
         <div className="v2-ray a" />
