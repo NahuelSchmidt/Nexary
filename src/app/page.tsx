@@ -11,7 +11,7 @@ export default function Home() {
       <ExperienceScene />
       <WordScene
         paragraphs={[
-          'Nexary es un estudio de software argentino. Diseñamos y desarrollamos sistemas de gestión, SaaS, aplicaciones web y sitios para empresas y emprendedores.',
+          'Nexary es una agencia de software argentina. Diseñamos y desarrollamos sistemas de gestión, SaaS, aplicaciones web y sitios para empresas y emprendedores.',
           'Ya hay +10 proyectos nuestros funcionando: gimnasios, complejos deportivos, comercios, agendas de turnos y más. Cada uno arranca igual: entendiendo tu negocio antes de escribir una línea de código.',
         ]}
       />

@@ -9,16 +9,16 @@ export default function Footer() {
       <div className="mx-auto grid max-w-[1200px] gap-12 px-6 py-20 md:grid-cols-12 md:px-10">
         <div className="md:col-span-5">
           <p className="text-lg">
-            El estudio <span className="text-primary">Nexary</span>
+            La agencia <span className="text-primary">Nexary</span>
           </p>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-black/55">
-            Estudio de software argentino. Diseñamos y desarrollamos sistemas de gestión, SaaS, aplicaciones web y sitios a medida para
+            Agencia de software argentina. Diseñamos y desarrollamos sistemas de gestión, SaaS, aplicaciones web y sitios a medida para
             empresas que quieren crecer con tecnología.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-8 text-sm md:col-span-7 md:grid-cols-3">
           <div className="space-y-3">
-            <p className="font-medium">Estudio</p>
+            <p className="font-medium">Agencia</p>
             <Link href="/#servicios" className="block text-black/55 hover:text-black">Servicios</Link>
             <Link href="/#proyectos" className="block text-black/55 hover:text-black">Proyectos</Link>
             <Link href="/#proceso" className="block text-black/55 hover:text-black">Cómo trabajamos</Link>

@@ -7,6 +7,7 @@ import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-rea
 import { projects } from '@/lib/projects';
 import { useEffect, useRef, useState } from 'react';
 import { easeInOut, easeOut, lerp, seg, useProgress } from './use-progress';
+import { keyClick } from './keys';
 
 /** Words rise out of a mask, one after the other, as the block scrolls into view. */
 export function RiseText({ text, className, accent, as: Tag = 'h2' }: { text: string; className?: string; accent?: string[]; as?: 'h2' | 'p' | 'span' }) {
@@ -201,7 +202,7 @@ export function ExperienceScene() {
   );
 }
 
-/** The studio paragraph lights up word by word while it is pinned. */
+
 /** Paints "+10 proyectos" (any figure + "proyectos") in the brand green. */
 const Highlight = ({ text }: { text: string }) => {
   const parts = text.split(/(\+?\d+ proyectos)/);
@@ -212,11 +213,18 @@ const Highlight = ({ text }: { text: string }) => {
   );
 };
 
-/** The studio paragraph types itself as you scroll (silent), with a blinking caret. */
+/** The agency paragraph types itself as you scroll, with a blinking caret and the key sound. */
 export function WordScene({ paragraphs }: { paragraphs: string[] }) {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const total = paragraphs.reduce((n, t) => n + t.length, 0);
   const typed = Math.floor(seg(p, 0.04, 0.8) * total);
+  // a key sound as letters appear (forward only; the player never fires faster than a real typist)
+  const prev = useRef(typed);
+  const flat = paragraphs.join('');
+  useEffect(() => {
+    if (typed > prev.current) keyClick(flat[typed - 1] === ' ');
+    prev.current = typed;
+  }, [typed, flat]);
   const [blink, setBlink] = useState(true);
   useEffect(() => {
     const id = setInterval(() => setBlink((b) => !b), 530);

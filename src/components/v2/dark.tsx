@@ -110,7 +110,7 @@ export function Experience() {
         </div>
         <Reveal className="mx-auto mt-40 max-w-2xl space-y-8 text-lg leading-relaxed text-white/90 md:text-xl">
           <p>
-            Nexary es un estudio de software argentino. Diseñamos y desarrollamos sistemas de gestión, SaaS, aplicaciones web y sitios para
+            Nexary es una agencia de software argentina. Diseñamos y desarrollamos sistemas de gestión, SaaS, aplicaciones web y sitios para
             empresas y emprendedores.
           </p>
           <p>
