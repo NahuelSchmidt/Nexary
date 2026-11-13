@@ -216,7 +216,7 @@ export function WordScene({ paragraphs }: { paragraphs: string[] }) {
               {ws.map((w, wi) => {
                 const t = seg(p, (k / total) * 0.85, (k / total) * 0.85 + 0.06);
                 k++;
-                const hot = /^\d|proyectos/.test(w);
+                const hot = /^[+\d]|proyectos/.test(w);
                 return (
                   <span key={wi} style={{ color: hot && t > 0.5 ? '#22c55e' : undefined, opacity: 0.18 + t * 0.82 }}>
                     {w}{' '}
