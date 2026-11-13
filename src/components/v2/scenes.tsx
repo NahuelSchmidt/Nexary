@@ -214,46 +214,53 @@ const Highlight = ({ text }: { text: string }) => {
 };
 
 /**
- * The agency paragraph types itself at a human pace once you reach it, with the key sound at a
- * natural rhythm (not tied to how fast you scroll). Scroll on before it finishes and the rest
- * appears at once, silently, so it is never left half-written.
+ * The agency paragraph types itself at a human pace once you reach it. Scrolling on pushes it
+ * forward (letter by letter, never all at once), so it always finishes before the section ends.
+ * The key sound keeps its own natural rhythm while letters are appearing.
  */
 export function WordScene({ paragraphs }: { paragraphs: string[] }) {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const total = paragraphs.reduce((n, t) => n + t.length, 0);
   const flat = paragraphs.join('');
-  const [typed, setTyped] = useState(0);
   const started = p > 0.02;
-  const rushed = p > 0.72;
-  const rushedRef = useRef(false);
-  rushedRef.current = rushed;
+  // by time: ~40 letters a second from the moment you arrive
+  const [timed, setTimed] = useState(0);
   useEffect(() => {
     if (!started) {
-      setTyped(0);
+      setTimed(0);
       return;
     }
     let i = 0;
-    let tick = 0;
     let t: ReturnType<typeof setTimeout>;
     const step = () => {
-      if (rushedRef.current) {
-        setTyped(total);
-        return;
-      }
       i = Math.min(total, i + 2);
-      setTyped(i);
-      // the key sound every other step, with a little jitter: ~11 keys a second, like a real typist
-      if (tick++ % 2 === 0) keyClick(flat[i - 1] === ' ');
+      setTimed(i);
       if (i >= total) return;
       const ch = flat[i - 1];
-      t = setTimeout(step, ch === '.' || ch === ':' ? 320 : ch === ',' ? 160 : 40 + Math.random() * 18);
+      t = setTimeout(step, ch === '.' || ch === ':' ? 300 : ch === ',' ? 150 : 42 + Math.random() * 16);
     };
     t = setTimeout(step, 250);
     return () => clearTimeout(t);
   }, [started, total, flat]);
+  // by scroll: a floor that reaches the end at 80% of the section
+  const scrolled = Math.floor(seg(p, 0.08, 0.8) * total);
+  const typed = Math.max(timed, scrolled);
+  // the sound: its own steady rhythm (~10 keys/s) while the text is still growing
+  const typedRef = useRef(typed);
+  typedRef.current = typed;
   useEffect(() => {
-    if (rushed) setTyped(total);
-  }, [rushed, total]);
+    if (!started) return;
+    let last = typedRef.current;
+    let t: ReturnType<typeof setTimeout>;
+    const beat = () => {
+      const now = typedRef.current;
+      if (now > last && now < total + 1) keyClick(flat[now - 1] === ' ');
+      last = now;
+      if (now < total) t = setTimeout(beat, 85 + Math.random() * 35);
+    };
+    t = setTimeout(beat, 250);
+    return () => clearTimeout(t);
+  }, [started, total, flat]);
   const [blink, setBlink] = useState(true);
   useEffect(() => {
     const id = setInterval(() => setBlink((b) => !b), 530);
