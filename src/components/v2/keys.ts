@@ -1,7 +1,7 @@
 'use client';
 
 // Real keyboard sounds: single keystrokes cut from royalty-free Mixkit recordings
-// (laptop typing #2531, backspace #2539), packed in /sounds/keys.mp3 with their offsets in
+// (desktop keyboard typing #1386, softened with a low-pass), packed in /sounds/keys.mp3 with their offsets in
 // /sounds/keys.json. One random keystroke per letter, so the sound always matches the typing.
 // Browsers only allow sound after the visitor has clicked, tapped or pressed a key; before that
 // this stays silent.
@@ -58,10 +58,10 @@ function play(kind: 'k' | 's' | 'b', gain: number) {
 
 /** One key press; `space` plays the space bar. */
 export function keyClick(space = false) {
-  play(space ? 's' : 'k', 0.55);
+  play(space ? 's' : 'k', 0.4);
 }
 
 /** One backspace while erasing. */
 export function keyBack() {
-  play('b', 0.5);
+  play('b', 0.34);
 }
