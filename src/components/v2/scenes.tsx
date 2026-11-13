@@ -7,7 +7,6 @@ import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-rea
 import { projects } from '@/lib/projects';
 import { useEffect, useRef, useState } from 'react';
 import { easeInOut, easeOut, lerp, seg, useProgress } from './use-progress';
-import { keyClick } from './keys';
 
 /** Words rise out of a mask, one after the other, as the block scrolls into view. */
 export function RiseText({ text, className, accent, as: Tag = 'h2' }: { text: string; className?: string; accent?: string[]; as?: 'h2' | 'p' | 'span' }) {
@@ -111,7 +110,7 @@ export function PillScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const lines = ['DISEÑAMOS &', 'DESARROLLAMOS', 'TU SISTEMA'];
   const total = lines.join('').length;
-  // Types itself once the section is on screen, at a human pace, one key sound per letter.
+  // Types itself once the section is on screen, at a human pace (silent: the key sound lives only in the hero).
   const flat = lines.join('');
   const [typed, setTyped] = useState(0);
   const active = p > 0.04;
@@ -125,7 +124,6 @@ export function PillScene() {
     const next = () => {
       i++;
       setTyped(i);
-      keyClick(flat[i - 1] === ' ');
       if (i < flat.length) {
         const ch = flat[i - 1];
         // a little human rhythm: quicker inside words, a beat after spaces and line ends
