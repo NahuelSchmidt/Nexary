@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import Reveal from '@/components/effects/reveal';
 import ShowcaseVideo from '@/components/v2/showcase-video';
+import { DrawLines, Grow } from '@/components/v2/scenes';
 import { projects } from '@/lib/projects';
 import { whatsAppLink } from '@/lib/site';
 
@@ -44,7 +45,7 @@ export function Hero() {
           Contanos tu idea
         </a>
         <div className="mt-16 w-full max-w-xl">
-          <Lines widths={[100, 60]} />
+          <DrawLines widths={[100, 60]} />
         </div>
       </div>
     </section>
@@ -54,16 +55,13 @@ export function Hero() {
 export function Showcase() {
   return (
     <section className="bg-black pb-10 text-white">
-      <Reveal className="mx-auto max-w-[1100px] px-6">
-        <ShowcaseVideo />
-      </Reveal>
+      <div className="mx-auto max-w-[1180px] px-6">
+        <Grow>
+          <ShowcaseVideo />
+        </Grow>
+      </div>
       <div className="mx-auto mt-24 max-w-md px-6">
-        <Lines widths={[100, 70, 45, 30]} />
-        <div className="mt-10 flex flex-col items-center gap-3">
-          {[40, 32, 26, 20, 16, 12].map((h, i) => (
-            <span key={i} className="w-px bg-primary/50" style={{ height: h, opacity: 1 - i * 0.14 }} />
-          ))}
-        </div>
+        <DrawLines widths={[100, 70, 45, 30]} dashes />
       </div>
     </section>
   );

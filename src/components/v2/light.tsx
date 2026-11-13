@@ -1,6 +1,7 @@
 import { ChevronRight, Check, Globe, LayoutDashboard, MessageCircle, Plus, Workflow, Boxes } from 'lucide-react';
 import Reveal from '@/components/effects/reveal';
 import { testimonials } from '@/lib/testimonials';
+import { RiseText, ZoomScene } from '@/components/v2/scenes';
 import { whatsAppLink } from '@/lib/site';
 
 const Btn = ({ children = 'Agendá una charla' }: { children?: React.ReactNode }) => (
@@ -11,23 +12,15 @@ const Btn = ({ children = 'Agendá una charla' }: { children?: React.ReactNode }
 
 export function Challenge() {
   return (
-    <section className="v2-light">
-      <div className="v2-sky flex min-h-[80vh] items-center justify-center px-6 py-32">
-        <Reveal as="h2" className="text-center text-[clamp(2.4rem,6vw,5rem)] font-medium leading-[1.02] tracking-[-0.045em]">
-          Hecho para los desafíos
-          <br />
-          de tu negocio
-        </Reveal>
-      </div>
-      <div className="flex min-h-[70vh] flex-col items-center justify-center gap-10 px-6 py-32 text-center">
-        <Reveal as="h2" className="text-[clamp(2.4rem,6vw,5rem)] font-medium leading-[1.02] tracking-[-0.045em]">
-          El próximo sistema,
-          <br />
-          lo construimos con vos.
-        </Reveal>
-        <Btn />
-      </div>
-    </section>
+    <>
+      <ZoomScene />
+      <section className="v2-light">
+        <div className="flex min-h-[80vh] flex-col items-center justify-center gap-10 px-6 py-32 text-center">
+          <RiseText text={'El próximo sistema,\nlo construimos con vos.'} className="text-[clamp(2.4rem,6vw,5rem)] font-medium leading-[1.02] tracking-[-0.045em]" />
+          <Btn />
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -63,11 +56,11 @@ export function Services() {
     <section id="servicios" className="v2-light scroll-mt-20 py-28 md:py-36">
       <div className="mx-auto max-w-[1100px] px-6">
         <Reveal className="text-center">
-          <h2 className="text-[clamp(1.8rem,3.4vw,2.8rem)] font-medium leading-tight tracking-[-0.035em]">
-            Sistemas, sitios y automatización.
-            <br />
-            <span className="text-primary">A medida, de punta a punta.</span>
-          </h2>
+          <RiseText
+            text={'Sistemas, sitios y automatización.\nA medida, de punta a punta.'}
+            accent={['A', 'medida,', 'de', 'punta', 'a', 'punta.']}
+            className="text-[clamp(1.8rem,3.4vw,2.8rem)] font-medium leading-tight tracking-[-0.035em]"
+          />
           <p className="mx-auto mt-5 max-w-xl text-black/55">
             Desde el primer sistema hasta los proyectos más grandes. Primero entendemos tu negocio, después te proponemos la solución.
           </p>
@@ -167,19 +160,22 @@ const STEPS = [
 export function Process() {
   return (
     <section id="proceso" className="v2-light scroll-mt-20 py-28 md:py-36">
-      <div className="mx-auto max-w-[1100px] px-6">
-        <Reveal as="h2" className="text-center text-[clamp(1.8rem,3.4vw,2.8rem)] font-medium tracking-[-0.035em]">
-          Cómo <span className="text-primary">trabajamos</span>
-        </Reveal>
-        <div className="mt-16 grid gap-x-8 gap-y-14 md:grid-cols-2">
+      <div className="mx-auto grid max-w-[1100px] gap-12 px-6 md:grid-cols-12">
+        <div className="md:col-span-4">
+          <div className="md:sticky md:top-28">
+            <RiseText text={'Cómo\ntrabajamos'} accent={['trabajamos']} className="text-[clamp(2rem,3.6vw,3rem)] font-medium leading-[1.05] tracking-[-0.035em]" />
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-black/55">Un proceso claro: sabés en qué etapa estamos y qué viene después.</p>
+          </div>
+        </div>
+        <div className="space-y-16 md:col-span-8">
           {STEPS.map(({ title, text, Mock }, i) => (
-            <Reveal key={title} delay={i * 0.06}>
+            <Reveal key={title}>
               <div className="flex items-center gap-3 text-base font-medium">
                 <span className="grid h-6 w-6 place-items-center rounded-md border border-black/10 text-xs">{i + 1}</span>
                 {title}
               </div>
               <p className="mt-2 text-sm text-black/55">{text}</p>
-              <div className="mt-6 h-48">
+              <div className="mt-6 h-56">
                 <Mock />
               </div>
             </Reveal>
@@ -195,9 +191,9 @@ export function Voices() {
   return (
     <section className="v2-light py-24">
       <div className="mx-auto max-w-[1100px] px-6">
-        <Reveal as="h2" className="text-center text-[clamp(1.8rem,3.4vw,2.8rem)] font-medium tracking-[-0.035em]">
-          Lo que dicen <span className="text-primary">nuestros clientes</span>
-        </Reveal>
+        <div className="text-center">
+          <RiseText text="Lo que dicen nuestros clientes" accent={['nuestros', 'clientes']} className="text-[clamp(1.8rem,3.4vw,2.8rem)] font-medium tracking-[-0.035em]" />
+        </div>
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {picks.map((t, i) => (
             <Reveal key={t.name + i} delay={i * 0.06} className="v2-card-light flex flex-col justify-between rounded-2xl p-7">

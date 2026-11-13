@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { LogoMark } from '@/components/layout/logo';
 import { whatsAppLink, GITHUB_URL } from '@/lib/site';
+import { FooterWave } from '@/components/v2/scenes';
 
 export default function Footer() {
   return (
@@ -36,6 +37,7 @@ export default function Footer() {
         </span>
         <span>Software a medida</span>
       </div>
+      <FooterWave />
     </footer>
   );
 }
