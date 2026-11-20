@@ -203,9 +203,9 @@ export function ExperienceScene() {
 }
 
 
-/** Paints "+10 proyectos" (any figure + "proyectos") in the brand green. */
+/** Paints the figure ("+100 usuarios", "+10 proyectos"…) in the brand green. */
 const Highlight = ({ text }: { text: string }) => {
-  const parts = text.split(/(\+?\d+ proyectos)/);
+  const parts = text.split(/(\+?\d+ (?:usuarios|proyectos))/);
   return (
     <>
       {parts.map((t, i) => (i % 2 ? <span key={i} className="text-primary">{t}</span> : <span key={i}>{t}</span>))}
