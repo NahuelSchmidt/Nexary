@@ -84,7 +84,7 @@ export function Showcase() {
       <div className="mt-14 flex flex-col items-center gap-4 pb-6 text-white/60">
         <div className="v2-mouse hidden md:block" aria-hidden="true" />
         <ChevronDown className="v2-bounce h-7 w-7 text-primary md:hidden" aria-hidden="true" />
-        <span className="font-mono text-[11px] uppercase tracking-[0.3em]">Seguí bajando</span>
+        <span className="text-sm">Seguí bajando</span>
         <ChevronDown className="v2-bounce hidden h-5 w-5 text-primary md:block" aria-hidden="true" style={{ animationDelay: '0.2s' }} />
       </div>
     </section>

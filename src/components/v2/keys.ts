@@ -5,6 +5,9 @@
 // /sounds/keys.json. One random keystroke per letter, so the sound always matches the typing.
 // Browsers only allow sound after the visitor has clicked, tapped or pressed a key; before that
 // this stays silent.
+/** Key sound switch — off while testing a more professional, less 'techy' feel. */
+export const SOUND_ON = false;
+
 let ctx: AudioContext | null = null;
 let sprite: AudioBuffer | null = null;
 let offsets: { k: number[][]; s: number[][]; b: number[][] } | null = null;
@@ -38,6 +41,7 @@ if (typeof window !== 'undefined') {
 }
 
 function play(kind: 'k' | 's' | 'b', gain: number) {
+  if (!SOUND_ON) return;
   if (!ctx || !sprite || !offsets || ctx.state !== 'running') return;
   const now = ctx.currentTime;
   if (now - last < 0.025) return;

@@ -87,7 +87,7 @@ export function OrbScene() {
   const s = lerp(0.8, 1.15, Math.sin(t * Math.PI));
   return (
     <Pinned vh={260} innerRef={ref} className="bg-black text-white">
-      <div className="v2-dots absolute inset-0 opacity-[0.14]" />
+      
       <div className="absolute" style={{ left: `${x}%`, top: `${y}%`, transform: `translate(-50%,-50%) scale(${s})` }}>
         <div className="relative h-36 w-36 md:h-72 md:w-72">
           <div className="v2-orb-ring absolute inset-0 rounded-full" />
@@ -171,9 +171,9 @@ export function ExperienceScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const lift = easeInOut(seg(p, 0.15, 0.5));
   const icons = [
-    { Icon: MousePointerClick, color: '#22c55e', label: 'Fácil de usar' },
-    { Icon: Eye, color: '#2dd4bf', label: 'Todo a la vista' },
-    { Icon: MessagesSquare, color: '#a3e635', label: 'Conectado con WhatsApp' },
+    { Icon: MousePointerClick, label: 'Fácil de usar', sub: 'Tu equipo lo aprende en minutos.' },
+    { Icon: Eye, label: 'Todo a la vista', sub: 'Ventas, clientes y números en un solo panel.' },
+    { Icon: MessagesSquare, label: 'Conectado con WhatsApp', sub: 'Avisos y confirmaciones automáticas.' },
   ];
   return (
     <Pinned vh={200} innerRef={ref} className="bg-black text-white">
@@ -187,17 +187,20 @@ export function ExperienceScene() {
           cada negocio
         </h2>
         <div className="absolute inset-x-0 top-[52%] mx-auto grid max-w-[1000px] grid-cols-3 gap-6 px-6">
-          {icons.map(({ Icon, color, label }, i) => {
+          {icons.map(({ Icon, label, sub }, i) => {
             const t = easeOut(seg(p, 0.4 + i * 0.1, 0.62 + i * 0.1));
             return (
               // each one flips in like a card turning over (back face hidden until it faces us)
               <div
                 key={label}
-                className="flex flex-col items-center gap-6 [backface-visibility:hidden]"
+                className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-6 text-center [backface-visibility:hidden] md:gap-4 md:px-6 md:py-8"
                 style={{ transform: `perspective(900px) translateY(${(1 - t) * 60}px) rotateY(${(1 - t) * -180}deg) scale(${0.85 + 0.15 * t})`, opacity: t > 0.02 ? 1 : 0 }}
               >
-                <Icon className="v2-neon h-14 w-14 md:h-32 md:w-32" strokeWidth={1.1} style={{ color }} />
-                <span className="max-w-[9rem] text-center font-mono text-[10px] uppercase leading-snug tracking-[0.12em] text-white/50 md:text-xs md:tracking-[0.2em]">{label}</span>
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary md:h-14 md:w-14">
+                  <Icon className="h-5 w-5 md:h-7 md:w-7" strokeWidth={1.6} />
+                </span>
+                <span className="text-sm font-medium text-white md:text-base">{label}</span>
+                <span className="hidden text-sm leading-snug text-white/55 md:block">{sub}</span>
               </div>
             );
           })}
@@ -324,37 +327,39 @@ const Cube = ({ size, spin }: { size: number; spin: number }) => (
 /** "Ya funcionan con ___": the name changes with the scroll while the cubes turn. */
 export function ProductsScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
-  const names = ['NexaGym', 'Turnify', 'SportNex', 'Folium', 'Insumos Mana', 'tu negocio'];
-  const idx = Math.min(names.length - 1, Math.floor(seg(p, 0.05, 0.9) * names.length));
-  const local = (seg(p, 0.05, 0.9) * names.length) % 1;
-  const last = idx === names.length - 1;
-  const spin = p * 540;
+  const items = [
+    { n: 'NexaGym', r: 'Gimnasios y centros de entrenamiento' },
+    { n: 'Turnify', r: 'Negocios que trabajan con turnos' },
+    { n: 'SportNex', r: 'Complejos deportivos' },
+    { n: 'Folium', r: 'Comercios: stock y ventas' },
+    { n: 'Insumos Mana', r: 'Empresa de insumos industriales' },
+    { n: 'tu negocio', r: 'El próximo puede ser el tuyo' },
+  ];
+  const idx = Math.min(items.length - 1, Math.floor(seg(p, 0.05, 0.9) * items.length));
+  const local = (seg(p, 0.05, 0.9) * items.length) % 1;
+  const last = idx === items.length - 1;
+  const t = easeOut(Math.min(1, local * 4));
   return (
-    <Pinned vh={280} innerRef={ref} className="text-white" >
-      <div className="absolute inset-0 transition-colors duration-700" style={{ background: last ? '#0b120e' : '#070908' }} />
-      <div className="relative flex h-full flex-col justify-between py-16">
-        <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6">
-          <Cube size={56} spin={spin} />
-          <Cube size={72} spin={-spin * 0.8} />
-          <Cube size={100} spin={spin * 0.6} />
-        </div>
-        <div className="mx-auto w-full max-w-[1200px] px-6 text-[clamp(2.2rem,5.5vw,4.6rem)] font-medium tracking-[-0.045em]">
+    <Pinned vh={240} innerRef={ref} className="bg-[#070908] text-white">
+      <div className="relative mx-auto flex h-full max-w-[1200px] flex-col justify-center px-6">
+        <div className="text-[clamp(2.2rem,5.5vw,4.6rem)] font-medium tracking-[-0.045em]">
           <span className="text-white/60">Ya funcionan con </span>
           <span className="relative inline-block overflow-hidden align-bottom">
-            <span
-              key={idx}
-              className={`inline-block ${last ? 'v2-grad-text' : 'text-primary'}`}
-              style={{ transform: `translateY(${(1 - easeOut(Math.min(1, local * 4))) * 100}%)` }}
-            >
-              {names[idx]}
+            <span key={idx} className={`inline-block ${last ? 'v2-grad-text' : 'text-primary'}`} style={{ transform: `translateY(${(1 - t) * 100}%)` }}>
+              {items[idx].n}
               {last ? '.' : ''}
             </span>
           </span>
         </div>
-        <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6">
-          <Cube size={64} spin={-spin} />
-          <Cube size={84} spin={spin * 0.7} />
-          <Cube size={108} spin={-spin * 0.5} />
+        <p key={'r' + idx} className="mt-4 text-base text-white/55 md:text-lg" style={{ opacity: t, transform: `translateY(${(1 - t) * 8}px)` }}>
+          {items[idx].r}
+        </p>
+        <div className="mt-10 flex gap-2">
+          {items.map((it, i) => (
+            <span key={it.n} className="h-1 flex-1 rounded-full bg-white/10">
+              <span className="block h-1 rounded-full bg-primary transition-all duration-300" style={{ width: i < idx ? '100%' : i === idx ? `${Math.round(local * 100)}%` : '0%' }} />
+            </span>
+          ))}
         </div>
       </div>
     </Pinned>
@@ -385,7 +390,7 @@ export function SaasScene() {
       >
         {/* left: heading + product list + details of the active one */}
         <div className="md:col-span-5">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Sistemas por suscripción</p>
+          <p className="text-sm font-medium text-primary">Sistemas por suscripción</p>
           <h2 className="mt-2 text-[clamp(1.6rem,3.2vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.04em]">
             Productos propios, listos para usar.
           </h2>
@@ -402,7 +407,7 @@ export function SaasScene() {
               return (
                 <li key={pr.id} className="shrink-0 md:border-t md:border-white/10">
                   <div className="relative isolate flex items-baseline gap-3 rounded-full px-3 py-1.5 md:rounded-none md:px-0 md:py-3.5">
-                    <span className={`hidden font-mono text-[11px] md:inline ${on ? 'text-primary' : 'text-white/30'}`}>
+                    <span className={`hidden text-xs md:inline ${on ? 'text-primary' : 'text-white/30'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span
@@ -412,7 +417,7 @@ export function SaasScene() {
                     >
                       {pr.title}
                     </span>
-                    <span className="ml-auto hidden font-mono text-[11px] text-white/35 md:inline">{pr.category.replace('SaaS · ', '')}</span>
+                    <span className="ml-auto hidden text-xs text-white/40 md:inline">{pr.category.replace('SaaS · ', '')}</span>
                     {/* progress line: a filled pill on phones, a bar under the row on desktop */}
                     <span className={`absolute inset-0 -z-10 rounded-full md:hidden ${on ? 'bg-white/10' : ''}`} />
                     <span className="absolute -top-px left-0 hidden h-px bg-primary md:block" style={{ width: `${fill * 100}%` }} />
@@ -542,7 +547,7 @@ export function CollageScene() {
         })}
         <div className="pointer-events-none absolute inset-0 grid place-items-center">
           <div className="pointer-events-auto text-center" style={{ opacity: seg(p, 0.35, 0.55), transform: `scale(${lerp(0.9, 1, seg(p, 0.35, 0.6))})` }}>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Trabajos a medida</p>
+            <p className="text-sm font-medium text-primary">Trabajos a medida</p>
             <h2 className="mt-3 text-[clamp(2.2rem,5.5vw,4.6rem)] font-medium leading-[1.02] tracking-[-0.045em] drop-shadow-[0_6px_30px_rgba(0,0,0,0.9)]">
               Hechos para
               <br />
@@ -625,7 +630,7 @@ function Piece({ d, b, className = '', children }: { d: number; b: number; class
         opacity: 0.15 + 0.85 * easeOut(d),
         transform: `scale(${lerp(0.97, 1, easeOut(d))})`,
         background: `rgba(255,255,255,${0.045 * b})`,
-        border: `1.5px ${b > 0.5 ? 'solid' : 'dashed'} rgba(${b > 0.5 ? '255,255,255' : '34,197,94'},${b > 0.5 ? 0.08 : 0.75 * easeOut(d)})`,
+        border: `1.5px ${b > 0.5 ? 'solid' : 'dashed'} rgba(255,255,255,${b > 0.5 ? 0.08 : 0.3 * easeOut(d)})`,
       }}
     >
       {children}
@@ -636,7 +641,7 @@ function Piece({ d, b, className = '', children }: { d: number; b: number; class
 /** A skeleton bar that becomes real content as `b` goes 0 → 1. */
 const Swap = ({ b, w, children, className = '' }: { b: number; w: string; children: React.ReactNode; className?: string }) => (
   <span className={`relative block ${className}`}>
-    <span className="absolute inset-y-[18%] left-0 rounded bg-primary/25" style={{ width: w, opacity: 1 - b }} />
+    <span className="absolute inset-y-[18%] left-0 rounded bg-white/10" style={{ width: w, opacity: 1 - b }} />
     <span className="block" style={{ opacity: b, transform: `translateY(${(1 - b) * 4}px)` }}>{children}</span>
   </span>
 );
@@ -668,7 +673,7 @@ export function BuildScene() {
   ];
   return (
     <Pinned vh={240} innerRef={ref} className="bg-black text-white">
-      <div className="v2-dots absolute inset-0 opacity-[0.08]" />
+      
       <div className="relative mx-auto grid h-full max-w-[1300px] items-center gap-8 px-5 pt-20 md:grid-cols-[0.8fr_1.2fr] md:gap-12 md:px-10 md:pt-0">
         {/* the three lines */}
         <div className="space-y-4 md:space-y-7">
@@ -678,7 +683,7 @@ export function BuildScene() {
             return (
               <div key={l.n} className="transition-all duration-500" style={{ opacity: on ? 1 : done ? 0.55 : 0.22 }}>
                 <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-xs text-primary">{l.n}</span>
+                  <span className="text-sm font-medium text-primary">{l.n}</span>
                   <span className={`whitespace-nowrap text-[clamp(1.7rem,3.6vw,3.4rem)] font-semibold leading-none tracking-[-0.035em] ${l.accent && (on || done) ? 'v2-grad-text' : ''}`}>{l.t}</span>
                 </div>
                 <p className="ml-7 mt-2 hidden text-sm text-white/55 transition-opacity duration-500 md:block" style={{ opacity: on ? 1 : 0 }}>
@@ -700,7 +705,7 @@ export function BuildScene() {
             filter: leave > 0 ? `blur(${leave * 6}px)` : undefined,
           }}
         >
-          <div className="pointer-events-none absolute -inset-8 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.3),transparent)] blur-2xl" style={{ opacity: 0.15 + 0.85 * live }} />
+          <div className="pointer-events-none absolute -inset-8 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.16),transparent)] blur-2xl" style={{ opacity: 0.15 + 0.85 * live }} />
           <div className="relative overflow-hidden rounded-2xl bg-[#0b0f0d] ring-1 ring-white/10">
             <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
               <span className="h-2 w-2 rounded-full bg-white/20" />
@@ -771,7 +776,7 @@ export function BuildScene() {
                             style={{
                               height: `${h * (0.12 + 0.88 * g)}%`,
                               background: g > 0.05 ? `rgba(34,197,94,${0.35 + 0.5 * (k / bars.length)})` : 'transparent',
-                              outline: g > 0.05 ? 'none' : `1px dashed rgba(34,197,94,${0.5 * D(0.3)})`,
+                              outline: g > 0.05 ? 'none' : `1px dashed rgba(255,255,255,${0.25 * D(0.3)})`,
                             }}
                           />
                         );
