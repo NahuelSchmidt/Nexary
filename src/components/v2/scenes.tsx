@@ -645,7 +645,9 @@ export function BuildScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
   const design = seg(p, 0.03, 0.36);
   const build = seg(p, 0.38, 0.8);
-  const live = easeOut(seg(p, 0.82, 0.92));
+  const live = easeOut(seg(p, 0.82, 0.9));
+  const flipIn = easeOut(seg(p, 0, 0.07));
+  const leave = easeInOut(seg(p, 0.92, 1));
   const D = (at: number) => clamp01((design - at) / 0.25); // blueprint stagger
   const Bd = (at: number) => easeOut(clamp01((build - at) / 0.22)); // build stagger
   const stage = p < 0.37 ? 0 : p < 0.81 ? 1 : 2;
@@ -684,7 +686,15 @@ export function BuildScene() {
           })}
         </div>
         {/* the dashboard being built */}
-        <div className="relative" style={{ transform: `scale(${lerp(0.98, 1, live)})` }}>
+        <div
+          className="relative [backface-visibility:hidden]"
+          style={{
+            // enters flipping like a card (already as a blueprint) · leaves leaning back into the distance
+            transform: `perspective(1400px) rotateY(${(1 - flipIn) * -180}deg) rotateX(${leave * 28}deg) translateY(${leave * -50}px) scale(${lerp(0.98, 1, live) * lerp(1, 0.88, leave)})`,
+            transformOrigin: '50% 90%',
+            opacity: (flipIn > 0.02 ? 1 : 0) * (1 - 0.6 * leave),
+          }}
+        >
           <div className="pointer-events-none absolute -inset-8 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.3),transparent)] blur-2xl" style={{ opacity: 0.15 + 0.85 * live }} />
           <div className="relative overflow-hidden rounded-2xl bg-[#0b0f0d] ring-1 ring-white/10">
             <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
