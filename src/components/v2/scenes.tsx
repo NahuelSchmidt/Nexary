@@ -808,3 +808,96 @@ export function BuildScene() {
     </Pinned>
   );
 }
+
+/*
+ * "Diseñamos & desarrollamos tu sistema" — the ring trail. A ring appears; the words type in with a
+ * green selection block on the word being typed; the ring travels right leaving a trail of rings and
+ * ends as a solid pill that stretches off screen; a thin frame then opens from the text and clears
+ * everything, leaving the words alone on black. All driven by the scroll.
+ */
+export function RingScene() {
+  const [ref, p] = useProgress<HTMLDivElement>('pinned');
+  const lines = ['DISEÑAMOS &', 'DESARROLLAMOS', 'TU SISTEMA'];
+  const flat = lines.join(' ');
+  const total = flat.length;
+  const typed = Math.floor(seg(p, 0.06, 0.46) * total);
+  const ringIn = easeOut(seg(p, 0, 0.07));
+  const trail = seg(p, 0.2, 0.55); // the ring travels right
+  const pill = easeInOut(seg(p, 0.5, 0.7)); // the last ring stretches into a pill
+  const frame = easeInOut(seg(p, 0.66, 0.82)); // the frame opens and clears
+  const N = 9;
+  // which word is being typed (for the selection block)
+  let cursor = 0;
+  const words = flat.split(' ');
+  const wordStart: number[] = [];
+  words.forEach((w) => {
+    wordStart.push(cursor);
+    cursor += w.length + 1;
+  });
+  const curWord = wordStart.findIndex((s0, i) => typed >= s0 && typed <= s0 + words[i].length);
+  let used = 0;
+  return (
+    <Pinned vh={240} innerRef={ref} className="bg-black text-white">
+      <div className="relative h-full overflow-hidden">
+        {/* ring trail */}
+        <div className="absolute inset-0" style={{ opacity: 1 - frame }}>
+          {Array.from({ length: N }).map((_, i) => {
+            const at = i / (N - 1);
+            const shown = i === 0 ? ringIn : clamp01((trail - at) * 6 + (trail >= at ? 1 : 0));
+            if (shown <= 0) return null;
+            const x = lerp(30, 66, at);
+            const last = i === N - 1;
+            const size = 'clamp(9rem, 26vw, 24rem)';
+            return (
+              <div
+                key={i}
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                style={{
+                  left: `${x}%`,
+                  width: last ? `calc(${size} + ${pill * 60}vw)` : size,
+                  height: size,
+                  marginLeft: last ? `calc(${pill * 30}vw)` : 0,
+                  border: '1.5px solid rgba(34,197,94,0.55)',
+                  background: last ? `linear-gradient(90deg, rgba(34,197,94,${0.35 + 0.5 * pill}), #22c55e)` : 'transparent',
+                  opacity: last ? 1 : 0.35 + 0.65 * (1 - at) * shown,
+                }}
+              />
+            );
+          })}
+        </div>
+        {/* the frame that opens and clears */}
+        {frame > 0 && frame < 1 && (
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border border-primary/70 bg-black" style={{ width: `${lerp(40, 104, frame)}vw`, height: `${lerp(36, 104, frame)}vh` }} />
+        )}
+        {frame >= 1 && <div className="absolute inset-0 bg-black" />}
+        {/* the words */}
+        <div className="absolute inset-0 grid place-items-center px-4">
+          <h2 className="text-center text-[clamp(1.9rem,4.6vw,3.8rem)] font-medium uppercase leading-[1.08] tracking-[-0.01em]">
+            {lines.map((l, li) => {
+              const ws = l.split(' ');
+              return (
+                <span key={li} className="block whitespace-nowrap">
+                  {ws.map((w, wi) => {
+                    const start = used;
+                    used += w.length + 1;
+                    const n = Math.max(0, Math.min(w.length, typed - start));
+                    const wIndex = words.indexOf(w, 0) === -1 ? -1 : wordStart.findIndex((s0) => s0 === start);
+                    const typing = wIndex === curWord && typed < total && n > 0;
+                    return (
+                      <span key={wi}>
+                        <span className={typing ? 'bg-primary text-black' : ''}>{w.slice(0, n)}</span>
+                        {typing && <span className="ml-0.5 inline-block h-[0.85em] w-[3px] translate-y-[0.08em] bg-lime-300" />}
+                        <span className="opacity-0">{w.slice(n)}</span>
+                        {wi < ws.length - 1 ? ' ' : ''}
+                      </span>
+                    );
+                  })}
+                </span>
+              );
+            })}
+          </h2>
+        </div>
+      </div>
+    </Pinned>
+  );
+}
