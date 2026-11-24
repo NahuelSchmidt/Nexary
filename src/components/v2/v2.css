@@ -1,3 +1,9 @@
+/* never let anything push the page sideways on phones (clip, unlike hidden, keeps position: sticky working) */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* Nexary v2 — an editorial, dark-to-light layout. Brand green #22c55e, teal and lime as glow partners. */
 .v2-grad-text {
   background: linear-gradient(90deg, #16a34a 0%, #22c55e 35%, #86efac 70%, #d9f99d 100%);

@@ -42,7 +42,7 @@ export default function ShowcaseVideo() {
 
   return (
     <div className="group relative">
-      <div className="v2-video-glow pointer-events-none absolute -inset-10" />
+      <div className="v2-video-glow pointer-events-none absolute -inset-y-10 inset-x-0 md:-inset-10" />
       <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]">
         <video
           ref={ref}
