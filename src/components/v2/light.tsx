@@ -1,4 +1,5 @@
-import { ChevronRight, Check, Plus } from 'lucide-react';
+import { ArrowRight, ChevronRight, Check, Plus } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/v2/header';
 import Reveal from '@/components/effects/reveal';
 import { testimonials } from '@/lib/testimonials';
 import { RiseText, ZoomScene } from '@/components/v2/scenes';
@@ -6,7 +7,7 @@ import { MockBuild, MockChat, MockLaunch, MockProposal } from '@/components/v2/m
 import { Magnetic, SpotCard } from '@/components/v2/interact';
 import { whatsAppLink } from '@/lib/site';
 
-const Btn = ({ children = 'Agendá una charla' }: { children?: React.ReactNode }) => (
+const Btn = ({ children = 'Quiero mi sistema' }: { children?: React.ReactNode }) => (
   <Magnetic>
     <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="inline-block rounded-md bg-primary px-5 py-3 text-sm font-medium text-black shadow-[0_10px_40px_-12px_rgba(34,197,94,0.7)]">
       {children}
@@ -198,9 +199,9 @@ export function FinalCta() {
       </div>
       <div className="relative mx-auto flex min-h-[80vh] max-w-[1200px] flex-col items-center justify-center px-6 py-32 text-center">
         <h2 className="text-[clamp(2.6rem,7vw,5.6rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
-          ¿Y vos, estás listo
+          Construimos el sistema
           <br />
-          para <span className="v2-grad-text">crear tu sistema?</span>
+          que tu empresa <span className="v2-grad-text">necesita.</span>
         </h2>
         <ul className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-white/70">
           {['Respuesta por WhatsApp', 'Sin compromiso', 'Hecho a medida'].map((t) => (
@@ -210,8 +211,13 @@ export function FinalCta() {
           ))}
         </ul>
         <div className="mt-10">
-          <Btn>Hablemos por WhatsApp</Btn>
+          <Btn>
+            <span className="inline-flex items-center gap-2">
+              <WhatsAppIcon className="h-4 w-4" /> Quiero mi sistema <ArrowRight className="h-4 w-4" />
+            </span>
+          </Btn>
         </div>
+        <p className="mt-5 font-mono text-xs text-white/50">Respondemos en menos de 24 h</p>
       </div>
     </section>
   );

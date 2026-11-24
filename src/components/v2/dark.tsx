@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, ChevronDown, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ChevronDown, Eye, MessagesSquare, MousePointerClick } from 'lucide-react';
 import Reveal from '@/components/effects/reveal';
 import ShowcaseVideo from '@/components/v2/showcase-video';
 import { DrawLines } from '@/components/v2/scenes';
@@ -35,7 +35,7 @@ export function Hero() {
               en&nbsp;
             </span>
             <span className="v2-in" style={{ animationDelay: '0.42s' }}>
-              <HeroTyper phrases={['piloto automático.', 'orden.', 'marcha.', 'un solo sistema.']} />
+              <HeroTyper phrases={['piloto automático.', 'orden.', 'tiempo real.', 'tu bolsillo.', 'un solo sistema.']} />
             </span>
           </span>
         </h1>
@@ -52,9 +52,9 @@ export function Hero() {
               href={whatsAppLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded-md bg-primary px-6 py-3.5 text-base font-medium text-black shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)]"
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 text-base font-medium text-black shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)]"
             >
-              Contanos tu idea
+              Quiero mi sistema <ArrowRight className="h-4 w-4" />
             </a>
           </Magnetic>
         </div>

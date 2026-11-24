@@ -68,7 +68,7 @@ export default function Header() {
               rel="noopener noreferrer"
               className="hidden rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-black transition-transform hover:-translate-y-0.5 sm:inline-block"
             >
-              Tengo una idea
+              Quiero mi sistema
             </a>
             <button aria-label="Abrir menú" onClick={() => setOpen(true)} className="flex h-10 w-10 flex-col items-center justify-center gap-[7px]">
               <span className="block h-[2px] w-7 bg-current transition-colors" />
@@ -108,7 +108,7 @@ export default function Header() {
             </Link>
           ))}
           <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="mt-10 inline-flex w-fit items-center gap-3 rounded-md bg-primary px-6 py-4 text-base font-medium text-black">
-            <WhatsAppIcon className="h-5 w-5" /> Hablemos por WhatsApp
+            <WhatsAppIcon className="h-5 w-5" /> Quiero mi sistema
           </a>
         </nav>
       </div>
