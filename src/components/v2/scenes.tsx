@@ -695,7 +695,8 @@ export function BuildScene() {
             // enters flipping like a card (already as a blueprint) · leaves moving forward, past the camera
             transform: `perspective(1400px) rotateY(${(1 - flipIn) * -88}deg) rotateX(${(1 - flipIn) * 10 - leave * 10}deg) translateY(${leave * -90}px) scale(${lerp(0.82, 1, flipIn) * lerp(0.98, 1, live) * lerp(1, 1.08, leave)})`,
             transformOrigin: '50% 50%',
-            opacity: 1 - 0.7 * leave,
+            opacity: 1 - leave,
+            filter: leave > 0 ? `blur(${leave * 6}px)` : undefined,
           }}
         >
           <div className="pointer-events-none absolute -inset-8 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.3),transparent)] blur-2xl" style={{ opacity: 0.15 + 0.85 * live }} />
