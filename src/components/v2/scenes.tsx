@@ -654,7 +654,6 @@ export function BuildScene() {
   const D = (at: number) => clamp01((design - at) / 0.25); // blueprint stagger
   const Bd = (at: number) => easeOut(clamp01((build - at) / 0.22)); // build stagger
   const stage = p < 0.31 ? 0 : p < 0.71 ? 1 : 2;
-  const typeWin = [seg(p, 0.0, 0.1), seg(p, 0.31, 0.4), seg(p, 0.71, 0.79)];
   const lines = [
     { n: '01', t: 'DISEÑAMOS', sub: 'Planificamos cada pantalla con vos.' },
     { n: '02', t: '& DESARROLLAMOS', sub: 'Lo construimos pieza por pieza.' },
@@ -680,19 +679,7 @@ export function BuildScene() {
               <div key={l.n} className="transition-all duration-500" style={{ opacity: on ? 1 : done ? 0.55 : 0.22 }}>
                 <div className="flex items-baseline gap-3">
                   <span className="font-mono text-xs text-primary">{l.n}</span>
-                  {(() => {
-                    // each line types itself when its stage starts, with a green block selecting what is being typed
-                    const frac = typeWin[i];
-                    const n = Math.round(frac * l.t.length);
-                    const typing = frac > 0 && frac < 1;
-                    return (
-                      <span className="whitespace-nowrap text-[clamp(1.7rem,3.6vw,3.4rem)] font-semibold leading-none tracking-[-0.035em]">
-                        <span className={typing ? 'bg-primary text-black' : l.accent && (on || done) ? 'v2-grad-text' : ''}>{l.t.slice(0, n)}</span>
-                        {typing && <span className="ml-0.5 inline-block h-[0.85em] w-[3px] translate-y-[0.08em] bg-lime-300" />}
-                        <span className="opacity-0">{l.t.slice(n)}</span>
-                      </span>
-                    );
-                  })()}
+                  <span className={`whitespace-nowrap text-[clamp(1.7rem,3.6vw,3.4rem)] font-semibold leading-none tracking-[-0.035em] ${l.accent && (on || done) ? 'v2-grad-text' : ''}`}>{l.t}</span>
                 </div>
                 <p className="ml-7 mt-2 hidden text-sm text-white/55 transition-opacity duration-500 md:block" style={{ opacity: on ? 1 : 0 }}>
                   {l.sub}
