@@ -20,14 +20,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Nexary — Software a medida para empresas',
+  title: 'Nexary — Software a medida para negocios y empresas',
   description:
-    'Nexary desarrolla plataformas web, sistemas de gestión y automatizaciones a medida para empresas que quieren crecer con tecnología.',
+    'Nexary desarrolla plataformas web, sistemas de gestión y automatizaciones a medida para negocios y empresas que quieren crecer con tecnología.',
   icons: {
     icon: '/favicon.ico',
   },
   openGraph: {
-    title: 'Nexary — Software a medida para empresas',
+    title: 'Nexary — Software a medida para negocios y empresas',
     description: 'Plataformas web, paneles de gestión y automatización de procesos.',
     locale: 'es_AR',
     type: 'website',

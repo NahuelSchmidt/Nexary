@@ -13,7 +13,7 @@ export default function Footer() {
           </p>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-black/55">
             Agencia de software argentina. Diseñamos y desarrollamos sistemas de gestión, SaaS, aplicaciones web y sitios a medida para
-            empresas que quieren crecer con tecnología.
+            negocios que quieren crecer con tecnología.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-8 text-sm md:col-span-7 md:grid-cols-3">

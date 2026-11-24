@@ -201,7 +201,7 @@ export function FinalCta() {
         <h2 className="text-[clamp(2.6rem,7vw,5.6rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
           Construimos el sistema
           <br />
-          que tu empresa <span className="v2-grad-text">necesita.</span>
+          que tu negocio <span className="v2-grad-text">necesita.</span>
         </h2>
         <ul className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-white/70">
           {['Respuesta por WhatsApp', 'Sin compromiso', 'Hecho a medida'].map((t) => (
