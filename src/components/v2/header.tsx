@@ -103,7 +103,7 @@ export default function Header() {
               className="group flex items-baseline gap-5 text-5xl font-semibold tracking-[-0.04em] md:text-7xl"
               style={{ transitionDelay: `${i * 60}ms` }}
             >
-              <span className="text-sm font-medium text-primary">0{i + 1}</span>
+              <span className="font-mono text-sm text-primary">0{i + 1}</span>
               <span className="transition-colors group-hover:text-primary">{l.label}</span>
             </Link>
           ))}

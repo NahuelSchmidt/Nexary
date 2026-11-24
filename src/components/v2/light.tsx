@@ -220,7 +220,7 @@ export function FinalCta() {
         <a href={whatsAppWebLink} target="_blank" rel="noopener noreferrer" className="group mt-6 inline-flex items-center gap-1.5 text-sm text-white/55 transition-colors hover:text-white">
               ¿Necesitás una página web? <span className="text-white/80 underline decoration-primary/60 underline-offset-4 group-hover:decoration-primary">También la hacemos</span> <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </a>
-        <p className="mt-4 text-sm text-white/50">Respondemos en menos de 24 h</p>
+        <p className="mt-4 font-mono text-xs text-white/50">Respondemos en menos de 24 h</p>
       </div>
     </section>
   );
