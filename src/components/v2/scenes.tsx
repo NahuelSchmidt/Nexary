@@ -604,92 +604,181 @@ export function FooterWave() {
 }
 
 /*
- * "Diseñamos & desarrollamos tu sistema", told as it happens: a green wireframe of a real dashboard
- * draws itself (we design), the real screen sweeps in over it (we build), then it goes live.
- * The wireframe follows the layout of /img/build-dashboard.jpg (Stock y Ventas · Reportes, 1436×830).
+ * "Diseñamos & desarrollamos tu sistema", told as it happens. Left: the three lines light up one by one.
+ * Right: a generic business dashboard, built in code (no screenshot): first as a dashed green blueprint
+ * (we design), then every piece fills in — numbers count up, bars grow, rows arrive (we build) — and it
+ * goes live.
  */
-const WIRE: { d: string; at: number }[] = [
-  { d: 'M28 16 h170 v32 h-170 z', at: 0 },
-  { d: 'M28 92 h524', at: 0.04 },
-  { d: 'M968 60 h132 a12 12 0 0 1 12 12 v38 a12 12 0 0 1 -12 12 h-132 a12 12 0 0 1 -12 -12 v-38 a12 12 0 0 1 12 -12 z', at: 0.08 },
-  { d: 'M1144 60 h252 a12 12 0 0 1 12 12 v38 a12 12 0 0 1 -12 12 h-252 a12 12 0 0 1 -12 -12 v-38 a12 12 0 0 1 12 -12 z', at: 0.1 },
-  ...[26, 498, 970].flatMap((x, i) => [
-    { d: `M${x + 24} 218 h392 a24 24 0 0 1 24 24 v160 a24 24 0 0 1 -24 24 h-392 a24 24 0 0 1 -24 -24 v-160 a24 24 0 0 1 24 -24 z`, at: 0.16 + i * 0.06 },
-    { d: `M${x + 26} 262 h60`, at: 0.22 + i * 0.06 },
-    { d: `M${x + 26} 334 h200`, at: 0.25 + i * 0.06 },
-    { d: `M${x + 26} 384 h300`, at: 0.28 + i * 0.06 },
-  ]),
-  { d: 'M50 474 h628 a24 24 0 0 1 24 24 v260 a24 24 0 0 1 -24 24 h-628 a24 24 0 0 1 -24 -24 v-260 a24 24 0 0 1 24 -24 z', at: 0.42 },
-  { d: 'M50 518 h180', at: 0.48 },
-  ...[582, 634, 686, 738].map((y, i) => ({ d: `M50 ${y} h420 M560 ${y} h110`, at: 0.52 + i * 0.05 })),
-  { d: 'M758 474 h628 a24 24 0 0 1 24 24 v260 a24 24 0 0 1 -24 24 h-628 a24 24 0 0 1 -24 -24 v-260 a24 24 0 0 1 24 -24 z', at: 0.5 },
-  { d: 'M758 518 h120', at: 0.58 },
-  { d: 'M758 594 h200', at: 0.64 },
-  { d: 'M758 648 h260', at: 0.7 },
-];
+const fmt = (n: number) => Math.round(n).toLocaleString('es-AR');
+
+function Piece({ d, b, className = '', children }: { d: number; b: number; className?: string; children?: React.ReactNode }) {
+  // d: blueprint progress (outline appears) · b: build progress (fills in)
+  return (
+    <div
+      className={`relative rounded-xl ${className}`}
+      style={{
+        opacity: 0.15 + 0.85 * easeOut(d),
+        transform: `scale(${lerp(0.97, 1, easeOut(d))})`,
+        background: `rgba(255,255,255,${0.045 * b})`,
+        border: `1.5px ${b > 0.5 ? 'solid' : 'dashed'} rgba(${b > 0.5 ? '255,255,255' : '34,197,94'},${b > 0.5 ? 0.08 : 0.75 * easeOut(d)})`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** A skeleton bar that becomes real content as `b` goes 0 → 1. */
+const Swap = ({ b, w, children, className = '' }: { b: number; w: string; children: React.ReactNode; className?: string }) => (
+  <span className={`relative block ${className}`}>
+    <span className="absolute inset-y-[18%] left-0 rounded bg-primary/25" style={{ width: w, opacity: 1 - b }} />
+    <span className="block" style={{ opacity: b, transform: `translateY(${(1 - b) * 4}px)` }}>{children}</span>
+  </span>
+);
 
 export function BuildScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
-  const draw = seg(p, 0.04, 0.42); // we design: the wireframe draws itself
-  const sweep = easeInOut(seg(p, 0.46, 0.78)); // we build: the real screen sweeps in
-  const live = easeOut(seg(p, 0.8, 0.9)); // it goes live
-  const words = [
-    { t: 'DISEÑAMOS', on: seg(p, 0.0, 0.06) },
-    { t: '&', on: seg(p, 0.02, 0.08) },
-    { t: 'DESARROLLAMOS', on: seg(p, 0.42, 0.5) },
-    { t: 'TU', on: seg(p, 0.78, 0.84) },
-    { t: 'SISTEMA.', on: seg(p, 0.8, 0.86), accent: true },
+  const design = seg(p, 0.03, 0.36);
+  const build = seg(p, 0.38, 0.8);
+  const live = easeOut(seg(p, 0.82, 0.92));
+  const D = (at: number) => clamp01((design - at) / 0.25); // blueprint stagger
+  const Bd = (at: number) => easeOut(clamp01((build - at) / 0.22)); // build stagger
+  const stage = p < 0.37 ? 0 : p < 0.81 ? 1 : 2;
+  const lines = [
+    { n: '01', t: 'DISEÑAMOS', sub: 'Planificamos cada pantalla con vos.' },
+    { n: '02', t: '& DESARROLLAMOS', sub: 'Lo construimos pieza por pieza.' },
+    { n: '03', t: 'TU SISTEMA.', sub: 'Funcionando para tu negocio.', accent: true },
+  ];
+  const bars = [32, 45, 38, 52, 48, 60, 57, 66, 62, 74, 70, 86];
+  const rows = [
+    { t: 'Nuevo pedido #1042', s: 'Confirmado' },
+    { t: 'Cliente registrado', s: 'Nuevo' },
+    { t: 'Pago recibido', s: 'Acreditado' },
+    { t: 'Reporte mensual enviado', s: 'Listo' },
   ];
   return (
     <Pinned vh={260} innerRef={ref} className="bg-black text-white">
       <div className="v2-dots absolute inset-0 opacity-[0.08]" />
-      <div className="relative flex h-full flex-col items-center justify-center gap-8 px-4 md:gap-10">
-        <h2 className="flex flex-wrap justify-center gap-x-[0.35em] text-center text-[clamp(1.5rem,4vw,3.2rem)] font-medium tracking-[-0.02em]">
-          {words.map((w) => (
-            <span key={w.t} className="inline-block overflow-hidden pb-[0.1em]">
-              <span
-                className={`inline-block ${w.accent ? 'v2-grad-text' : ''}`}
-                style={{ transform: `translateY(${(1 - easeOut(w.on)) * 110}%)`, opacity: 0.15 + 0.85 * w.on }}
-              >
-                {w.t}
-              </span>
-            </span>
-          ))}
-        </h2>
-        <div
-          className="relative w-[min(94vw,980px)]"
-          style={{ transform: `scale(${lerp(0.96, 1, live)})` }}
-        >
-          <div className="pointer-events-none absolute -inset-x-6 -inset-y-10 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.28),transparent)] blur-2xl" style={{ opacity: 0.3 + 0.7 * live }} />
+      <div className="relative mx-auto grid h-full max-w-[1300px] items-center gap-8 px-5 pt-20 md:grid-cols-[0.9fr_1.1fr] md:gap-14 md:px-10 md:pt-0">
+        {/* the three lines */}
+        <div className="space-y-4 md:space-y-7">
+          {lines.map((l, i) => {
+            const on = stage === i;
+            const done = stage > i;
+            return (
+              <div key={l.n} className="transition-all duration-500" style={{ opacity: on ? 1 : done ? 0.55 : 0.22 }}>
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-xs text-primary">{l.n}</span>
+                  <span className={`text-[clamp(1.8rem,4.6vw,4rem)] font-semibold leading-none tracking-[-0.035em] ${l.accent && (on || done) ? 'v2-grad-text' : ''}`}>{l.t}</span>
+                </div>
+                <p className="ml-7 mt-2 hidden text-sm text-white/55 transition-opacity duration-500 md:block" style={{ opacity: on ? 1 : 0 }}>
+                  {l.sub}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+        {/* the dashboard being built */}
+        <div className="relative" style={{ transform: `scale(${lerp(0.98, 1, live)})` }}>
+          <div className="pointer-events-none absolute -inset-8 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.3),transparent)] blur-2xl" style={{ opacity: 0.15 + 0.85 * live }} />
           <div className="relative overflow-hidden rounded-2xl bg-[#0b0f0d] ring-1 ring-white/10">
-            {/* window chrome */}
-            <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2 md:px-4 md:py-2.5">
-              <span className="h-2 w-2 rounded-full bg-white/20 md:h-2.5 md:w-2.5" />
-              <span className="h-2 w-2 rounded-full bg-white/20 md:h-2.5 md:w-2.5" />
-              <span className="h-2 w-2 rounded-full bg-white/20 md:h-2.5 md:w-2.5" />
-              <span className="ml-3 truncate rounded-md bg-white/5 px-2.5 py-0.5 font-mono text-[10px] text-white/45 md:text-xs">tu-sistema.com/reportes</span>
-              <span
-                className="ml-auto flex items-center gap-1.5 rounded-full bg-primary/15 px-2.5 py-0.5 text-[10px] font-medium text-primary md:text-xs"
-                style={{ opacity: live, transform: `translateX(${(1 - live) * 10}px)` }}
-              >
+            <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
+              <span className="h-2 w-2 rounded-full bg-white/20" />
+              <span className="h-2 w-2 rounded-full bg-white/20" />
+              <span className="h-2 w-2 rounded-full bg-white/20" />
+              <span className="ml-3 rounded-md bg-white/5 px-2.5 py-0.5 font-mono text-[10px] text-white/45">tu-sistema.com/panel</span>
+              <span className="ml-auto flex items-center gap-1.5 rounded-full bg-primary/15 px-2.5 py-0.5 text-[10px] font-medium text-primary" style={{ opacity: live, transform: `translateX(${(1 - live) * 10}px)` }}>
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> En producción
               </span>
             </div>
-            <div className="relative aspect-[1436/830]">
-              {/* the wireframe, line by line */}
-              <svg viewBox="0 0 1436 830" className="absolute inset-0 h-full w-full" fill="none" aria-hidden="true">
-                {WIRE.map((w, i) => {
-                  const t = easeOut(clamp01((draw - w.at) / 0.18));
-                  return <path key={i} d={w.d} pathLength={1} stroke="#22c55e" strokeOpacity={0.85} strokeWidth={3} strokeLinecap="round" strokeDasharray="1" strokeDashoffset={1 - t} />;
-                })}
-              </svg>
-              {/* the real screen sweeps in from the left; a green scan line rides its edge */}
-              <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - sweep * 100}% 0 0)` }}>
-                <Image src="/img/build-dashboard.jpg" alt="Panel de Reportes de un sistema hecho por Nexary" fill sizes="(max-width: 768px) 94vw, 980px" className="object-cover" />
+            <div className="grid grid-cols-[44px_1fr] gap-2.5 p-2.5 md:grid-cols-[60px_1fr] md:gap-3 md:p-3">
+              {/* sidebar */}
+              <Piece d={D(0)} b={Bd(0)} className="flex flex-col items-center gap-2.5 py-3">
+                {[0, 1, 2, 3, 4].map((k) => (
+                  <span key={k} className="h-5 w-5 rounded-md md:h-6 md:w-6" style={{ background: k === 0 ? `rgba(34,197,94,${0.15 + 0.6 * Bd(0)})` : `rgba(255,255,255,${0.04 + 0.08 * Bd(0)})` }} />
+                ))}
+              </Piece>
+              <div className="grid gap-2.5 md:gap-3">
+                {/* header */}
+                <Piece d={D(0.05)} b={Bd(0.04)} className="flex items-center justify-between px-3 py-2">
+                  <Swap b={Bd(0.04)} w="40%">
+                    <span className="text-xs font-semibold md:text-sm">Resumen del negocio</span>
+                  </Swap>
+                  <Swap b={Bd(0.06)} w="70%">
+                    <span className="rounded-md bg-white/5 px-2 py-0.5 text-[10px] text-white/55">Este mes</span>
+                  </Swap>
+                </Piece>
+                {/* KPIs */}
+                <div className="grid grid-cols-3 gap-2.5 md:gap-3">
+                  {[
+                    { k: 'Facturación', v: 4820000, pre: '$ ', d: '+18%' },
+                    { k: 'Clientes activos', v: 1248, pre: '', d: '+9%' },
+                    { k: 'Pedidos', v: 3560, pre: '', d: '+24%' },
+                  ].map((c, i) => {
+                    const b = Bd(0.1 + i * 0.06);
+                    return (
+                      <Piece key={c.k} d={D(0.12 + i * 0.05)} b={b} className="px-2.5 py-2 md:px-3 md:py-3">
+                        <Swap b={b} w="60%">
+                          <span className="block truncate text-[9px] text-white/50 md:text-[11px]">{c.k}</span>
+                        </Swap>
+                        <Swap b={b} w="85%" className="mt-1">
+                          <span className="block truncate text-sm font-semibold tabular-nums md:text-xl">
+                            {c.pre}
+                            {fmt(c.v * b)}
+                          </span>
+                        </Swap>
+                        <Swap b={b} w="35%" className="mt-0.5">
+                          <span className="text-[9px] text-primary md:text-[11px]">{c.d}</span>
+                        </Swap>
+                      </Piece>
+                    );
+                  })}
+                </div>
+                {/* chart + activity */}
+                <div className="grid gap-2.5 md:grid-cols-[1.4fr_1fr] md:gap-3">
+                  <Piece d={D(0.3)} b={Bd(0.3)} className="px-3 py-2.5">
+                    <Swap b={Bd(0.3)} w="45%">
+                      <span className="text-[10px] text-white/60 md:text-xs">Ingresos · últimos 12 meses</span>
+                    </Swap>
+                    <div className="mt-2 flex h-16 items-end gap-1 md:h-24">
+                      {bars.map((h, k) => {
+                        const g = easeOut(clamp01((build - 0.32 - k * 0.012) / 0.2));
+                        return (
+                          <span
+                            key={k}
+                            className="flex-1 rounded-t-sm"
+                            style={{
+                              height: `${h * (0.12 + 0.88 * g)}%`,
+                              background: g > 0.05 ? `rgba(34,197,94,${0.35 + 0.5 * (k / bars.length)})` : 'transparent',
+                              outline: g > 0.05 ? 'none' : `1px dashed rgba(34,197,94,${0.5 * D(0.3)})`,
+                            }}
+                          />
+                        );
+                      })}
+                    </div>
+                  </Piece>
+                  <Piece d={D(0.42)} b={Bd(0.45)} className="hidden px-3 py-2.5 md:block">
+                    <Swap b={Bd(0.45)} w="50%">
+                      <span className="text-xs text-white/60">Actividad reciente</span>
+                    </Swap>
+                    <div className="mt-2 space-y-1.5">
+                      {rows.map((r, k) => {
+                        const t = Bd(0.5 + k * 0.08);
+                        return (
+                          <div key={r.t} className="flex items-center justify-between gap-2 text-[11px]" style={{ opacity: 0.25 + 0.75 * t, transform: `translateX(${(1 - t) * 10}px)` }}>
+                            <Swap b={t} w="70%" className="min-w-0 flex-1">
+                              <span className="block truncate">{r.t}</span>
+                            </Swap>
+                            <span className="shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-[9px] text-primary" style={{ opacity: t }}>
+                              {r.s}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </Piece>
+                </div>
               </div>
-              {sweep > 0 && sweep < 1 && (
-                <div className="absolute inset-y-0 w-[3px] bg-primary shadow-[0_0_24px_6px_rgba(34,197,94,0.6)]" style={{ left: `calc(${sweep * 100}% - 1px)` }} />
-              )}
             </div>
           </div>
         </div>
