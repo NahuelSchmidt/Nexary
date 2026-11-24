@@ -643,17 +643,17 @@ const Swap = ({ b, w, children, className = '' }: { b: number; w: string; childr
 
 export function BuildScene() {
   const [ref, p] = useProgress<HTMLDivElement>('pinned');
-  const design = seg(p, 0.03, 0.28);
-  const build = seg(p, 0.3, 0.64);
-  const live = easeOut(seg(p, 0.66, 0.72));
+  const design = seg(p, 0.03, 0.3);
+  const build = seg(p, 0.32, 0.7);
+  const live = easeOut(seg(p, 0.72, 0.78));
   // the flip happens while the panel rises into view (not after the section pins), so you see it turn
   const [panelRef, enter] = useProgress<HTMLDivElement>('enter', { endAt: 0.25 });
   const flipIn = easeInOut(enter);
   // holds “En producción” a while, then fades away slowly over the last stretch
-  const leave = easeInOut(seg(p, 0.8, 1));
+  const leave = easeInOut(seg(p, 0.84, 1));
   const D = (at: number) => clamp01((design - at) / 0.25); // blueprint stagger
   const Bd = (at: number) => easeOut(clamp01((build - at) / 0.22)); // build stagger
-  const stage = p < 0.29 ? 0 : p < 0.65 ? 1 : 2;
+  const stage = p < 0.31 ? 0 : p < 0.71 ? 1 : 2;
   const lines = [
     { n: '01', t: 'DISEÑAMOS', sub: 'Planificamos cada pantalla con vos.' },
     { n: '02', t: '& DESARROLLAMOS', sub: 'Lo construimos pieza por pieza.' },
@@ -667,7 +667,7 @@ export function BuildScene() {
     { t: 'Reporte mensual enviado', s: 'Listo' },
   ];
   return (
-    <Pinned vh={320} innerRef={ref} className="bg-black text-white">
+    <Pinned vh={240} innerRef={ref} className="bg-black text-white">
       <div className="v2-dots absolute inset-0 opacity-[0.08]" />
       <div className="relative mx-auto grid h-full max-w-[1300px] items-center gap-8 px-5 pt-20 md:grid-cols-[0.8fr_1.2fr] md:gap-12 md:px-10 md:pt-0">
         {/* the three lines */}
