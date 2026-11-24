@@ -647,7 +647,7 @@ export function BuildScene() {
   const build = seg(p, 0.38, 0.8);
   const live = easeOut(seg(p, 0.82, 0.9));
   // the flip happens while the panel rises into view (not after the section pins), so you see it turn
-  const [panelRef, enter] = useProgress<HTMLDivElement>('enter', { endAt: 0.2 });
+  const [panelRef, enter] = useProgress<HTMLDivElement>('enter', { endAt: 0.25 });
   const flipIn = easeInOut(enter);
   const leave = easeInOut(seg(p, 0.92, 1));
   const D = (at: number) => clamp01((design - at) / 0.25); // blueprint stagger
@@ -693,7 +693,7 @@ export function BuildScene() {
           className="relative [backface-visibility:hidden]"
           style={{
             // enters flipping like a card (already as a blueprint) · leaves leaning back into the distance
-            transform: `perspective(1400px) rotateY(${(1 - flipIn) * -180}deg) rotateX(${(1 - flipIn) * 12 + leave * 28}deg) translateY(${leave * -50}px) scale(${lerp(0.82, 1, flipIn) * lerp(0.98, 1, live) * lerp(1, 0.88, leave)})`,
+            transform: `perspective(1400px) rotateY(${(1 - flipIn) * -88}deg) rotateX(${(1 - flipIn) * 10 + leave * 28}deg) translateY(${leave * -50}px) scale(${lerp(0.82, 1, flipIn) * lerp(0.98, 1, live) * lerp(1, 0.88, leave)})`,
             transformOrigin: flipIn < 1 ? '50% 50%' : '50% 90%',
             opacity: 1 - 0.6 * leave,
           }}
