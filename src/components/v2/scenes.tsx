@@ -646,7 +646,9 @@ export function BuildScene() {
   const design = seg(p, 0.03, 0.36);
   const build = seg(p, 0.38, 0.8);
   const live = easeOut(seg(p, 0.82, 0.9));
-  const flipIn = easeOut(seg(p, 0, 0.07));
+  // the flip happens while the panel rises into view (not after the section pins), so you see it turn
+  const [panelRef, enter] = useProgress<HTMLDivElement>('enter', { endAt: 0.2 });
+  const flipIn = easeInOut(enter);
   const leave = easeInOut(seg(p, 0.92, 1));
   const D = (at: number) => clamp01((design - at) / 0.25); // blueprint stagger
   const Bd = (at: number) => easeOut(clamp01((build - at) / 0.22)); // build stagger
@@ -686,13 +688,14 @@ export function BuildScene() {
           })}
         </div>
         {/* the dashboard being built */}
+        <div ref={panelRef}>
         <div
           className="relative [backface-visibility:hidden]"
           style={{
             // enters flipping like a card (already as a blueprint) · leaves leaning back into the distance
-            transform: `perspective(1400px) rotateY(${(1 - flipIn) * -180}deg) rotateX(${leave * 28}deg) translateY(${leave * -50}px) scale(${lerp(0.98, 1, live) * lerp(1, 0.88, leave)})`,
-            transformOrigin: '50% 90%',
-            opacity: (flipIn > 0.02 ? 1 : 0) * (1 - 0.6 * leave),
+            transform: `perspective(1400px) rotateY(${(1 - flipIn) * -180}deg) rotateX(${(1 - flipIn) * 12 + leave * 28}deg) translateY(${leave * -50}px) scale(${lerp(0.82, 1, flipIn) * lerp(0.98, 1, live) * lerp(1, 0.88, leave)})`,
+            transformOrigin: flipIn < 1 ? '50% 50%' : '50% 90%',
+            opacity: 1 - 0.6 * leave,
           }}
         >
           <div className="pointer-events-none absolute -inset-8 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.3),transparent)] blur-2xl" style={{ opacity: 0.15 + 0.85 * live }} />
@@ -797,6 +800,7 @@ export function BuildScene() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </Pinned>
