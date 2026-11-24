@@ -659,7 +659,7 @@ export function BuildScene() {
   return (
     <Pinned vh={260} innerRef={ref} className="bg-black text-white">
       <div className="v2-dots absolute inset-0 opacity-[0.08]" />
-      <div className="relative mx-auto grid h-full max-w-[1300px] items-center gap-8 px-5 pt-20 md:grid-cols-[0.9fr_1.1fr] md:gap-14 md:px-10 md:pt-0">
+      <div className="relative mx-auto grid h-full max-w-[1300px] items-center gap-8 px-5 pt-20 md:grid-cols-[0.8fr_1.2fr] md:gap-12 md:px-10 md:pt-0">
         {/* the three lines */}
         <div className="space-y-4 md:space-y-7">
           {lines.map((l, i) => {
@@ -669,7 +669,7 @@ export function BuildScene() {
               <div key={l.n} className="transition-all duration-500" style={{ opacity: on ? 1 : done ? 0.55 : 0.22 }}>
                 <div className="flex items-baseline gap-3">
                   <span className="font-mono text-xs text-primary">{l.n}</span>
-                  <span className={`text-[clamp(1.8rem,4.6vw,4rem)] font-semibold leading-none tracking-[-0.035em] ${l.accent && (on || done) ? 'v2-grad-text' : ''}`}>{l.t}</span>
+                  <span className={`whitespace-nowrap text-[clamp(1.7rem,3.6vw,3.4rem)] font-semibold leading-none tracking-[-0.035em] ${l.accent && (on || done) ? 'v2-grad-text' : ''}`}>{l.t}</span>
                 </div>
                 <p className="ml-7 mt-2 hidden text-sm text-white/55 transition-opacity duration-500 md:block" style={{ opacity: on ? 1 : 0 }}>
                   {l.sub}
@@ -711,9 +711,9 @@ export function BuildScene() {
                 {/* KPIs */}
                 <div className="grid grid-cols-3 gap-2.5 md:gap-3">
                   {[
-                    { k: 'Facturación', v: 4820000, pre: '$ ', d: '+18%' },
-                    { k: 'Clientes activos', v: 1248, pre: '', d: '+9%' },
-                    { k: 'Pedidos', v: 3560, pre: '', d: '+24%' },
+                    { k: 'Facturación', v: 4.8, pre: '$ ', post: ' M', dec: 1, d: '+18%' },
+                    { k: 'Clientes activos', v: 1248, pre: '', post: '', dec: 0, d: '+9%' },
+                    { k: 'Pedidos', v: 3560, pre: '', post: '', dec: 0, d: '+24%' },
                   ].map((c, i) => {
                     const b = Bd(0.1 + i * 0.06);
                     return (
@@ -724,7 +724,8 @@ export function BuildScene() {
                         <Swap b={b} w="85%" className="mt-1">
                           <span className="block truncate text-sm font-semibold tabular-nums md:text-xl">
                             {c.pre}
-                            {fmt(c.v * b)}
+                            {c.dec ? (c.v * b).toLocaleString('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : fmt(c.v * b)}
+                            {c.post}
                           </span>
                         </Swap>
                         <Swap b={b} w="35%" className="mt-0.5">
