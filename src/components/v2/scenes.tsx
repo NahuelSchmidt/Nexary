@@ -190,7 +190,12 @@ export function ExperienceScene() {
           {icons.map(({ Icon, color, label }, i) => {
             const t = easeOut(seg(p, 0.4 + i * 0.1, 0.62 + i * 0.1));
             return (
-              <div key={label} className="flex flex-col items-center gap-6" style={{ transform: `translateY(${(1 - t) * 120}px)`, opacity: t }}>
+              // each one flips in like a card turning over (back face hidden until it faces us)
+              <div
+                key={label}
+                className="flex flex-col items-center gap-6 [backface-visibility:hidden]"
+                style={{ transform: `perspective(900px) translateY(${(1 - t) * 60}px) rotateY(${(1 - t) * -180}deg) scale(${0.85 + 0.15 * t})`, opacity: t > 0.02 ? 1 : 0 }}
+              >
                 <Icon className="v2-neon h-14 w-14 md:h-32 md:w-32" strokeWidth={1.1} style={{ color }} />
                 <span className="max-w-[9rem] text-center font-mono text-[10px] uppercase leading-snug tracking-[0.12em] text-white/50 md:text-xs md:tracking-[0.2em]">{label}</span>
               </div>
