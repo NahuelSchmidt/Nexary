@@ -692,10 +692,10 @@ export function BuildScene() {
         <div
           className="relative [backface-visibility:hidden]"
           style={{
-            // enters flipping like a card (already as a blueprint) · leaves leaning back into the distance
-            transform: `perspective(1400px) rotateY(${(1 - flipIn) * -88}deg) rotateX(${(1 - flipIn) * 10 + leave * 28}deg) translateY(${leave * -50}px) scale(${lerp(0.82, 1, flipIn) * lerp(0.98, 1, live) * lerp(1, 0.88, leave)})`,
-            transformOrigin: flipIn < 1 ? '50% 50%' : '50% 90%',
-            opacity: 1 - 0.6 * leave,
+            // enters flipping like a card (already as a blueprint) · leaves moving forward, past the camera
+            transform: `perspective(1400px) rotateY(${(1 - flipIn) * -88}deg) rotateX(${(1 - flipIn) * 10 - leave * 10}deg) translateY(${leave * -90}px) scale(${lerp(0.82, 1, flipIn) * lerp(0.98, 1, live) * lerp(1, 1.08, leave)})`,
+            transformOrigin: '50% 50%',
+            opacity: 1 - 0.7 * leave,
           }}
         >
           <div className="pointer-events-none absolute -inset-8 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.3),transparent)] blur-2xl" style={{ opacity: 0.15 + 0.85 * live }} />
