@@ -1,5 +1,5 @@
 import { Hero, Showcase } from '@/components/v2/dark';
-import { CollageScene, ExperienceScene, PillScene, ProductsScene, SaasScene, WordScene } from '@/components/v2/scenes';
+import { BuildScene, CollageScene, ExperienceScene, ProductsScene, SaasScene, WordScene } from '@/components/v2/scenes';
 import { Challenge, Faq, FinalCta, Process, Services, Voices } from '@/components/v2/light';
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Hero />
       <Showcase />
-      <PillScene />
+      <BuildScene />
       <ExperienceScene />
       <WordScene
         paragraphs={[

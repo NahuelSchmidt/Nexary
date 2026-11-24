@@ -7,7 +7,7 @@ import { DrawLines } from '@/components/v2/scenes';
 import { BlurWords, Magnetic } from '@/components/v2/interact';
 import HeroTyper from '@/components/v2/hero-typer';
 import { projects } from '@/lib/projects';
-import { whatsAppLink } from '@/lib/site';
+import { whatsAppLink, whatsAppWebLink } from '@/lib/site';
 
 const Lines = ({ widths }: { widths: number[] }) => (
   <div className="flex flex-col items-center gap-16">
@@ -57,6 +57,11 @@ export function Hero() {
               Quiero mi sistema <ArrowRight className="h-4 w-4" />
             </a>
           </Magnetic>
+        </div>
+        <div className="v2-in" style={{ animationDelay: '1.2s' }}>
+          <a href={whatsAppWebLink} target="_blank" rel="noopener noreferrer" className="group mt-5 inline-flex items-center gap-1.5 text-sm text-white/55 transition-colors hover:text-white">
+            ¿Necesitás una página web? <span className="text-white/80 underline decoration-primary/60 underline-offset-4 group-hover:decoration-primary">También la hacemos</span> <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          </a>
         </div>
         <div className="mt-16 w-full max-w-xl">
           <DrawLines widths={[100, 60]} />

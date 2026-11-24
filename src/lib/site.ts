@@ -5,6 +5,10 @@ const WHATSAPP_MESSAGE =
 
 export const whatsAppLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
+// Secondary path for people who only need a website (systems stay the main call to action)
+const WHATSAPP_WEB_MESSAGE = 'Hola! Vi la web de Nexary y quiero una página web para mi negocio. ¿Podemos hablar?';
+export const whatsAppWebLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_WEB_MESSAGE)}`;
+
 export const navLinks = [
   { href: '/#servicios', label: 'Servicios' },
   { href: '/#proyectos', label: 'Proyectos' },

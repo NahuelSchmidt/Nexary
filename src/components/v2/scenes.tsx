@@ -602,3 +602,98 @@ export function FooterWave() {
     </div>
   );
 }
+
+/*
+ * "Diseñamos & desarrollamos tu sistema", told as it happens: a green wireframe of a real dashboard
+ * draws itself (we design), the real screen sweeps in over it (we build), then it goes live.
+ * The wireframe follows the layout of /img/build-dashboard.jpg (Stock y Ventas · Reportes, 1436×830).
+ */
+const WIRE: { d: string; at: number }[] = [
+  { d: 'M28 16 h170 v32 h-170 z', at: 0 },
+  { d: 'M28 92 h524', at: 0.04 },
+  { d: 'M968 60 h132 a12 12 0 0 1 12 12 v38 a12 12 0 0 1 -12 12 h-132 a12 12 0 0 1 -12 -12 v-38 a12 12 0 0 1 12 -12 z', at: 0.08 },
+  { d: 'M1144 60 h252 a12 12 0 0 1 12 12 v38 a12 12 0 0 1 -12 12 h-252 a12 12 0 0 1 -12 -12 v-38 a12 12 0 0 1 12 -12 z', at: 0.1 },
+  ...[26, 498, 970].flatMap((x, i) => [
+    { d: `M${x + 24} 218 h392 a24 24 0 0 1 24 24 v160 a24 24 0 0 1 -24 24 h-392 a24 24 0 0 1 -24 -24 v-160 a24 24 0 0 1 24 -24 z`, at: 0.16 + i * 0.06 },
+    { d: `M${x + 26} 262 h60`, at: 0.22 + i * 0.06 },
+    { d: `M${x + 26} 334 h200`, at: 0.25 + i * 0.06 },
+    { d: `M${x + 26} 384 h300`, at: 0.28 + i * 0.06 },
+  ]),
+  { d: 'M50 474 h628 a24 24 0 0 1 24 24 v260 a24 24 0 0 1 -24 24 h-628 a24 24 0 0 1 -24 -24 v-260 a24 24 0 0 1 24 -24 z', at: 0.42 },
+  { d: 'M50 518 h180', at: 0.48 },
+  ...[582, 634, 686, 738].map((y, i) => ({ d: `M50 ${y} h420 M560 ${y} h110`, at: 0.52 + i * 0.05 })),
+  { d: 'M758 474 h628 a24 24 0 0 1 24 24 v260 a24 24 0 0 1 -24 24 h-628 a24 24 0 0 1 -24 -24 v-260 a24 24 0 0 1 24 -24 z', at: 0.5 },
+  { d: 'M758 518 h120', at: 0.58 },
+  { d: 'M758 594 h200', at: 0.64 },
+  { d: 'M758 648 h260', at: 0.7 },
+];
+
+export function BuildScene() {
+  const [ref, p] = useProgress<HTMLDivElement>('pinned');
+  const draw = seg(p, 0.04, 0.42); // we design: the wireframe draws itself
+  const sweep = easeInOut(seg(p, 0.46, 0.78)); // we build: the real screen sweeps in
+  const live = easeOut(seg(p, 0.8, 0.9)); // it goes live
+  const words = [
+    { t: 'DISEÑAMOS', on: seg(p, 0.0, 0.06) },
+    { t: '&', on: seg(p, 0.02, 0.08) },
+    { t: 'DESARROLLAMOS', on: seg(p, 0.42, 0.5) },
+    { t: 'TU', on: seg(p, 0.78, 0.84) },
+    { t: 'SISTEMA.', on: seg(p, 0.8, 0.86), accent: true },
+  ];
+  return (
+    <Pinned vh={260} innerRef={ref} className="bg-black text-white">
+      <div className="v2-dots absolute inset-0 opacity-[0.08]" />
+      <div className="relative flex h-full flex-col items-center justify-center gap-8 px-4 md:gap-10">
+        <h2 className="flex flex-wrap justify-center gap-x-[0.35em] text-center text-[clamp(1.5rem,4vw,3.2rem)] font-medium tracking-[-0.02em]">
+          {words.map((w) => (
+            <span key={w.t} className="inline-block overflow-hidden pb-[0.1em]">
+              <span
+                className={`inline-block ${w.accent ? 'v2-grad-text' : ''}`}
+                style={{ transform: `translateY(${(1 - easeOut(w.on)) * 110}%)`, opacity: 0.15 + 0.85 * w.on }}
+              >
+                {w.t}
+              </span>
+            </span>
+          ))}
+        </h2>
+        <div
+          className="relative w-[min(94vw,980px)]"
+          style={{ transform: `scale(${lerp(0.96, 1, live)})` }}
+        >
+          <div className="pointer-events-none absolute -inset-x-6 -inset-y-10 rounded-[40px] bg-[radial-gradient(closest-side,rgba(34,197,94,0.28),transparent)] blur-2xl" style={{ opacity: 0.3 + 0.7 * live }} />
+          <div className="relative overflow-hidden rounded-2xl bg-[#0b0f0d] ring-1 ring-white/10">
+            {/* window chrome */}
+            <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2 md:px-4 md:py-2.5">
+              <span className="h-2 w-2 rounded-full bg-white/20 md:h-2.5 md:w-2.5" />
+              <span className="h-2 w-2 rounded-full bg-white/20 md:h-2.5 md:w-2.5" />
+              <span className="h-2 w-2 rounded-full bg-white/20 md:h-2.5 md:w-2.5" />
+              <span className="ml-3 truncate rounded-md bg-white/5 px-2.5 py-0.5 font-mono text-[10px] text-white/45 md:text-xs">tu-sistema.com/reportes</span>
+              <span
+                className="ml-auto flex items-center gap-1.5 rounded-full bg-primary/15 px-2.5 py-0.5 text-[10px] font-medium text-primary md:text-xs"
+                style={{ opacity: live, transform: `translateX(${(1 - live) * 10}px)` }}
+              >
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> En producción
+              </span>
+            </div>
+            <div className="relative aspect-[1436/830]">
+              {/* the wireframe, line by line */}
+              <svg viewBox="0 0 1436 830" className="absolute inset-0 h-full w-full" fill="none" aria-hidden="true">
+                {WIRE.map((w, i) => {
+                  const t = easeOut(clamp01((draw - w.at) / 0.18));
+                  return <path key={i} d={w.d} pathLength={1} stroke="#22c55e" strokeOpacity={0.85} strokeWidth={3} strokeLinecap="round" strokeDasharray="1" strokeDashoffset={1 - t} />;
+                })}
+              </svg>
+              {/* the real screen sweeps in from the left; a green scan line rides its edge */}
+              <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - sweep * 100}% 0 0)` }}>
+                <Image src="/img/build-dashboard.jpg" alt="Panel de Reportes de un sistema hecho por Nexary" fill sizes="(max-width: 768px) 94vw, 980px" className="object-cover" />
+              </div>
+              {sweep > 0 && sweep < 1 && (
+                <div className="absolute inset-y-0 w-[3px] bg-primary shadow-[0_0_24px_6px_rgba(34,197,94,0.6)]" style={{ left: `calc(${sweep * 100}% - 1px)` }} />
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Pinned>
+  );
+}
