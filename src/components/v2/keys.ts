@@ -58,10 +58,10 @@ function play(kind: 'k' | 's' | 'b', gain: number) {
 
 /** One key press; `space` plays the space bar. */
 export function keyClick(space = false) {
-  play(space ? 's' : 'k', 0.22);
+  play(space ? 's' : 'k', 0.14);
 }
 
 /** One backspace while erasing. */
 export function keyBack() {
-  play('b', 0.19);
+  play('b', 0.12);
 }
