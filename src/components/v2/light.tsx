@@ -5,6 +5,7 @@ import { testimonials } from '@/lib/testimonials';
 import { RiseText, ZoomScene } from '@/components/v2/scenes';
 import { MockBuild, MockChat, MockLaunch, MockProposal } from '@/components/v2/mocks';
 import { Magnetic, SpotCard } from '@/components/v2/interact';
+import Image from 'next/image';
 import { whatsAppLink, whatsAppWebLink } from '@/lib/site';
 
 const Btn = ({ children = 'Quiero mi sistema' }: { children?: React.ReactNode }) => (
@@ -145,6 +146,57 @@ export function Voices() {
               </p>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Founder() {
+  return (
+    <section className="v2-light overflow-hidden py-24 md:py-28">
+      <div className="mx-auto grid max-w-[1100px] items-center gap-12 px-6 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+        <Reveal className="relative mx-auto w-full max-w-[420px]">
+          <div aria-hidden className="absolute -inset-6 rounded-[2.5rem] bg-primary/20 blur-3xl" />
+          <div className="v2-card-light relative overflow-hidden rounded-[2rem] p-2">
+            <Image src="/img/nahuel.jpg" alt="Nahuel Schmidt, fundador de Nexary" width={960} height={1200} sizes="(min-width: 768px) 420px, 90vw" className="h-auto w-full rounded-[1.6rem]" />
+            <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-xl border border-black/5 bg-white/85 px-4 py-3 backdrop-blur-md">
+              <div>
+                <p className="text-sm font-semibold tracking-tight">Nahuel Schmidt</p>
+                <p className="text-xs text-black/55">Fundador de Nexary</p>
+              </div>
+              <span className="flex items-center gap-1.5 text-xs font-medium text-primary">
+                <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" /><span className="relative inline-flex h-2 w-2 rounded-full bg-primary" /></span>
+                Disponible
+              </span>
+            </div>
+          </div>
+        </Reveal>
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Quién está detrás</p>
+          <RiseText text="Hablás directo conmigo" accent={['conmigo']} className="mt-4 text-[clamp(2rem,4.2vw,3.4rem)] font-medium leading-[1.05] tracking-[-0.04em]" />
+          <Reveal delay={0.05}>
+            <p className="mt-6 max-w-[520px] text-[17px] leading-relaxed text-black/65">
+              Soy Nahuel, fundador de Nexary. Cuando nos escribís, te respondo yo: entiendo cómo funciona tu negocio, diseño la solución y la acompaño hasta que está andando.
+            </p>
+          </Reveal>
+          <Reveal delay={0.08}>
+          <ul className="mt-8 space-y-3">
+            {['Sin intermediarios: hablás con quien construye tu sistema', 'Avances reales cada semana, por WhatsApp', 'Te acompaño también después del lanzamiento'].map((t) => (
+                <li key={t} className="flex items-start gap-3 text-[15px]">
+                  <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary/15"><Check className="h-3.5 w-3.5 text-primary" /></span>
+                  {t}
+                </li>
+            ))}
+          </ul>
+          </Reveal>
+          <div className="mt-10">
+            <Btn>
+              <span className="inline-flex items-center gap-2">
+                <WhatsAppIcon className="h-4 w-4" /> Escribime por WhatsApp <ArrowRight className="h-4 w-4" />
+              </span>
+            </Btn>
+          </div>
         </div>
       </div>
     </section>

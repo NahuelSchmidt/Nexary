@@ -1,6 +1,6 @@
 import { Hero, Showcase } from '@/components/v2/dark';
 import { BuildScene, CollageScene, ExperienceScene, ProductsScene, SaasScene, WordScene } from '@/components/v2/scenes';
-import { Challenge, Faq, FinalCta, Process, Services, Voices } from '@/components/v2/light';
+import { Challenge, Faq, FinalCta, Founder, Process, Services, Voices } from '@/components/v2/light';
 
 export default function Home() {
   return (
@@ -22,6 +22,7 @@ export default function Home() {
       <Services />
       <Process />
       <Voices />
+      <Founder />
       <Faq />
       <FinalCta />
     </>
