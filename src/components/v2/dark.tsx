@@ -35,14 +35,14 @@ export function Hero() {
               en&nbsp;
             </span>
             <span className="v2-in" style={{ animationDelay: '0.42s' }}>
-              <HeroTyper phrases={['piloto automático.', 'orden.', 'tiempo real.', 'tu bolsillo.', 'un solo sistema.']} />
+              <HeroTyper phrases={['piloto automático.', 'orden.', 'tiempo real.', 'tu bolsillo.', 'una app.', 'un solo sistema.']} />
             </span>
           </span>
         </h1>
         <div className="mt-10 w-full max-w-3xl">
           <div className="v2-line v2-draw" style={{ animationDelay: '0.7s' }} />
           <p className="v2-in py-3 text-base text-white/85 md:text-lg" style={{ animationDelay: '0.85s' }}>
-            Sistemas de gestión, SaaS, aplicaciones web y sitios. Todo a medida.
+            Sistemas de gestión, apps móviles, SaaS, aplicaciones web y sitios. Todo a medida.
           </p>
           <div className="v2-line v2-draw" style={{ animationDelay: '0.8s' }} />
         </div>
